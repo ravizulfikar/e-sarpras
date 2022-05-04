@@ -19,18 +19,13 @@
       }
     }
   }
-  .custom-profile {
-    .card-profile {
-      img {
-        height: 180px;
-      }
-    }
-  }
+
   .bar-chart {
     canvas {
       width: 100% !important;
     }
   }
+
   .chat-box {
     .chat-history {
       .call-icons {
@@ -65,11 +60,13 @@
       }
     }
   }
+
   .chat-left-aside {
     .people-list {
       height: 520px;
     }
   }
+
   .chat-box {
     .chat-right-aside {
       .chat {
@@ -86,6 +83,7 @@
       }
     }
   }
+
   .call-chat-body {
     .chat-box {
       .people-list {
@@ -94,15 +92,18 @@
           overflow: auto;
         }
       }
+
       overflow: hidden;
       height: 625px;
     }
   }
+
   .caller-img {
     position: absolute;
     width: 100%;
     max-width: 100%;
     left: 15px;
+
     img {
       opacity: 0.7;
     }
@@ -120,6 +121,12 @@
       }
     }
   }
+
+
+
+
+
+
 }
 
 @media screen and (max-width: 1600px) {
@@ -176,30 +183,37 @@
   .xl-none {
     display: none;
   }
+
   .xl-60 {
     max-width: 60%;
     flex: 0 0 60%;
   }
+
   .xl-50 {
     max-width: 50%;
     flex: 0 0 50%;
   }
+
   .xl-100 {
     max-width: 100%;
     flex: 0 0 100%;
   }
+
   .xl-23 {
     max-width: 23%;
     flex: 0 0 23%;
   }
+
   .xl-25 {
     max-width: 25%;
     flex: 0 0 25%;
   }
+
   .xl-40 {
     max-width: 40%;
     flex: 0 0 40%;
   }
+
   .xl-4 {
     max-width: 33.33%;
     flex: 0 0 33.33%;
@@ -730,6 +744,15 @@
     }
   }
 
+  .calender-widget {
+    .cal-desc {
+      p {
+        max-height: 88px;
+        overflow: auto;
+      }
+    }
+  }
+
   .equal-height-xl {
     height: 517px;
   }
@@ -900,6 +923,10 @@
     width: unset;
   }
 
+  .company-card {
+    padding: 20px;
+  }
+
   .static-top-widget {
     .media-body {
       h3 {
@@ -911,9 +938,23 @@
       }
     }
   }
+
+  .widget-joins {
+    .media {
+      padding: 20px;
+
+      .media-body {
+        h3 {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
   .redial-social-widget {
     width: 125px;
     height: 125px;
+
     i {
       width: 100px;
       height: 100px;
@@ -1258,7 +1299,6 @@
       overflow: scroll;
       min-width: unset;
       padding-right: 20px;
-      // display: block !important;
       .container-fluid {
         padding: 0;
       }
@@ -1666,6 +1706,15 @@
         padding: 18px;
       }
     }
+
+    .cal-desc {
+      padding: 14px;
+
+      p {
+        max-height: 114px;
+        overflow-y: auto;
+      }
+    }
   }
 
   .browser-widget {
@@ -1687,6 +1736,13 @@
       }
     }
   }
+
+  .static-top-widget {
+    .media-body{
+      padding-left:20px;
+    }
+  }
+
   .widget-joins {
     .media {
       .media-body {
@@ -1698,12 +1754,15 @@
     }
   }
 
+
+
   //ecommerce dashboard
   .crm-overall {
     .overall-chart {
       height: 200px;
     }
   }
+
 
   // eccommerce product
   .product-table{
@@ -1712,10 +1771,13 @@
     }
   }
 
+
   //chat
   .chat-menu-icons {
     display: block;
     clear: both;
+    // width: 100%;
+    // text-align: right;
   }
 
   .chat-menu {
@@ -1739,6 +1801,10 @@
     }
   }
 
+  .chat-history {
+    //height: 447px;
+  }
+
   .chat-box {
     .chat-menu {
       .people-list {
@@ -1748,43 +1814,55 @@
         }
       }
     }
+
     .btn-lg {
       font-size: 12px;
     }
+
     .people-list {
       ul {
         height: auto;
       }
     }
+
     .chat-right-aside {
       .chat {
         .chat-header {
           height: auto;
+
           .chat-menu-icons li a i {
+
             font-size: 19px;
+
           }
         }
+
         .chat-message {
           margin: 0;
         }
       }
     }
+
     .chat-history {
       .total-time h2 {
         font-size: 25px;
       }
+
       .row {
         .col-sm-7 {
           padding-right: 0;
         }
       }
     }
+
     .border-tab.nav-tabs {
       width: 100%;
+
       .nav-item {
         margin-right: 5px;
       }
     }
+
     .chat-left-aside {
       .people-list {
         height: 493px;
@@ -1996,11 +2074,6 @@
   .simplebar-mask {
     top: 70px;
   }
-  .cal-date-widget {
-    .datepicker {
-      padding: 20px;
-    }
-  }
   .project-cards {
     .tab-content {
       margin-bottom: -20px;
@@ -2029,6 +2102,7 @@
         margin-left: 6px;
       }
     }
+
   }
   .page-wrapper {
     &.modern-type {
@@ -2086,20 +2160,6 @@
           top: 0 !important;
         }
       }
-    }
-  }
-  .browser-table, .best-seller-table {
-    table {
-      tr {
-        td {
-          padding: 10px;
-        }
-      }
-    }
-  }
-  .emplyoee-table {
-    .u-s-tb {
-      padding: 10px;
     }
   }
   .product-box {
@@ -2253,6 +2313,11 @@
     }
 
     .page-body-wrapper {
+      .page-title {
+        padding-top: 25px;
+        padding-bottom: 25px;
+      }
+
       .footer-fix {
         margin-left: 0px;
         padding-right: 15px;
@@ -2421,6 +2486,14 @@
       #customer-review {
         .owl-stage-outer {
           width: 100% !important;
+        }
+      }
+
+      .calender-widget {
+        .cal-desc {
+          p {
+            max-height: 101px;
+          }
         }
       }
     }
@@ -2610,15 +2683,9 @@
   }
 
   .social-widget-card {
-    .media {
-      .social-font {
-        width: 50px;
-        height: 50px;
-        img {
-          width: 20px;
-          height: 20px;
-        }
-      }
+    .b-b-light {
+      padding: 20px;
+      margin-bottom: 20px;
     }
   }
 
@@ -2697,6 +2764,7 @@
       }
     }
   }
+
   .custom-card {
     padding-bottom: 0;
 
@@ -2718,11 +2786,7 @@
       }
     }
   }
-  .custom-profile {
-    .card-footer  {
-      padding: 20px !important;
-    }
-  }
+
   .display-1 {
     font-size: 4rem;
   }
@@ -2837,7 +2901,7 @@
       }
 
       .card-header-right {
-        top: 12px;
+        top: 11px;
         right: 15px;
       }
     }
@@ -2931,6 +2995,32 @@
       }
     }
   }
+
+  //business dashboard
+  .calender-widget {
+    .cal-desc {
+      padding: 10px 20px 20px !important;
+
+      p {
+        max-height: 100px;
+      }
+    }
+  }
+
+  .contact-form {
+    padding-top: 10px !important;
+
+    .theme-form {
+      padding: 20px;
+      margin-top: 27px;
+
+      .form-icon {
+        margin-top: -47px;
+      }
+    }
+  }
+
+  //crm dashboard
   .user-status {
     &.product-chart {
       max-height: 518px;
@@ -2948,19 +3038,9 @@
       }
     }
   }
+
   .xl-none {
     display: block;
-  }
-  .widget-feedback {
-    .feedback-top {
-      margin-bottom: 10px;
-    }
-    ul {
-      margin-top: 0;
-    }
-  }
-  .mobile-clock-widget {
-    padding: 20px;
   }
 
   //blog
@@ -3319,26 +3399,6 @@
       width: 100%;
     }
   }
-
-  .widget-joins {
-    .widget-card {
-      padding: 15px;
-      .widget-icon {
-        width: 40px;
-        height: 40px;
-        i {
-          font-size: 20px;
-        }
-      }
-      .icon-bg {
-        svg {
-          width: 60px;
-          height: 60px;
-        }
-      }
-    }
-  }
-
   .contact-editform {
     padding-left: 20px !important;
   }
@@ -3992,6 +4052,14 @@
   }
 
   //general widget page
+  .calender-widget {
+    .cal-desc {
+      p {
+        max-height: 100%;
+      }
+    }
+  }
+
   .user-status {
     &.product-chart {
       max-height: 100%;
@@ -5084,11 +5152,6 @@
     .cal-datepicker {
       margin-top: 15px;
     }
-    .datepicker {
-      .datepicker--cell-day {
-        height: 36px;
-      }
-    }
   }
   .static-top-widget {
     .media-body {
@@ -6135,6 +6198,17 @@
     }
   }
 
+  //business card
+  .calender-widget {
+    .cal-desc {
+      padding: 10px 15px 15px !important;
+
+      p {
+        max-height: 100%;
+      }
+    }
+  }
+
   //user profile
   .user-profile {
     hr {
@@ -6667,31 +6741,6 @@
 }
 
 @media only screen and (max-width: 480px) {
-
-  .custom-profile {
-    .card-social {
-      .social-link {
-        width: 35px;
-        height: 35px;
-        img {
-          width: 16px;
-          height: 16px;
-        }
-      }
-      li {
-        + li {
-          margin-left: 6px;
-        }
-      }
-    }
-    .card-profile {
-      img {
-        height: 200px !important;
-        bottom: 0 !important;
-      }
-    }
-  }
-
   .page-wrapper .page-header .header-wrapper .nav-right .onhover-show-div {
     right: 20px;
     width: 280px;
@@ -6954,6 +7003,25 @@
       }
     }
   }
+
+  .cal-date-widget {
+    padding: 30px;
+  }
+
+  .calender-widget {
+    .cal-img {
+      height: 225px;
+    }
+  }
+
+  .company-card {
+    .details {
+      .media {
+        flex-wrap: wrap;
+      }
+    }
+  }
+
   // from wizard two
   .stepwizard {
     .stepwizard-row {
@@ -7733,22 +7801,6 @@
   .sidebar-wrapper {
     .back-btn {
       display: none;
-    }
-  }
-}
-
-@media (width: 768px) and (height: 1024px) {
-  .page-wrapper {
-    &.compact-wrapper {
-      .page-body-wrapper {
-        div.sidebar-wrapper {
-          .sidebar-main {
-            .sidebar-links {
-              height: calc(100vh - 210px);
-            }
-          }
-        }
-      }
     }
   }
 }

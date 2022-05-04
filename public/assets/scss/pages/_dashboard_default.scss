@@ -42,52 +42,77 @@ $badge-light-color in (primary, $primary-color),
 }
 
 .profile-greeting {
+  background-image: url(../images/dashboard/bg.jpg);
+  background-size: cover !important;
+  background-repeat: no-repeat;
+  background-position: center center;
   position: relative;
-  .cartoon {
-    margin: -35px -60px -20px 0;
-  }
 
   .card-body {
-    padding: 40px;
+    padding: 40px 20px;
   }
 
   .badge-groups {
     .badge {
-      &.f-10 {
+      &.f-12 {
         svg {
-          padding-top: 0;
-          width: 12px;
-          height: 12px;
-          vertical-align: bottom;
-          stroke-width: 3px;
+          width: 16px;
+          height: 16px;
         }
       }
     }
   }
 
   .media {
-    justify-content: space-between;
-    position: relative;
+    .media-body {
+      p {
+        font-weight: 500;
+        font-size: 10px;
+      }
+    }
+
     .badge-groups {
+      display: flex;
+      justify-content: space-between;
+
       .badge {
-        color: $primary-color;
+        color: $white !important;
         padding: 10px 14px !important;
-        background: linear-gradient(270deg, rgba(255, 255, 255, 0.2) 2%, rgba($primary-color, 0.2) 3.07%, rgba(255, 255, 255, 0.2) 94.5%);
-        border-radius: 5px;
-        text-align: left;
+
+        &:first-child {
+          display: flex;
+          align-items: center;
+          background: linear-gradient(90deg, $transparent-color 28%, rgba($white, 0.1) 100%);
+          border-radius: 5px;
+        }
+
+        &:last-child {
+          background: linear-gradient(90deg, rgba($white, 0.1) 20%, $transparent-color 100%);
+          border-radius: 5px;
+          width: 56px;
+          text-align: left;
+        }
       }
     }
   }
 
   .greeting-user {
+    margin: 42px 0;
+
     h4 {
-      margin-bottom: 15px;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      color: $white;
     }
 
     p {
       font-weight: 500;
-      margin-bottom: 15px;
-      width: 72%;
+      padding: 0 50px;
+      margin-bottom: 25px;
+
+      span {
+        color: rgba($white, 0.8);
+      }
     }
 
     .profile-vector {
@@ -102,6 +127,32 @@ $badge-light-color in (primary, $primary-color),
       }
     }
 
+    .left-icon {
+      width: 50px;
+      height: 50px;
+      background-color: rgba($white, 0.1);
+      border-radius: 20px 20px 20px 10px;
+      position: absolute;
+      left: 4%;
+      bottom: 4%;
+
+      i {
+        color: $white;
+        margin-top: 38%;
+        transform: translateY(-50%);
+        animation: tada 1.5s ease infinite;
+      }
+    }
+  }
+
+  .whatsnew-btn {
+    .btn {
+      background-color: $white !important;
+      border-radius: 5px;
+      color: var(--theme-deafult);
+      font-weight: 500;
+      padding: 6px 18px;
+    }
   }
 }
 
@@ -247,7 +298,6 @@ $badge-light-color in (primary, $primary-color),
           p {
             font-size: 14px;
             color: $theme-body-sub-title-color;
-            font-family: $font-roboto, $font-serif;
           }
         }
       }
@@ -417,7 +467,6 @@ $badge-light-color in (primary, $primary-color),
       margin-bottom: -5px;
 
       input {
-        font-weight: 400 !important;
         height: 40% !important;
         width: 40% !important;
         left: 50% !important;
@@ -476,25 +525,13 @@ $badge-light-color in (primary, $primary-color),
   }
 
   .news-update {
-    padding: 20px 40px;
+    padding: 30px 40px;
     border-bottom: 1px solid $light-gray;
 
     span {
+      color: $theme-body-sub-title-color;
       font-family: $font-roboto, $font-serif;
       font-weight: 400;
-    }
-
-    .time-detail {
-      font-weight: 500;
-      font-size: 10px;
-      color: $theme-body-sub-title-color;
-      margin-top: 8px;
-      svg {
-        width: 12px;
-        height: 12px;
-        vertical-align: text-bottom;
-        margin-right: 5px;
-      }
     }
 
     &:last-child {
@@ -544,22 +581,15 @@ $badge-light-color in (primary, $primary-color),
   }
   .bottom-btn {
     text-align: center;
-    a {
-      font-family: $font-roboto, $font-serif;
-      font-weight: bold;
-      font-size: 14px;
-      line-height: 16px;
-      letter-spacing: 0.3px;
-      text-decoration-line: underline;
-      text-transform: uppercase;
-    }
+    font-size: 18px;
+    font-weight: 500;
   }
 
   .news {
     .card {
       .card-footer {
-        padding-top: 20px;
-        padding-bottom: 20px;
+        padding-top: 0;
+        border-top: none !important;
       }
     }
   }
@@ -608,10 +638,6 @@ $badge-light-color in (primary, $primary-color),
             display: flex;
             align-items: center;
             justify-content: center;
-            svg {
-              width: 30px;
-              height: 30px;
-            }
           }
         }
       }
@@ -624,7 +650,7 @@ $badge-light-color in (primary, $primary-color),
           }
 
           span {
-            color: rgba($white, 0.6);
+            color: rgba($white, 0.8);
           }
         }
       }
@@ -757,7 +783,6 @@ $badge-light-color in (primary, $primary-color),
         &.img-content-box {
           .font-roboto {
             color: $theme-body-sub-title-color;
-            font-weight: 400;
           }
         }
       }
@@ -765,26 +790,24 @@ $badge-light-color in (primary, $primary-color),
   }
 }
 
-.icon-box {
-  width: 50px;
-  height: 32px;
-  background-color: rgba($primary-color, 0.08);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  i {
-    color: var(--theme-deafult);
-    font-size: 22px;
-  }
-  svg {
-    stroke: var(--theme-deafult);
-  }
-}
 .chat-default {
   .media-dashboard {
     align-items: center;
+
+    .icon-box {
+      width: 50px;
+      height: 32px;
+      background-color: rgba($primary-color, 0.08);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      i {
+        color: var(--theme-deafult);
+        font-size: 22px;
+      }
+    }
   }
 
   .card-body {
@@ -950,6 +973,20 @@ $badge-light-color in (primary, $primary-color),
   }
 }
 
+.date-picker-setting {
+  background-color: rgba($primary-color, 0.1);
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+
+  i {
+    color: var(--theme-deafult);
+  }
+}
+
 .default-datepicker {
   .datepicker-inline {
     .datepicker {
@@ -961,7 +998,7 @@ $badge-light-color in (primary, $primary-color),
       .datepicker--content {
         .datepicker--days {
           .datepicker--days-names {
-            margin: 40px 0 0;
+            margin: 60px 0 0;
             padding: 15px 0;
 
             .datepicker--day-name {
@@ -973,6 +1010,7 @@ $badge-light-color in (primary, $primary-color),
           .datepicker--cells {
             .datepicker--cell-day {
               height: 55px;
+              border-radius: 0;
               color: $dark-editor-document;
 
               &.-other-month- {
@@ -983,11 +1021,9 @@ $badge-light-color in (primary, $primary-color),
 
             .datepicker--cell {
               font-weight: 500;
-              font-size: 14px;
-              line-height: 17px;
-              border-radius: 100%;
+              font-size: 16px;
+              border-radius: 0;
               z-index: 0;
-              letter-spacing: 2px;
 
               &.-selected- {
                 background: var(--theme-deafult);
@@ -1142,154 +1178,6 @@ $badge-light-color in (primary, $primary-color),
 
 //general widget css start
 
-.fill-primary {
-  fill: $primary-color;
-}
-.fill-secondary {
-  fill: $secondary-color;
-}
-.fill-success {
-  fill: $success-color;
-}
-.fill-warning {
-  fill: $warning-color;
-}
-.fill-info {
-  fill: $info-color;
-}
-.fill-danger {
-  fill: $danger-color;
-}
-
-.widget-feedback {
-  .apexcharts-canvas {
-    margin: 0 auto;
-  }
-  h6 {
-    color: $font-gray-color;
-  }
-  ul {
-    display: flex;
-    align-items: center;
-    margin-top: 9px;
-    li {
-      width: 100%;
-      text-align: center;
-      h5 {
-        margin-bottom: 0;
-        font-weight: 600;
-      }
-    }
-  }
-  .feedback-top {
-    margin-bottom: 20px;
-  }
-}
-
-.activity-media {
-  margin: -12px 0;
-  .media {
-    padding: 12px 0;
-    .recent-circle {
-      width: 12px;
-      height: 12px;
-      border-radius: 100%;
-      margin-top: 8px;
-    }
-    .media-body  {
-      margin-left: 20px;
-      h6 {
-        line-height: 1.6;
-      }
-      i {
-        vertical-align: middle;
-      }
-      svg {
-        width: 12px;
-        height: 12px;
-        vertical-align: -2px;
-      }
-      span {
-        font-size: 10px;
-        color: $theme-body-sub-title-color;
-        font-weight: 500;
-      }
-    }
-    + .media {
-      border-top: 1px solid $light-widget-border;
-    }
-  }
-}
-.emplyoee-table {
-  .u-s-tb {
-    padding: 20px;
-  }
-}
-
-.new-order {
-  h6, span {
-    color: $font-gray-color;
-  }
-  .progress {
-    margin-top: 20px;
-  }
-  ul {
-    margin-top: 40px;
-    display: flex;
-    align-items: center;
-    li {
-      h5 {
-        margin-bottom: 0;
-      }
-      width: 100%;
-    }
-  }
-}
-
-.browser-table {
-  table {
-    thead {
-      th {
-        border-top: 0;
-        font-size: calc(16px + (20 - 16) * ((100vw - 320px) / (1920 - 320)));
-        padding-top: 0;
-        border-bottom-width: 1px;
-      }
-    }
-    tr {
-      th, td {
-        vertical-align: middle;
-        font-family: $font-roboto, $font-serif;
-        font-weight: 500;
-        border-color: $light-widget-border;
-      }
-      td {
-        font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (1920 - 320)));
-        color: $font-gray-color;
-        padding: 20px;
-        img {
-          height: 46px;
-          transition: 0.5s;
-        }
-      }
-      &:hover {
-        td {
-          img {
-            filter: grayscale(100%);
-            transition: 0.5s;
-          }
-        }
-      }
-      &:last-child {
-        td {
-          padding-bottom: 0;
-          border-bottom: none;
-        }
-      }
-    }
-  }
-}
-
 .ecommerce-widget {
   box-shadow: none;
   border: 1px solid #f1f3ff !important;
@@ -1341,11 +1229,13 @@ $badge-light-color in (primary, $primary-color),
 }
 
 .static-top-widget {
-  margin-bottom: 40px;
-  h6 {
-    font-weight: 400;
-    color: $theme-body-sub-title-color;
+  &:hover {
+    .icon-bg {
+      transform: rotate(-5deg) scale(1.1);
+      transition: all 0.3s ease;
+    }
   }
+
   div.align-self-center {
     svg {
       width: 30px;
@@ -1355,9 +1245,17 @@ $badge-light-color in (primary, $primary-color),
 
   .media-body {
     align-self: center !important;
-  }
-  .icon-bg {
-    font-size: 30px;
+    padding-left: 30px;
+
+    .icon-bg {
+      position: absolute;
+      right: -14px;
+      top: 6px;
+      opacity: 0.2;
+      transition: all 0.3s ease;
+      width: 100px;
+      height: 100px;
+    }
   }
 }
 
@@ -1394,57 +1292,32 @@ $badge-light-color in (primary, $primary-color),
 }
 
 .widget-joins {
-  .widget-card {
-    border: 1px solid $light-widget-border;
-    padding: 30px;
-    border-radius: 18px;
-    position: relative;
-    .widget-icon {
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 100%;
-      i {
-        font-size: 30px;
-      }
-      svg {
-        width: 20px;
-        height: 20px;
-      }
-    }
-    .icon-bg {
-      position: absolute;
-      right: 20px;
-      bottom: 20px;
-      svg {
-        opacity: 0.05;
-        fill: $font-gray-color;
-      }
-    }
-    h6 {
-      color: $font-gray-color;
-      margin-left: 15px;
-      margin-bottom: 0;
-    }
-    .font-roboto {
-      color: $font-gray-color;
-      i {
-        font-size: 20px;
-        vertical-align: middle;
-      }
-      span {
-        font-weight: 600;
-      }
-    }
+  &:before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 1px;
+    background-color: $light-semi-gray;
+    left: calc(50% - 1px);
   }
+
+  &:after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    background-color: $light-semi-gray;
+    left: 0;
+    top: 50%;
+  }
+
   .media {
+    padding: 30px;
     text-align: center;
     align-items: center;
-    margin-bottom: 30px;
+
     .details {
-     
+      border-left: 1px solid $light-semi-gray;
       padding: 1px 0;
     }
 
@@ -1458,6 +1331,14 @@ $badge-light-color in (primary, $primary-color),
       svg {
         width: 40px;
         height: 40px;
+      }
+
+      h6 {
+        font-weight: 600;
+
+        span {
+          color: $black;
+        }
       }
     }
   }
@@ -1491,32 +1372,25 @@ $badge-light-color in (primary, $primary-color),
 }
 
 .social-widget-card {
-  h6 {
+  span {
     color: $theme-body-sub-title-color;
-    margin-bottom: 0;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: inline-block;
+    font-size: $btn-sm-font-size;
   }
 
   h5 {
+    color: $theme-body-sub-title-color;
+    text-transform: uppercase;
     text-align: center;
-    font-weight: bold;
+    padding: 20px 0;
+    font-weight: 500;
+    margin-bottom: 30px;
+    font-size: 16px;
   }
-  .media {
-    align-items: center;
-    .social-font {
-      width: 70px;
-      height: 70px;
-      background-color: $off-white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 100%;
-    }
-    .media-body {
-      margin-left: 20px;
-    }
-    h4 {
-      margin-bottom: 0;
-    }
+  h4 {
+    font-size: $btn-lg-font-size;
   }
 }
 
@@ -1612,39 +1486,23 @@ $badge-light-color in (primary, $primary-color),
 %clock-widget {
   position: absolute;
   width: 24px;
-  height: 208px;
+  height: 234px;
   top: 0;
-  left: 88px;
+  left: 102px;
   margin-top: -30px;
   margin-left: -25px;
 }
 
 .cal-date-widget {
   .datepicker {
-    padding: 40px;
+    padding: 20px;
     border-radius: 20px;
-    box-shadow: none;
-    width: auto;
     .datepicker--nav {
-      justify-content: center;
       border-bottom: none;
-    }
-    .datepicker--nav-action {
-      display: none;
-    }
-    .datepicker--day-name, .datepicker--nav, .datepicker--nav-title i {
-      color: #2C323F;
-    }
-    .datepicker--days-names {
-      margin-top: 18px;
     }
     .datepicker--cell-day.-other-month-,
     .datepicker--cell-year.-other-decade- {
       opacity: 0.5;
-    }
-    .datepicker--cell-day {
-      height: 43px;
-      border-radius: 25px;
     }
   }
   .cal-info h2 {
@@ -1654,56 +1512,19 @@ $badge-light-color in (primary, $primary-color),
 }
 
 .weather-widget-two {
-  background: url(../images/other-images/wallpaper.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-radius: 20px;
   position: relative;
-  color: $white;
-  &::after {
-    position: absolute;
-    content: '';
-    width: 100%;
-    height: 100%;
-    opacity: 0.3;
-    filter: blur(30px);
-    background: #1F3DD8;
-    border-radius: 20px;
-    top: 0;
-  }
+  background-color: var(--theme-deafult);
+  height: 365px;
+  border-radius: 20px;
+  overflow: hidden;
   .card-body {
-    position: relative;
-    z-index: 1;
+    .media {
+      margin-bottom: 10px;
+    }
   }
   svg {
     path.climacon_component-stroke {
       fill: $white;
-    }
-  }
-  .widget-list {
-    .climacon_component-fill {
-      fill: $white;
-    }
-    svg.climacon {
-      width: 70px;
-      height: 70px;
-    }
-    ul {
-      li {
-        padding: 16px 0;
-        + li {
-          border-top: 1px solid rgba($light-widget-border, 0.2);
-        }
-      }
-    }
-    .media {
-      align-items: center;
-      .media-body {
-        h5 {
-          margin-bottom: 0;
-        }
-        margin-left: 30px;
-      }
     }
   }
 
@@ -1748,22 +1569,20 @@ $badge-light-color in (primary, $primary-color),
 }
 
 .mobile-clock-widget {
-  position: relative;
-  padding: 30px;
-  z-index: 1;
+  background: url(../images/other-images/mobile-clock-wallpaper.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 365px;
+  border-radius: 20px;
+  color: $white;
   text-align: center;
-  &::after {
-    position: absolute;
-    content: '';
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: #19191B;
-    opacity: 0.3;
-    border-radius: 10px;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-blend-mode: overlay;
+  background-color: #102680;
+  position: relative;
+
   .bg-svg {
     position: absolute;
     top: -4px;
@@ -1781,11 +1600,10 @@ $badge-light-color in (primary, $primary-color),
     position: relative;
     list-style: none;
     margin: 0 auto;
-    height: 150px;
-    width: 150px;
+    height: 175px;
+    width: 175px;
     display: block;
     background: url(../images/other-images/clock-face.png) 5% center no-repeat;
-    background-size: cover;
   }
 
   .sec {
@@ -1826,40 +1644,35 @@ $badge-light-color in (primary, $primary-color),
 }
 
 .calender-widget {
-  background: url(../images/other-images/calender-widget.jpg);
-  background-size: cover;
-  height: 560px;
-  background-repeat: no-repeat;
-  position: relative;
-  .card-body {
-    display: flex;
-    align-items: flex-end;
-    height: 100%;
+  .cal-img {
+    background: url(../images/other-images/calender-bg.png);
+    ;
+    background-size: cover;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    height: 300px;
   }
+
   .cal-date {
-    position: absolute;
-    top: 40px;
     width: 100px;
     height: 100px;
-    margin-bottom: 40px;
+    margin: 0 auto;
     text-align: center;
     background-color: $white;
+    border-radius: 50%;
+    margin-top: -45px;
+    border: 1px solid $light-gray;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(#2C323F, 0.5);
-    border-radius: 20px;
+
     h5 {
       margin-bottom: 0;
       line-height: 1.5;
       padding: 17px;
       font-weight: 600;
-      color: $white;
+      font-size: $btn-lg-font-size;
     }
-  }
-
-  p {
-    color: $white;
   }
 
   .cal-desc {
@@ -1874,37 +1687,53 @@ $badge-light-color in (primary, $primary-color),
 }
 
 .contact-form {
+  .theme-form {
+    border: 1px solid $light-color;
+    padding: 30px;
+    border-radius: 4px;
+
+    .form-icon {
+      width: 53px;
+      height: 53px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border: 1px solid $light-semi-gray;
+      border-radius: 100%;
+      font-size: 28px;
+      background-color: $white;
+      color: $primary-color;
+      margin-top: -55px;
+      margin-bottom: 15px;
+    }
+
+     label {
+       font-weight: 600;
+     }
+  }
+
   .btn {
     padding: 10px 30px;
-    font-weight: 500;
-    text-transform: capitalize;
   }
 }
 
 //chart widget css
+
 .chart-widget-top {
+
   #chart-widget1,
   #chart-widget2,
   #chart-widget3 {
     margin-bottom: -14px;
+
     .apexcharts-xaxistooltip {
       display: none;
     }
   }
-  span {
-    color: $font-gray-color;
-  }
 }
+
 .bar-chart-widget {
-  .apexcharts-legend {
-    bottom: 0 !important;
-    .apexcharts-legend-series {
-      margin: 0 10px !important;
-    }
-    .apexcharts-legend-marker {
-      margin-right: 5px ;
-    }
-  }
   .top-content {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -1941,37 +1770,17 @@ $badge-light-color in (primary, $primary-color),
   }
 
 }
-.skill-chart {
-  margin-bottom: -48px;
-  .apexcharts-legend {
-    .apexcharts-legend-series {
-      span {
-        display: block;
-      }
-      .apexcharts-legend-text {
-        margin: 10px 0 20px;
-      }
-    }
-  }
-}
-.progress-chart {
-  margin: -11px 0 -20px;
-  .apexcharts-canvas {
-    svg {
-      path, rect {
-        clip-path: inset(1% 0% 0% 0% round 1rem);
-      }
-    }
-  }
-}
+
 .bottom-content {
   span {
     color: $theme-body-sub-title-color;
   }
+
   .block-bottom {
     display: block;
   }
 }
+
 .user-status {
   table {
     tbody {
@@ -2002,7 +1811,7 @@ $badge-light-color in (primary, $primary-color),
           border-top: 0;
           font-size: 16px;
           color: $dark-color;
-          font-weight: 500;
+          font-weight: 600;
           padding-top: 0;
         }
       }
@@ -2091,29 +1900,6 @@ $badge-light-color in (primary, $primary-color),
     stroke-linejoin: round;
     stroke-linecap: round;
     animation: am-moving-dashes 1s linear infinite;
-  }
-}
-.chart-container {
-  .apexcharts-xaxis-label , .apexcharts-yaxis-label  {
-    font-size: 14px !important;
-    color: $font-gray-color !important;
-  }
-  .apexcharts-xaxis-annotations {
-    rect {
-      clip-path: inset(1% 0% 0% 0% round 0.2rem);
-    }  
-  }
-}
-
-.crypto-chart {
-  margin-left: -20px;
-  .apexcharts-tooltip-title {
-    display: none;
-  }
-  .apexcharts-tooltip-series-group {
-      &:last-child, &.active {
-        padding-bottom: 0;
-      }
   }
 }
 
@@ -2653,27 +2439,6 @@ footer {
 }
 
 @media screen and (max-width: 1366px) {
-
-  .custom-profile {
-    .card-social {
-      .social-link {
-        width: 45px;
-        height: 45px;
-        img {
-          width: 18px;
-          height: 18px;
-        }
-      }
-    }
-  }
-
-  .static-top-widget {
-    svg {
-      width: 30px;
-      height: 30px;
-    }
-  }
-
   .chart_data_left {
     .row {
       >div {
@@ -2770,6 +2535,9 @@ footer {
   .morning-sec {
     order: -2;
 
+    .greeting-user {
+      margin: 33px 0;
+    }
   }
 
   .calendar-sec {
@@ -2801,29 +2569,16 @@ footer {
 }
 
 @media only screen and (max-width: 1199px) {
-
-  .widget-joins {
-    .widget-card {
-      .widget-icon {
-        i {
-          font-size: 25px;
-        }
-      }
-      .icon-bg {
-        svg {
-          width: 80px;
-          height: 80px;
-        }
-      }
-    }
-  }
-  .profile-greeting {
-    .cartoon {
-      margin-right: 0;
-    }
-  }
   .morning-sec {
     order: unset;
+  }
+
+  .profile-greeting {
+    .greeting-user {
+      .left-icon {
+        left: 2%;
+      }
+    }
   }
 
   .calendar-sec {
@@ -2925,9 +2680,6 @@ footer {
 }
 
 @media only screen and (max-width: 991px) {
-  .calender-widget {
-    height: 450px;
-  }
   .earning-card {
     margin-top: 0;
 
@@ -2977,6 +2729,7 @@ footer {
       }
     }
   }
+
   .chart_data_left {
     .card-body {
       .chart-main {
@@ -3059,6 +2812,12 @@ footer {
 
         h4 {
           margin-bottom: 10px;
+          margin-top: 15px;
+        }
+
+        .left-icon {
+          left: 20px;
+          bottom: 20px;
         }
       }
     }
@@ -3122,16 +2881,25 @@ footer {
 }
 
 @media only screen and (max-width: 575px) {
-  .profile-greeting {
-    .greeting-user {
-      p {
-        width: 100%;
+
+  .morning-sec {
+    .card-body {
+      .greeting-user {
+        p {
+          padding: 0 15px;
+        }
+
+        .left-icon {
+          left: 15px;
+          bottom: 15px;
+          width: 40px;
+          height: 40px;
+          border-radius: 15px 15px 15px 5px;
+        }
       }
     }
-    .cartoon {
-      margin-bottom: -15px;
-    }
   }
+
   .chart_data_left {
     .card {
       .card-body {
@@ -3284,6 +3052,10 @@ footer {
           padding: 15px;
         }
       }
+
+      .card-footer {
+        padding-top: 0 !important;
+      }
     }
   }
 
@@ -3368,7 +3140,7 @@ footer {
           .datepicker--days {
             .datepicker--cells {
               .datepicker--cell {
-                font-size: 13px;
+                font-size: 14px;
               }
             }
           }

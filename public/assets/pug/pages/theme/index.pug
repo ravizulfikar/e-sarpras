@@ -16,7 +16,14 @@ doctype html
 html(lang='en')
   include ../../components/header-files
   body(onload='startTime()')
-    include ../../components/loader
+    .loader-wrapper
+      .loader-index
+        span
+      svg
+        defs
+        filter#goo
+          fegaussianblur(in='SourceGraphic' stddeviation='11' result='blur')
+          fecolormatrix(in='blur' values='1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9' result='goo')  
     include ../../components/taptop
     // page-wrapper Start
     #pageWrapper.page-wrapper.compact-wrapper
@@ -42,22 +49,29 @@ html(lang='en')
           .container-fluid
             .row.second-chart-list.third-news-update
               .col-xl-4.col-lg-12.xl-50.morning-sec.box-col-12
-                .card.profile-greeting
-                  .card-body.pb-0
+                .card.o-hidden.profile-greeting
+                  .card-body
                     .media
-                      .media-body 
-                        .greeting-user
-                          h4.f-w-600.font-primary#greeting Good Morning
-                          p Here whats happing in your account today
-                          .whatsnew-btn
-                            a.btn.btn-primary Whats New !
-                      .badge-groups
-                        .badge.f-10
+                      .badge-groups.w-100
+                        .badge.f-12
                           i.me-1(data-feather='clock')
                           span#txt
-                    .cartoon
-                      img.img-fluid(src="../assets/images/dashboard/cartoon.png" alt="") 
-                      
+                        .badge.f-12
+                          i.fa.fa-spin.fa-cog.f-14
+                    .greeting-user.text-center
+                      .profile-vector
+                        img.img-fluid(src='../assets/images/dashboard/welcome.png' alt='')
+                      h4.f-w-600
+                        span#greeting Good Morning
+                        | 
+                        span.right-circle
+                          i.fa.fa-check-circle.f-14.middle
+                      p
+                        span  Today's earrning is $405 & your sales increase rate is 3.7 over the last 24 hours
+                      .whatsnew-btn
+                        a.btn.btn-primary Whats New !
+                      .left-icon
+                        i.fa.fa-bell  
               .col-xl-8.xl-100.dashboard-sec.box-col-12
                 .card.earning-card
                   .card-body.p-0
@@ -194,33 +208,18 @@ html(lang='en')
                             a.dropdown-item(href='#') Tomorrow
                             a.dropdown-item(href='#') Yesterday
                   .card-body.p-0
-                    .news-update.media
-                      img.img-fluid.me-3.b-r-10(src="../assets/images/dashboard/update/1.jpg" alt="")
-                      .media-body
-                        h6 36% off For pixel Couslations Types.
-                        span Lorem Ipsum is simply dummy...
-                        span.time-detail.d-block
-                          i(data-feather="clock")
-                          | 10 Minutes Ago
-                    .news-update.media
-                      img.img-fluid.me-3.b-r-10(src="../assets/images/dashboard/update/2.jpg" alt="")
-                      .media-body
-                        h6 We are produce new product this
-                        span  Lorem Ipsum is simply text of the printing... 
-                        span.time-detail.d-block
-                          i(data-feather="clock")
-                          | 1 Hour Ago
-                    .news-update.media
-                      img.img-fluid.me-3.b-r-10(src="../assets/images/dashboard/update/3.jpg" alt="")
-                      .media-body
-                        h6 50% off For COVID Couslations Types.
-                        span Lorem Ipsum is simply dummy...
-                        span.time-detail.d-block
-                          i(data-feather="clock")
-                          | 8 Hours Ago
+                    .news-update
+                      h6 36% off For pixel lights Couslations Types.
+                      span Lorem Ipsum is simply dummy...
+                    .news-update
+                      h6 We are produce new product this
+                      span  Lorem Ipsum is simply text of the printing... 
+                    .news-update
+                      h6 50% off For COVID Couslations Types.
+                      span Lorem Ipsum is simply dummy...
                   .card-footer
                     .bottom-btn
-                      a(href="#") See all
+                      a(href="#") More...
               .col-xl-4.xl-50.appointment-sec.box-col-6
                 .row 
                   .col-xl-12.appointment
@@ -251,6 +250,7 @@ html(lang='en')
                                   p.m-0.font-primary 28 Sept
                                 td.text-end
                                   .button.btn.btn-primary Done
+                                    i.fa.fa-check-circle.ms-2
                               tr
                                 td
                                   img.img-fluid.img-40.rounded-circle(src='../assets/images/appointment/app-ent.jpg',alt='Image description')
@@ -261,14 +261,15 @@ html(lang='en')
                                 td
                                   p.m-0.font-primary 22 Sept
                                 td.text-end
-                                  .button.btn.btn-warning Pending
+                                  .button.btn.btn-danger Pending
+                                    i.fa.fa-clock-o.ms-2
                   .col-xl-12.alert-sec
                     .card.bg-img
                       .card-header
                         .header-top
                           h5.m-0 Alert  
                           .dot-right-icon
-                            i(data-feather="more-horizontal")
+                            i.fa.fa-ellipsis-h
                       .card-body
                         .body-bottom
                           h6   10% off For drama lights Couslations...
@@ -333,7 +334,7 @@ html(lang='en')
                       .media-body 
                         h5.mb-0 Live Chat
                       .icon-box
-                        i(data-feather="more-horizontal")
+                        i.fa.fa-ellipsis-h
                   .card-body.chat-box
                     .chat
                       .media.left-side-chat
@@ -375,9 +376,8 @@ html(lang='en')
                 .card.gradient-primary.o-hidden
                   .card-body
                     .setting-dot
-                      .setting-bg-primary.date-picker-setting.pull-right
-                        .icon-box
-                          i(data-feather="more-horizontal")
+                      .setting-bg-primary.date-picker-setting.position-set.pull-right
+                        i.fa.fa-spin.fa-cog
                     .default-datepicker
                       .datepicker-here(data-language='en')
                     span.default-dots-stay.overview-dots.full-width-dots

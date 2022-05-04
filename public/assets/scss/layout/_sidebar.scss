@@ -91,7 +91,7 @@
     z-index:$main-header-z-index;
     transition:$sidebar-transition;
     background-color:$white;
-    box-shadow:$main-header-shadow-1;
+    box-shadow:$main-header-shadow;
     .header-wrapper {
       width: 100%;
       display: flex;
@@ -269,37 +269,11 @@
           box-shadow: unset !important;
           background-color: transparent !important;
           overflow: initial;
-          &::after, &::before {
-            display: none;
-          }
-
-          .bookmark-dropdown {
-            .bookmark-content {
-              text-align: center;
-              .bookmark-icon {
-                width: 52px;
-                height: 52px;
-                background-color: #f9f9f9;
-                border-radius: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin: 0 auto;
-              }
-              span {
-                font-family: $font-roboto, $font-serif;
-                font-size: 12px;
-                font-weight: 500;
-                letter-spacing: 0.5px;
-              }
-             
-            }
-          }
         }
 
         .flip-card {
-          width: 300px;
-          height: 260px;
+          width: 220px;
+          height: 245px;
           background-color: transparent;
 
           .flip-card-inner {
@@ -316,8 +290,8 @@
               border-radius: 10px;
               overflow: hidden;
               box-shadow: 0 0 20px rgba(89, 102, 122, 0.1);
-              width: 300px;
-              height: 260px;
+              width: 220px;
+              height: 240px;
 
               button {
                 background-color: $transparent-color;
@@ -335,6 +309,7 @@
               transition: .3s;
 
               svg {
+                margin-bottom: 15px;
                 stroke: $dark-color;
                 transition: all 0.3s ease;
 
@@ -352,7 +327,12 @@
               li {
                 &:first-child {
                   margin-top: 20px;
-                  height: 140px !important;
+                  height: 160px !important;
+                }
+
+                &:last-child {
+                  padding: 20px 0;
+                  border-top: 1px solid #ddd;
                 }
               }
 
@@ -366,9 +346,6 @@
                   padding: 6px 12px;
                   width: 100%;
                   border: 1px solid #ddd;
-                  &:focus {
-                    outline: none;
-                  }
                 }
               }
             }
@@ -383,35 +360,39 @@
           }
         }
 
+        .onhover-show-div:not(.profile-dropdown) {
+          li {
+            &:first-child {
+              padding:20px;
+              background-color:#eaeaea;
+              svg {
+                position: absolute;
+                width: 50px;
+                height: 50px;
+                top: 0;
+                right: 0;
+                opacity: 0.05;
+              }
+            }
+          }
+        }
         .onhover-show-div {
           width: 330px;
           top: 50px;
           right: 0;
           left: unset;
-          .dropdown-title {
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba($dropdown-border-color, 0.3);
-          }
-          ul {
-            padding: 15px;
-          }
+
           li {
-            padding: 15px;
+            padding: 0 20px;
+
             p {
-              font-size: 14px;
-              letter-spacing: 0.3px;
-              margin-bottom: 0;
-            }
-            a {
-              text-decoration: underline;
-              text-transform: uppercase;
-              letter-spacing: 0.3px;
-              font-family: $font-roboto, $font-serif;
+              opacity: 0.6;
             }
 
             &+li {
-                margin-top: 15px;
+              padding-top: 15px;
+              padding-bottom: 0px;
+              border-top: 1px solid #f5f5f5;
             }
 
 
@@ -440,7 +421,7 @@
                 }
 
                 p {
-                  margin-bottom: 8px;
+                  margin-bottom: 15px;
                 }
               }
             }
@@ -470,26 +451,13 @@
         }
 
         .cart-dropdown {
-          ul {
-            padding: 0 0 15px;
-          }
           li {
-            margin: 0 15px;
-            padding: 10px 0;
             .media {
               align-items: center;
-              .media-body {
-                margin-right: 20px;
-              }
             }
 
             &+li {
-              margin-top: 0;
-              border-top: 1px solid rgba($dropdown-border-color, 0.1);
-            }
-            &:last-child {
-              padding: 20px 15px;
-              border-top: none;
+              padding-bottom: 10px;
             }
           }
 
@@ -503,61 +471,18 @@
             position: absolute;
             right: 0;
             top: 0;
-            a {
-              width: 18px;
-              height: 18px;
-              border-radius: 100%;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-            }
 
             svg {
               width: 14px;
-              stroke: $white;
             }
           }
           .qty-box {
-            margin: 5px 0;
             .input-group {
               width: 80px;
-              background-color: transparent;
-              input {
-                background-color: transparent;
-              }
-              input, .btn {
-                font-size: 10px;
-                font-family: $font-roboto, $font-serif;
-                font-weight: 700;
-              }
               .btn{
-                padding: 0px 7px;
-                background-color: $off-white !important;
-                border-color: $off-white !important;
-                border-radius: 100%;
-                font-size: 14px;
-                color: $theme-body-font-color;
+                padding: 0px 2px;
               }
             }
-          }
-          .total {
-            margin: 0;
-            padding: 15px;
-            background-color: #f9f9f9;
-            border: none;
-            h6 {
-              font-family: $font-roboto, $font-serif;
-              font-weight: 500;
-              font-size: 12px;
-              line-height: 14px;
-              letter-spacing: 0.5px;
-              span {
-                font-size: 14px;
-              }
-            }
-          }
-          .view-checkout {
-            text-decoration: unset;
           }
         }
 
@@ -568,20 +493,22 @@
           left: unset;
 
           li {
-            background-color: #f9f9f9;
-            border-radius: 5px;
+            &+li {
+              padding-top: 8px;
+
+              p {
+                margin-bottom: 8px;
+              }
+            }
+
             &:last-child {
               text-align: center;
-              background-color: transparent;
+              border-top: 1px solid #ecf3fa;
             }
 
             p {
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
               span {
-                font-size: 11px;
-                vertical-align: middle;
+                color: $light-font;
               }
             }
           }
@@ -593,43 +520,6 @@
           }
         }
 
-        .chat-dropdown {
-          ul {
-            li {
-              h6 {
-                font-weight: 500;
-                font-size: 14px;
-                line-height: 16px;
-              }
-              h6, p {
-                font-family: $font-roboto, $font-serif;
-                letter-spacing: 0.5px;
-              }
-              p {
-                font-size: 12px;
-                font-weight: 500;
-                line-height: 1.3;
-                color: $light-paragraph;
-              }
-              .badge {
-                font-family: $font-roboto, $font-serif;
-                font-weight: 500;
-                font-size: 10px;
-                line-height: 1.3;
-                letter-spacing: 0.5px;
-                padding: 3px 6px;
-                position: relative;
-                right: unset;
-                top: unset;
-              }
-              &+li {
-                margin-top: 0;
-                border-top: 1px solid rgba($dropdown-border-color, 0.1);
-              }
-            }
-          }
-        }
-
         .profile-dropdown {
           width: 160px;
           top: 57px;
@@ -638,9 +528,6 @@
 
           li {
             padding: 10px !important;
-            a {
-              text-decoration: unset;
-            }
 
             &:hover {
               a {
@@ -660,9 +547,6 @@
                 }
               }
             }
-             + li {
-               margin-top: 0;
-             }
 
             &:last-child {
               padding-top: 10px !important;
@@ -700,15 +584,11 @@
     }
 
     .page-title {
-      padding: $page-title-padding;
-      margin: 0 -27px 30px;
-      background-color: $white;
-      border-bottom: 1px solid #D9D9E1;
-      box-shadow: 0px 4px 40px rgba($black, 0.07);
+      padding-top: $page-title-padding;
+      padding-bottom: $page-title-padding;
+
       >.row {
-        margin: 0;
         .col-6 {
-          padding: 0 ;
           &:first-child {
             display: flex;
 
@@ -1506,13 +1386,8 @@
                             position: absolute;
                             right: 50px;
                             top: 14.5px;
-                            padding: 0.45em 0.8em 0.33em;
+                            padding: 0.44em 0.7em 0.32em;
                             z-index: 1;
-                            font-size: 10px;
-                            letter-spacing: 0.7px;
-                            font-weight: 600;
-                            font-family: $font-roboto, $font-serif;
-                            border-radius: 10px;
                           }
 
                           &:hover {
@@ -1560,6 +1435,7 @@
                             margin-right: 10px;
                             vertical-align: bottom;
                             float: none;
+                            stroke-width: 2.3px;
                             color: $dark-color;
                             transition: all 0.3s ease;
                           }
@@ -1825,7 +1701,7 @@
         i {
           vertical-align: middle;
           color: rgba($black, 0.8);
-          font-weight: 500;
+          font-weight: 600;
         }
       }
 

@@ -6,36 +6,6 @@ body {
 	&.dark-only {
 		color: $dark-all-font-color;
 		background-color: $dark-body-background;
-		.activity-media {
-			.media {
-				.media-body {
-					span {
-						color: $dark-small-font-color;
-					}
-				}
-				+ .media {
-					border-top: 1px solid $dark-card-border;
-				}
-			}
-		}
-		.static-top-widget {
-			h6  {
-				color: $dark-small-font-color;
-			}
-		}
-		.widget-joins {
-			.widget-card {
-				border: 1px solid $dark-card-border;
-			}
-		}
-		.custom-profile {
-			.card-social {
-				.social-link {
-					background-color: $dark-body-background;
-					border: 1px solid $dark-card-border;
-				}
-			}
-		}
 		.apexcharts-tooltip.light {
 			.apexcharts-tooltip-title {
 				background: $dark-card-background;
@@ -238,7 +208,7 @@ body {
 						
 						.flip-card .flip-card-inner {
 							.back {
-								background-color: $dark-body-background !important;
+								background-color: $dark-card-background !important;
 								.flip-back-content {
 									input {
 										background-color: $dark-body-background;
@@ -261,32 +231,19 @@ body {
 								}
 							}
 						}
-
-						.cart-dropdown {
-							.total {
-								background-color: $dark-card-background;
-							}
-							.qty-box {
-								.input-group {
-									.btn {
-										color: rgba($white, 0.4);
-										border-color: $dark-card-background !important;
-										background-color: $dark-card-background !important;
-									}
+						
+						.onhover-show-div:not(.profile-dropdown) {
+							li {
+								&:first-child {
+									background-color: $dark-card-background;
 								}
 							}
 						}
-						
 					}
 				}
 			}
 		}
 		
-		.qty-box {
-			input {
-				color: rgba($white, 0.5);
-			}
-		}
 		
 		.customizer-contain {
 			color: $dark-body-background;
@@ -423,11 +380,6 @@ body {
 		.page-wrapper {
 			.page-body-wrapper {
 				background-color: $dark-body-background;
-				.page-title {
-					background-color: $dark-card-background;
-					border-bottom: 1px solid $dark-card-border;
-					box-shadow: rgba(0, 0, 0, 0.07) 0px 4px 40px;
-				}
 			}
 			
 			.sidebar-main-title {
@@ -508,9 +460,6 @@ body {
 														li {
 															a {
 																color: $dark-all-font-color;
-																&.active {
-																	color: var(--theme-deafult);
-																}
 															}
 														}
 													}
@@ -1238,10 +1187,8 @@ body {
 		}
 		.cal-date-widget {
 			.datepicker {
-				background-color: $dark-card-background;
-				.datepicker--day-name, .datepicker--nav, .datepicker--nav-title i {
-					color: $dark-all-font-color;
-				}
+				background-color: $dark-card-inbox;
+				
 				.datepicker--cell-day {
 					color: $white;
 				}
@@ -1352,6 +1299,20 @@ body {
 							}
 						}
 						
+						&:hover {
+							td {
+								color: var(--theme-deafult) !important;
+								
+								span {
+									color: $dark-all-font-color !important;
+								}
+								
+								.label,
+								p {
+									color: var(--theme-deafult) !important;
+								}
+							}
+						}
 					}
 				}
 			}
@@ -1955,7 +1916,6 @@ body {
 								
 								.notification-dropdown.onhover-show-div {
 									li {
-										background-color: $dark-card-background;
 										span {
 											color: $dark-small-font-color;
 										}
@@ -2030,16 +1990,6 @@ body {
 										span {
 											color: $dark-small-font-color;
 										}
-									}
-								}
-							}
-						}
-
-						.bookmark-flip {
-							.bookmark-dropdown {
-								.bookmark-content {
-									.bookmark-icon {
-										background-color: $dark-card-background;
 									}
 								}
 							}
@@ -2609,6 +2559,8 @@ body {
 						
 						.contact-form {
 							.theme-form {
+								border: 1px solid $dark-card-border;
+								
 								.form-icon {
 									background-color: $dark-card-background;
 									border: 1px solid $dark-card-border;
@@ -2616,30 +2568,36 @@ body {
 								}
 							}
 						}
+						
 						.btn-outline-light,
 						.btn-outline-dark,
 						.btn-outline-light-2x {
 							color: $white !important;
 							border: 1px solid $dark-card-border;
 						}
+						
 						.btn-outline-light {
 							&:hover {
 								color: $black !important;
 							}
 						}
+						
 						.border-right {
 							border-right: 1px solid $dark-border-color !important;
 						}
+						
 						.flot-chart-placeholder {
 							.flot-text {
 								color: $dark-all-font-color !important;
 							}
+							
 							svg {
 								text {
 									fill: $dark-all-font-color;
 								}
 							}
 						}
+						
 						.chart-overflow {
 							&#gantt_chart {
 								svg {
@@ -2651,12 +2609,14 @@ body {
 										}
 									}
 								}
+								
 								rect {
 									&:nth-child(6) {
 										fill: $dark-body-background;
 									}
 								}
 							}
+							
 							&#line-chart,
 							&#column-chart1,
 							&#column-chart2 {
@@ -2664,6 +2624,7 @@ body {
 									fill: $dark-card-background;
 								}
 							}
+							
 							svg {
 								>rect {
 									fill: $dark-card-background;
@@ -3873,13 +3834,14 @@ body {
 					}
 					
 					.social-widget-card {
-						h6 {
-							color: $dark-small-font-color;
+						
+						h5,
+						h4 {
+							color: $dark-all-font-color;
 						}
-						.media {
-							.social-font {
-								background-color: $dark-body-background;
-							}
+						
+						span {
+							color: $dark-small-font-color;
 						}
 					}
 					

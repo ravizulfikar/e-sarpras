@@ -1,7 +1,7 @@
 // General variables
 $theme-font-color: #242934;
 $theme-body-font-color: #2b2b2b;
-$theme-body-sub-title-color: rgba($theme-body-font-color, 0.54);
+$theme-body-sub-title-color: rgba($theme-body-font-color, 0.7);
 $body-color: #f8f8f8;
 
 // Theme colors variables
@@ -13,9 +13,7 @@ $warning-color: #f8d62b;
 $danger-color: #dc3545;
 $light-color : #f4f4f4;
 $light-gray : #ecf3fa;
-$light-widget-border: #EFEEFF;
 $light-semi-gray :#efefef;
-$font-gray-color: #6C757D;
 $dark-light :$theme-font-color;
 $dark-gray: #898989;
 $dark-color : #2c323f;
@@ -26,7 +24,6 @@ $auth-bg-color:#fafafa;
 $light : #fdfeff;
 $semi-dark :#59667a;
 $light-text: #999999;
-$light-paragraph: #8F8F8F;
 $light-background: #d7e2e9;
 $light-font: rgba(27, 49, 85, 0.4);
 $light-semi-font: $semi-dark;
@@ -36,9 +33,7 @@ $color-scarpa: #4c5667;
 $color-fiord: #455a64;
 $black : #000;
 $white:#fff;
-$off-white: #F7F6FF;
 $theme-medium-color: #eae8ff;
-$dropdown-border-color: #918E99;
 
 // gradient colors
 $gradient-primary: linear-gradient(26deg, var(--theme-deafult) 0%, #a26cf8 100%);
@@ -254,13 +249,12 @@ $sidebar-height: calc(100vh - 115px);
 $main-header-position: fixed;
 $main-header-top: 0;
 $main-header-shadow: 0 0 20px rgba($semi-dark, 0.1);
-$main-header-shadow-1: 0px 4px 40px rgba(0, 0, 0, 0.07);
 
 //page settings
 $page-body-padding : 0 15px 0 15px;
 $page-body-bg-color: $light-color;
 $page-body-margin-bottom: 0px;
-$page-title-padding : 15px 30px;
+$page-title-padding : 30px;
 $common-box-shadow: 2px 3.464px 8px 0px rgba(22, 145, 248, 0.18);
 $page-title-font-size: 24px;
 $page-title-margin-bottom: 0;

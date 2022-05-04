@@ -19,7 +19,7 @@ class CreateRolesTable extends Migration
             $table->string('slug')->nullable();
             $table->string('level')->nullable();
             $table->text('description')->nullable();
-            $table->json('module')->nullable();
+            $table->string('class')->nullable();
             $table->timestamps();
         });
     }

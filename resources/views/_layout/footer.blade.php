@@ -1,5 +1,0 @@
-<div class="row">
-	<div class="col-md-12 footer-copyright text-center">
-		<p class="mb-0">Copyright 2021 © Cuba theme by pixelstrap  </p>
-	</div>
-</div>

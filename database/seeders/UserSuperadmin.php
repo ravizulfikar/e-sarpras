@@ -15,15 +15,17 @@ class UserSuperadmin extends Seeder
     public function run()
     {
         User::create([
-            'name'          => 'Superadmin',
-            'username'      => 'superadmin',
-            'email'         => 'ravizulfikar@gmail.com',
-            'password'      => bcrypt(1234567890),
-            'confirmed'     => true,
-            'active'        => true,
-            'profile'       => json_encode(["jabatan"=>"Superadmin", "photo"=>null], true),
-            'created_at'    => date('Y-m-d H:i:s'),
-            'updated_at'    => date('Y-m-d H:i:s'),
+            'name'              => 'Superadmin',
+            'username'          => 'superadmin',
+            'email'             => 'ravizulfikar17@gmail.com',
+            'email_verified_at' => date('Y-m-d H:i:s'),
+            'password'          => bcrypt(12345678900),
+            'confirmed'         => true,
+            'active'            => true,
+            'profile'           => json_encode(["jabatan"=>"Superadmin", "photo"=>null], true),
+            'role_id'           => 1,
+            'created_at'        => date('Y-m-d H:i:s'),
+            'updated_at'        => date('Y-m-d H:i:s'),
         ]);
     }
 }

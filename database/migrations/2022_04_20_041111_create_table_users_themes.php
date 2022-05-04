@@ -13,11 +13,11 @@ class CreateTableUsersThemes extends Migration
      */
     public function up()
     {
-        Schema::create('users_theme', function (Blueprint $table) {
+        Schema::create('theme_user', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('users_id');
-            $table->foreign('users_id')->references('id')->on('users');
-            $table->string('class');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('class')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateTableUsersThemes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_theme');
+        Schema::dropIfExists('theme_user');
     }
 }

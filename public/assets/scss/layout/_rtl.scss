@@ -457,6 +457,16 @@ html[dir="rtl"]{
   .page-header  {
     .header-wrapper {
       .nav-right {
+        .onhover-show-div:not(.profile-dropdown) {
+          li {
+            &:first-child {
+              svg {
+                right: unset;
+                left: 0;
+              }
+            }
+          }
+        }
         .notification-dropdown {
           left: -20px !important;
           right: unset !important;
@@ -1847,51 +1857,15 @@ html[dir="rtl"]{
     }
   }
   // general widgets css
-  .widget-joins {
-    .widget-card {
-      h6  {
-        margin-left: unset;
-        margin-right: 15px;
-      }
-      .icon-bg {
-        right: unset;
-        left: 20px;
-      }
-    }
-  }
   .weather-widget-two {
-    .widget-list {
-      .media {
-        .media-body {
-          margin-left: unset;
-          margin-right: 30px;
-        }
-      }
+    .top-bg-whether {
+      left: -28px;
+      right: unset;
     }
-  }
-  .activity-media {
-    .media {
-      .media-body {
-        margin-left: unset;
-        margin-right: 20px;
-      }
-    }
-  }
-  .custom-profile {
-    .card-social {
-      li {
-        + li {
-          margin-left: unset;
-          margin-right: 20px;
-        }
-      }
-    }
-  }
-  .social-widget-card {
-    .media {
-      .media-body {
-        margin-left: unset;
-        margin-right: 20px;
+    .bottom-whetherinfo {
+      svg {
+        left: unset;
+        right: -35px;
       }
     }
   }
@@ -3303,6 +3277,8 @@ html[dir="rtl"]{
   }
   // general widgets page
   .static-top-widget .media-body {
+    padding-right: 30px;
+    padding-left: unset;
     .icon-bg {
       left: -20px;
       right: unset;
@@ -4995,15 +4971,6 @@ html[dir="rtl"]{
     }
   }
   @media only screen and (max-width: 480px) {
-    .custom-profile {
-      .card-social {
-        li {
-          + li {
-            margin-right: 6px;
-          }
-        }
-      }
-    }
     .left-header {
       .level-menu {
         .header-level-menu {

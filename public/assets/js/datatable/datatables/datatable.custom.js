@@ -75,7 +75,7 @@ $(document).ready(function() {
     });
     var eventFired = function ( type ) {
         var n = $('#demo_info')[0];
-        n.innerHTML += '<div class="me-2"><b>'+type+' event - </b>'+new Date().getTime()+'</div>';
+        n.innerHTML += '<div>'+type+' event - '+new Date().getTime()+'</div>';
         n.scrollTop = n.scrollHeight;
     }
     $('#advance-2')

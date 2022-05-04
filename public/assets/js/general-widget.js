@@ -40,37 +40,3 @@ var general_widget = {
     "use strict";
     general_widget.init();
 })(jQuery);
-
-
-var options = {
-    series: [90, 10],
-    labels: ['Positive', 'Negative'],
-    chart: {
-        type: 'donut',
-        height: 200
-  },
-  legend: {
-    show: false,
-  },
-  stroke: {
-    width: 0,
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  colors: ['#51bb25', '#DC3545'],
-  responsive: [{
-    breakpoint: 480,
-    options: {
-      chart: {
-        width: 200
-      },
-      legend: {
-        position: 'bottom'
-      }
-    }
-  }]
-  };
-
-  var chart = new ApexCharts(document.querySelector("#feedback-chart"), options);
-  chart.render();

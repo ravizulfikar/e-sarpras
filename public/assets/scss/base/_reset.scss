@@ -452,7 +452,7 @@ $warning-color;
   }
 
   .bg-light-#{$var} {
-    background-color: rgba(nth($background-color, $i), 0.1) !important;
+    background-color: rgba(nth($background-color, $i), 0.2) !important;
     color: $white;
   }
 }

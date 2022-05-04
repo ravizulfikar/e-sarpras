@@ -3,8 +3,6 @@
 ==========================**/
 .badge {
   padding: $badge-padding;
-  font-family: $font-roboto, $font-serif;
-  font-weight: 500;
 
   &+.badge {
     margin-left: 5px;
@@ -70,7 +68,6 @@ $round-badge-color in (primary, var(--theme-deafult)),
 .round-badge-secondary {
   background-color: var(--theme-secondary);
 }
-
 
 /**=====================
     49. Badge CSS Ends
