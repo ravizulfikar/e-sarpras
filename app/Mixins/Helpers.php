@@ -29,6 +29,22 @@
 		}
 	}
 
+	if (!function_exists('LevelBadge')) {
+		function LevelBadge($data){
+			if($data == 'superadmin'){
+				$class = '<span class="badge badge-primary">'.$data.'</span>';
+			} else if($data == 'admin'){
+				$class = '<span class="badge badge-success">'.$data.'</span>';
+			} else if($data == 'user'){
+				$class = '<span class="badge badge-warning">'.$data.'</span>';
+			} else {
+				$class = '<span class="badge badge-danger">ERROR</span>';
+			}
+
+			return $class;
+		}
+	}
+
 	// // asset('assets/images/avatar/'.RenderJson(Auth::user()->profile, "photo", 'safari.png'))
 
 	// if (!function_exists('ShowFile')) {

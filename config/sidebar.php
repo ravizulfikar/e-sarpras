@@ -119,7 +119,7 @@ return [
 
             [
                 'type'        => 'main',
-                'badge'       => ['type' => 'danger', 'data' => CountData::getCount()],
+                // 'badge'       => ['type' => 'danger', 'data' => CountData::getCount()],
                 'icon'        => 'users',
                 'title'       => 'Users',
                 'route'       => 'user.index',
@@ -129,7 +129,7 @@ return [
 
             [
                 'type'        => 'main',
-                'badge'       => ['type' => 'info', 'data' => CountData::getCount()],
+                // 'badge'       => ['type' => 'info', 'data' => CountData::getCount()],
                 'icon'        => 'command',
                 'title'       => 'Role',
                 'route'       => 'role.index',

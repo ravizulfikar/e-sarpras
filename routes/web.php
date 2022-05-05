@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 
 use App\Http\Controllers\Auth\LoginController as Login;
 use App\Http\Controllers\ESarpras\UserController as User;
+use App\Http\Controllers\ESarpras\RoleController as Role;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -412,13 +413,16 @@ Route::middleware(['auth','verified'])->group(function () {
 
     //User
     Route::resource('user', User::class);
-    Route::get('user/account/{username}', [User::class, 'account'])->name('user.account');
-    Route::get('user/account/{username}/edit', [User::class, 'account_edit'])->name('user.account_edit');
+    Route::prefix('user')->group(function () {
+        Route::get('account/{username}', [User::class, 'account'])->name('user.account');
+        Route::get('account/{username}/edit', [User::class, 'account_edit'])->name('user.account_edit');
+    });
     // Route::post('/user/store/test', [User::class, 'storeTest'])->name('user.test');
     // Route::get('/user/{type}/{id}', [User::class, 'check'])->name('user.check');
     // Route::get('/getData/user', [User::class, 'getData'])->name('user.fetch');
 
-    Route::get('/role', function () { dd("role"); })->name('role.index');
+    Route::resource('role', Role::class);
+    // Route::get('/role', function () { dd("role"); })->name('role.index');
 
     Route::get('/holiday', function () { dd("holiday"); })->name('holiday.index');
 
