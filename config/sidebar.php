@@ -139,7 +139,7 @@ return [
 
             [
                 'type'        => 'main',
-                'badge'       => ['type' => 'success', 'data' => CountData::getCount()],
+                // 'badge'       => ['type' => 'success', 'data' => CountData::getCount()],
                 'icon'        => 'target',
                 'title'       => 'Regional Unit',
                 'route'       => 'region.index',
