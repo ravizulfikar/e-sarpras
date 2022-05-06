@@ -19,7 +19,7 @@
 <div class="container-fluid">
 
 	<div class="row">
-		<div class="col-sm-12">
+		<div class="col-sm-6">
 			<div class="card">
 				{{-- <div class="card-header"></div> --}}
 				<div class="card-body">
@@ -33,10 +33,10 @@
 							@csrf
 
 							<div class="row">
-								<div class="col-sm-6">
+								<div class="col-sm-12">
 									<div class="mb-3">
 										<label>Name</label>
-										<input value="{{ old('name') }}" class="form-control" type="text" placeholder="Full Name" name="name" id="name">
+										<input value="{{ old('name') }}" class="form-control" type="text" placeholder="Holiday Name" name="name" id="name">
 									</div>
 								</div>
 							</div>
@@ -44,48 +44,27 @@
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="mb-3">
-										<label class="form-label" for="username">Description</label>
-										<textarea class="form-control" name="description" id="description" rows="3">{{ old('description') }}</textarea>
+										<label>Date</label>
+										<input value="{{ old('date') }}" class="form-control" type="date" placeholder="Date" id="date" name="date">
 									</div>
 								</div>
 							</div>
 
 							<div class="row">
-								<div class="col-sm-6">
-									<div class="mb-3">
-										<label>Slug</label>
-										<input value="{{ old('slug') }}" class="form-control" type="text" placeholder="Slug" id="slug" name="slug">
-									</div>
-								</div>
 
 								<div class="col-sm-6">
-									<div class="mb-3">
-										<label>Level</label>
-										<select class="form-select" name="level" id="level">
-											<option value="">- Choice Level -</option>
-											@foreach ($levels as $level)
-												<option value="{{ $level->level }}" @if(old('level')==$level->level) selected @endif>{{  $level->level }}</option>
-											@endforeach
-										</select>
+									<div class="mb-3 text-start">
+										<label class="">Is Holiday?</label>
+										<div class="media-body icon-state switch-outline">
+											<label class="switch">
+												<input type="checkbox" @if(old('is_holiday') == true) checked @endif name="is_holiday" id="is_holiday"><span class="switch-state bg-primary"></span>
+											</label>
+										</div>
 									</div>
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="col-sm-6">
-									<div class="mb-3">
-										<label>Class</label>
-										<input value="{{ old('class') }}" class="form-control" type="text" placeholder="class" id="class" name="class">
-									</div>
-								</div>
-
-								<div class="col-sm-6">
-									<div class="mb-3">
-										<label>View</label><br>
-										<span id="viewClass" class="">badge badge-secondary</span>
-									</div>
-								</div>
-							</div>
+							
 
 							<div class="row">
 								<div class="col">

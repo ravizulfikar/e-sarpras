@@ -22,7 +22,7 @@
 
 		<div class="row">
 			
-			<div class="col-xl-12">
+			<div class="col-xl-6">
 				<div class="card">
 					<div class="card-body">
 						<form class="needs-validation" novalidate="" method="POST" action="{{ route($pages['edit']['update'], $data->id) }}" autocomplete="off" id="submitForm">
@@ -31,10 +31,10 @@
 							@csrf
 
 							<div class="row">
-								<div class="col-sm-6">
+								<div class="col-sm-12">
 									<div class="mb-3">
 										<label>Name</label>
-										<input value="{{ $data->name }}" class="form-control" type="text" placeholder="Full Name" name="name" id="name">
+										<input value="{{ $data->name }}" class="form-control" type="text" placeholder="Holiday Name" name="name" id="name">
 									</div>
 								</div>
 							</div>
@@ -42,45 +42,23 @@
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="mb-3">
-										<label class="form-label" for="username">Description</label>
-										<textarea class="form-control" name="description" id="description" rows="3">{{ $data->description }}</textarea>
+										<label>Date</label>
+										<input value="{{ date_format(date_create($data->date), 'Y-m-d') }}" class="form-control" type="date" placeholder="Date" id="date" name="date">
 									</div>
 								</div>
+
 							</div>
 
 							<div class="row">
-								<div class="col-sm-6">
-									<div class="mb-3">
-										<label>Slug</label>
-										<input value="{{ $data->slug }}" class="form-control" type="text" placeholder="Slug" id="slug" name="slug">
-									</div>
-								</div>
 
 								<div class="col-sm-6">
-									<div class="mb-3">
-										<label>Level</label>
-										<select class="form-select" name="level" id="level">
-											<option value="">- Choice Level -</option>
-											@foreach ($levels as $level)
-												<option value="{{ $level->level }}" @if($data->level==$level->level) selected @endif>{{  $level->level }}</option>
-											@endforeach
-										</select>
-									</div>
-								</div>
-							</div>
-
-							<div class="row">
-								<div class="col-sm-6">
-									<div class="mb-3">
-										<label>Class</label>
-										<input value="{{ $data->class }}" class="form-control" type="text" placeholder="class" id="class" name="class">
-									</div>
-								</div>
-
-								<div class="col-sm-6">
-									<div class="mb-3">
-										<label>View</label><br>
-										<span id="viewClass" class="{{ $data->class }}">{{ $data->class }}</span>
+									<div class="mb-3 text-start">
+										<label class="">Is Holiday?</label>
+										<div class="media-body icon-state switch-outline">
+											<label class="switch">
+												<input type="checkbox" @if($data->is_holiday == true) checked @endif name="is_holiday" id="is_holiday"><span class="switch-state bg-primary"></span>
+											</label>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -90,7 +68,7 @@
 					</div>
 
 					<div class="card-footer text-end">
-						<a style="margin-right:30px;" href="{{ route($pages['index']) }}">Back</a>
+						<a class="" style="margin-right:30px;" href="{{ route($pages['index']) }}">Back</a>
 						<button class="btn btn-primary btn-block" type="submit" form="submitForm">Update</button>
 					</div>
 				</div>

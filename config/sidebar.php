@@ -149,7 +149,7 @@ return [
 
             [
                 'type'        => 'main',
-                'badge'       => ['type' => 'warning', 'data' => CountData::getCount()],
+                // 'badge'       => ['type' => 'warning', 'data' => CountData::getCount()],
                 'icon'        => 'calendar',
                 'title'       => 'Holiday',
                 'route'       => 'holiday.index',

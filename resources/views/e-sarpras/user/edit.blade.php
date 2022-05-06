@@ -221,7 +221,7 @@
 					</div>
 
 					<div class="card-footer text-end">
-						<a class="btn" href="{{ route($pages['index']) }}">Back</a>
+						<a style="margin-right:30px;" href="{{ route($pages['index']) }}">Back</a>
 						<button class="btn btn-primary btn-block" type="submit" form="submitForm">Update</button>
 					</div>
 				</div>

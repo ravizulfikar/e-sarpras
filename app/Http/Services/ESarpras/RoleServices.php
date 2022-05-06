@@ -20,7 +20,7 @@ class RoleServices
 
     public function findBy($field, $id)
     {
-        return User::where($field, $id)->first();
+        return Role::where($field, $id)->first();
     }
 
     public function paramsLevel()

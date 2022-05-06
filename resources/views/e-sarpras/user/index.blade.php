@@ -155,7 +155,6 @@
 		// var table = $('#example');
 		var table = $('#example').DataTable({
 			responsive: true,
-			paging: false,
 			columnDefs: [
 				{ width: 200, targets: 0 },
 				{ width: 190, targets: 1 },

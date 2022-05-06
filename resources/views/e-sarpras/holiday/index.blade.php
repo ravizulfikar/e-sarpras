@@ -21,7 +21,7 @@
 		<div class="col-sm-12">
 			<div class="card">
 				<div class="card-header">
-					<a href="{{ route($pages['create']['url']) }}" class="btn btn-pill btn-primary btn-air-primary pull-right"><i class="fa fa-plus"></i> Add Data</a>
+					<a href="{{ route('holiday.sync') }}" class="btn btn-pill btn-success btn-air-success pull-right"><i class="fa fa-refresh"></i> Synchronize Data</a> <a href="{{ route($pages['create']['url']) }}" class="btn btn-pill btn-primary btn-air-primary pull-right"><i class="fa fa-plus"></i> Add Data</a>
 
 					{{-- <button type="button" class="btn btn-primary" onclick="on()">Turn on overlay effect</button> --}}
 				</div>
@@ -33,22 +33,22 @@
 						<thead>
 							<tr>
 								<th>No</th>
+								<th>Date</th>
 								<th>Name</th>
-								<th>Level</th>
-								<th>Class</th>
+								<th>Holiday</th>
 								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
-						@foreach($data as $role)
+						@foreach($data as $holiday)
 							<tr>
 								<td></td>
-								<td>{{ $role->name }}</td>
-								<td>{!! LevelBadge($role->level) !!}</td>
-								<td><span class="{{ $role->class }}">{{ $role->class }}</span></td>
+								<td>{{ date_format(date_create($holiday->date), 'Y-m-d') }}</td>
+								<td>{{ $holiday->name }}</td>
+								<td>{!! HolidayBadge($holiday->is_holiday) !!}</td>
 								<td class="va-middle">
-									<a href="{{ route($pages['edit']['url'], $role) }}" class="btn btn-outline-success btn-xs"><i class="fa fa-pencil"></i></a>
-									<a href="#" class="btn btn-outline-danger btn-xs remove" data-action="{{ route($pages['destroy'], $role) }}" data-id="{{$role}}"><i class="fa fa-trash"></i></a>
+									<a href="{{ route($pages['edit']['url'], $holiday) }}" class="btn btn-outline-success btn-xs"><i class="fa fa-pencil"></i></a>
+									<a href="#" class="btn btn-outline-danger btn-xs remove" data-action="{{ route($pages['destroy'], $holiday) }}" data-id="{{$holiday}}"><i class="fa fa-trash"></i></a>
 								</td>
 							</tr>
 						@endforeach
@@ -72,12 +72,12 @@
 			responsive: true,
 			columnDefs: [
 				{ searchable: false, orderable: false, width: 10, targets: 0, className: 'text-center' },
-				{ width: 220, targets: 1 },
-				{ width: 80, targets: 2 },
-				{ width: 170, targets: 3 },
+				{ width: 100, targets: 1 },
+				{ width: 280, targets: 2 },
+				{ width: 90, targets: 3 },
 				{ width: 50, targets: 4 }
 			],
-			order: [[ 1, 'asc' ]],
+			order: [[ 1, 'DESC' ]],
 			fixedColumns: true
 		});
 

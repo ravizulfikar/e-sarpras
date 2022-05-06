@@ -67,6 +67,18 @@
 		}
 	}
 
+	if (!function_exists('HolidayBadge')) {
+		function HolidayBadge($data){
+			if($data == true){
+				$class = '<span class="badge badge-success"> true </span>';
+			} else {
+				$class = '<span class="badge badge-danger"> false </span>';
+			}
+
+			return $class;
+		}
+	}
+
 	// // asset('assets/images/avatar/'.RenderJson(Auth::user()->profile, "photo", 'safari.png'))
 
 	// if (!function_exists('ShowFile')) {

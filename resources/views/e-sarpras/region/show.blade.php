@@ -32,7 +32,7 @@
 							</span>
 						</div>
 						<div class="col-6 text-end">
-							<a class="btn" href="{{ route($pages['index']) }}">Back</a>
+							<a style="margin-right:30px;" href="{{ route($pages['index']) }}">Back</a>
 							<a href="{{ route($pages['edit']['url'], $data) }}" class="btn btn-pill btn-info btn-air-info"><i class="fa fa-pencil"></i> Edit Data</a>
 						</div>
 					</div>

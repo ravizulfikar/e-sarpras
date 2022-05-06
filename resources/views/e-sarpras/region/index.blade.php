@@ -69,7 +69,6 @@
 		// var table = $('#example');
 		var table = $('#example').DataTable({
 			responsive: true,
-			paging: false,
 			columnDefs: [
 				{ searchable: false, orderable: false, width: 10, targets: 0, className: 'text-center' },
 				{ width: 80, targets: 1 },

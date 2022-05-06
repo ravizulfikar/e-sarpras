@@ -131,7 +131,7 @@
 							<div class="row">
 								<div class="col">
 									<div class="text-end">
-										<a class="btn" href="{{ route($pages['index']) }}">Back</a>
+										<a  style="margin-right:30px;" href="{{ route($pages['index']) }}">Back</a>
 										<button type="submit" class="btn btn-info">Add</button>
 									</div>
 								</div>

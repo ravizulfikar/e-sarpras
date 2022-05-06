@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\LoginController as Login;
 use App\Http\Controllers\ESarpras\UserController as User;
 use App\Http\Controllers\ESarpras\RoleController as Role;
 use App\Http\Controllers\ESarpras\RegionController as Region;
+use App\Http\Controllers\ESarpras\HolidayController as Holiday;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -106,7 +107,12 @@ Route::middleware(['auth','verified'])->group(function () {
 
     Route::resource('region', Region::class);
 
-    Route::get('/holiday', function () { dd("holiday"); })->name('holiday.index');
+    Route::resource('holiday', Holiday::class);
+    Route::prefix('holiday')->group(function () {
+        Route::get('fetch/data', [Holiday::class, 'synchronizeData'])->name('holiday.sync');
+    });
+
+    // Route::get('/holiday', function () { dd("holiday"); })->name('holiday.index');
 
     Route::get('/ticket', function () { dd("ticketing"); })->name('ticket.index');
     Route::get('/ticket/entry', function () { dd("ticketing"); })->name('ticket.entry');
