@@ -18,7 +18,7 @@
 
 <script src="{{asset('assets/js/sweet-alert/sweetalert.min.js')}}"></script>
 {{-- <script src="{{asset('assets/js/sweet-alert/app.js')}}"></script> --}}
-
+<script src="{{ asset('assets/js/select2/select2.full.min.js') }}"></script>
 <script src="{{asset('assets/js/notify/bootstrap-notify.min.js')}}"></script>
 <script src="{{asset('assets/js/notify/notify-script.js')}}"></script>
 <script src="{{ asset('assets/plugin/izitoast/dist/js/iziToast.min.js')}}"></script>
@@ -234,5 +234,67 @@
             position: 'topRight'
         });
     @endif
+
+</script>
+
+
+<script>
+	$("body").on("click",".update",function(){
+		var current_object = $(this);
+		var action = current_object.attr('data-action');
+        var dataID = current_object.attr('data-id');
+        var dataMethod = current_object.attr('data-method');
+
+		swal({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			buttons: true,
+			dangerMode: true,
+			})
+		.then((willDelete) => {
+            
+
+			if (willDelete) {
+                actionUpdateDelete(action,dataID,current_object, dataMethod);
+			} 
+		});
+
+		
+	});
+
+    function actionUpdateDelete(action,dataID,current_object, dataMethod){
+        LoadingOn();
+
+
+        $.ajax({
+            url: action,
+            type: 'POST',
+            data: {
+                _method: dataMethod,
+                _token: "{{ csrf_token() }}",
+                id: dataID,
+            },
+            success: function(response){
+                console.log(response);
+                current_object.closest('tr').remove();
+                swal("Data has been deleted!", {
+                    icon: "success",
+                });
+
+                LoadingOff();
+                location.reload();
+            },
+            error: function(response){
+                swal("Server Error Detected !!", {
+                    icon: "error",
+                });
+
+                LoadingOff();
+            }
+        });
+
+        
+    }
 
 </script>

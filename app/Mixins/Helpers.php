@@ -59,6 +59,8 @@
 				$class = '<span class="badge badge-danger">'.$data.'</span>';
 			} else if($data == 'Kepulauan Seribu'){
 				$class = '<span class="badge badge-secondary">'.$data.'</span>';
+			} else if($data == 'Dinas'){
+				$class = '<span class="badge badge-warning">'.$data.'</span>';
 			} else {
 				$class = '<span class="badge badge-danger">ERROR</span>';
 			}
@@ -79,17 +81,133 @@
 		}
 	}
 
-	// // asset('assets/images/avatar/'.RenderJson(Auth::user()->profile, "photo", 'safari.png'))
+	if (!function_exists('Badge')) {
+		function Badge($params, $value){
+			$params = json_decode($params, true);
+			foreach ($params as $param) {
+				if($param['id'] == $value){
+					$class = '<span class="'.$param["class"].'">'.$value.'</span>';
+				}
+			}
 
-	// if (!function_exists('ShowFile')) {
-	// 	function ShowFile($data, $path){
-			
-	// 		$filename = time().'.'.$data->extension();
+			return '<span class="'.$class.'">'.$value.'</span>';
+		}
+	}
 
-    //     	$data->move(public_path('uploads'), $image);
+	if (!function_exists('ShowFile')) {
+		function ShowFile($file, $path, $type, $value = null){
+			if($type == 'image'){
+				if(!empty($file)){
+					$class = asset($path.$file);
+				} else {
+					$class = \Avatar::create($value)->toBase64();
+				}
+			}
 
-	// 		return $class;
-	// 	}
-	// }
+			return $class;
+		}
+	}
 
+	if (!function_exists('RenderParams')) {
+		function RenderParams($slug){
+			$params = \DB::table('params')->whereSlug($slug)->first();
+			return json_decode($params->object, true);
+		}
+	}
+
+	if (!function_exists('TokenCreate')) {
+		function TokenCreate(){
+			return strtoupper(substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 8));
+		}
+	}
+
+	if (!function_exists('ParamsCategory')) {
+		function ParamsCategory(){
+			return \DB::table('category')->get();
+		}
+	}
+
+	// Ticket::whereStatus($status)->count();
+	if (!function_exists('LocationTicket')) {
+		function LocationTicket($data, $other = null){
+
+			if($other = 'view'){
+				$br = ' | ';
+			} else {
+				$br = '<br>';
+			}
+
+			if(!empty(json_decode($data, true))){
+				$datajson = json_decode($data, true);
+				if(isset($datajson['floor'])){
+					$class = CityBadge($datajson['city']).$br.' Lantai : '.$datajson['floor'].' - '.$datajson['department'];
+				} 
+				
+				if(isset($datajson['location'])){
+					$class = $datajson['location'];
+				}
+
+				if(isset($datajson['unit'])){
+					$class = CityBadge($datajson['city']).$br.$datajson['unit'];
+				}
+			} else {
+				$class = null;
+			}
+			return $class;
+		}
+	}
+
+	if (!function_exists('Location')) {
+		function Location($data, $type){
+			if(!empty(json_decode($data, true))){
+				$datajson = json_decode($data, true);
+
+				if($type == 'city'){
+					if(isset($datajson['city'])){
+						$class = CityBadge($datajson['city']);
+					} else {
+						$class = '-';
+					}
+				}
+
+				if($type == 'unit'){
+					if(isset($datajson['floor'])){
+						$class = 'Lantai : '.$datajson['floor'].' - '.$datajson['department'];
+					} 
+					
+					if(isset($datajson['location'])){
+						$class = $datajson['location'];
+					}
+	
+					if(isset($datajson['unit'])){
+						$class = $datajson['unit'];
+					}
+				}
+				
+			} else {
+				$class = '-';
+			}
+			return $class;
+		}
+	}
+
+	if (!function_exists('TypeBadge')) {
+		function TypeBadge($data){
+			if($data == 'troubleshooting'){
+				return '<span class="badge badge-primary">Troubleshooting</span>';
+			} else if($data == 'server'){
+				return '<span class="badge badge-success">Server</span>';
+			} else if($data == 'monitoring'){
+				return '<span class="badge badge-warning">Monitoring</span>';
+			} else {
+				return '<span class="badge badge-danger">ERROR</span>';
+			}
+		}
+	}
+
+	if (!function_exists('UserName')) {
+		function UserName($data){
+			return \App\Models\User::whereId($data)->first()->name;
+		}
+	}
 ?>

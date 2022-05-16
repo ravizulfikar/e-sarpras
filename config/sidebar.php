@@ -3,18 +3,28 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Mixins\CountData;
+// use App\Models\Ticket;
+// use App\Http\Services\ESarpras\TicketServices;
+
+// $CountEntry = CountData::getCountDataByStatus('entry');
+// $CountProcess = CountData::getCountDataByStatus('process');
+// $CountFinish = CountData::getCountDataByStatus('finish');
+
+// $CountEntry = TicketCount('entry');
+// $CountProcess = TicketCount('process');
+// $CountFinish = TicketCount('finish');
 
 return [
 
     'items' => [
         [
             'type'        => 'main',
-            'badge'       => ['type' => 'danger', 'data' => CountData::getCount()],
+            // 'badge'       => ['type' => 'danger', 'data' => CountData::getCount()],
             'icon'        => 'home',
             'title'       => 'Dashboard',
-            'route'       => 'index',
+            'route'       => ['name' => 'index'],
             'group'       => 'index',
-            'role'        => ['superadmin']
+            'role'        => ['superadmin', 'ta-teknisi', 'ta-admin', 'ta-asisten']
         ],
 
         // [
@@ -38,38 +48,38 @@ return [
         [
             'type'          => 'header',
             'title'         => 'Ticketing',
-            'description'   => 'Local, Region, Server, Monitoring',
-            'role'          => ['superadmin'],
+            'description'   => 'Troubleshooting, Server, Monitoring',
+            'role'          => ['superadmin', 'ta-teknisi', 'ta-admin', 'ta-asisten'],
         ],
 
             [
                 'type'        => 'main',
-                'badge'       => ['type' => 'warning', 'data' => CountData::getCount()],
+                // 'badge'       => ['type' => 'warning', 'data' => $CountEntry ],
                 'icon'        => 'inbox',
                 'title'       => 'Entry',
-                'route'       => 'ticket.entry',
-                'group'       => 'ticket.entry',
-                'role'        => ['superadmin']
+                'route'       => ['name' => 'entry.ticket'],
+                'group'       => 'entry',
+                'role'        => ['superadmin', 'ta-teknisi', 'ta-admin', 'ta-asisten']
             ],
 
             [
                 'type'        => 'main',
-                'badge'       => ['type' => 'warning', 'data' => CountData::getCount()],
+                // 'badge'       => ['type' => 'primary', 'data' => $CountProcess ],
                 'icon'        => 'list',
                 'title'       => 'Process',
-                'route'       => 'ticket.process',
-                'group'       => 'ticket.process',
-                'role'        => ['superadmin']
+                'route'       => ['name' => 'process.ticket'],
+                'group'       => 'process',
+                'role'        => ['superadmin', 'ta-teknisi', 'ta-admin', 'ta-asisten']
             ],
 
             [
                 'type'        => 'main',
-                'badge'       => ['type' => 'warning', 'data' => CountData::getCount()],
+                // 'badge'       => ['type' => 'success', 'data' => $CountFinish],
                 'icon'        => 'check-circle',
                 'title'       => 'Finish',
-                'route'       => 'ticket.finish',
-                'group'       => 'ticket.finish',
-                'role'        => ['superadmin']
+                'route'       => ['name' => 'ticket.index'],
+                'group'       => 'ticket',
+                'role'        => ['superadmin', 'ta-teknisi', 'ta-admin', 'ta-asisten']
             ],
         
         //Reporting
@@ -84,7 +94,8 @@ return [
                 'badge'       => ['type' => 'warning', 'data' => CountData::getCount()],
                 'icon'        => 'edit',
                 'title'       => 'Daily',
-                'route'       => 'report.daily',
+                // 'route'       => 'report.daily',
+                'route'       => ['name' => 'report.daily'],
                 'group'       => 'report.daily',
                 'role'        => ['superadmin']
             ],
@@ -94,7 +105,8 @@ return [
                 'badge'       => ['type' => 'warning', 'data' => CountData::getCount()],
                 'icon'        => 'image',
                 'title'       => 'Picture',
-                'route'       => 'report.pictures',
+                // 'route'       => 'report.pictures',
+                'route'       => ['name' => 'report.pictures'],
                 'group'       => 'report.pictures',
                 'role'        => ['superadmin']
             ],
@@ -104,7 +116,8 @@ return [
                 'badge'       => ['type' => 'success', 'data' => CountData::getCount()],
                 'icon'        => 'download',
                 'title'       => 'Download',
-                'route'       => 'report.download',
+                // 'route'       => 'report.download',
+                'route'       => ['name' => 'report.download'],
                 'group'       => 'report.download',
                 'role'        => ['superadmin']
             ],
@@ -122,7 +135,7 @@ return [
                 // 'badge'       => ['type' => 'danger', 'data' => CountData::getCount()],
                 'icon'        => 'users',
                 'title'       => 'Users',
-                'route'       => 'user.index',
+                'route'       => ['name' => 'user.index'],
                 'group'       => 'user',
                 'role'        => ['superadmin']
             ],
@@ -132,7 +145,7 @@ return [
                 // 'badge'       => ['type' => 'info', 'data' => CountData::getCount()],
                 'icon'        => 'command',
                 'title'       => 'Role',
-                'route'       => 'role.index',
+                'route'       => ['name' => 'role.index'],
                 'group'       => 'role',
                 'role'        => ['superadmin']
             ],
@@ -142,7 +155,7 @@ return [
                 // 'badge'       => ['type' => 'success', 'data' => CountData::getCount()],
                 'icon'        => 'target',
                 'title'       => 'Regional Unit',
-                'route'       => 'region.index',
+                'route'       => ['name' => 'region.index'],
                 'group'       => 'region',
                 'role'        => ['superadmin']
             ],
@@ -152,7 +165,7 @@ return [
                 // 'badge'       => ['type' => 'warning', 'data' => CountData::getCount()],
                 'icon'        => 'calendar',
                 'title'       => 'Holiday',
-                'route'       => 'holiday.index',
+                'route'       => ['name' => 'holiday.index'],
                 'group'       => 'holiday',
                 'role'        => ['superadmin']
             ],

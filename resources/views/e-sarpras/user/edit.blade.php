@@ -111,7 +111,7 @@
 										<div class="profile-title">
 											<div class="text-center">
 												<center>
-													<div id='profile-upload' style="background-image:url('{{ asset('uploads/avatar/'.RenderJson($data->profile, "photo", 'safari.png')) }}');">
+													<div id='profile-upload' style="background-image:url('{{ ShowFile(RenderJson($data->profile, "photo"), 'uploads/avatar/', 'image', $data->name) }}');">
 														<div class="hvr-profile-img">
 															<input type="file" name="image" id='getval' class="upload w180" id="imag" accept=".jpeg,.png,.jpg">
 														</div><span class="text-primary"><i class="fa fa-camera"></i></span>

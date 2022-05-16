@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Mixins;
+use App\Models\Ticket;
 
 class CountData
 {
@@ -20,5 +22,10 @@ class CountData
     public static function getKlasifikasi(){
         return 'new';
 	}
+
+    public static function getCountDataByStatus($status){
+        // return $status;
+        return Ticket::whereStatus($status)->count();
+    }
 
 }

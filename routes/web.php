@@ -10,6 +10,9 @@ use App\Http\Controllers\ESarpras\UserController as User;
 use App\Http\Controllers\ESarpras\RoleController as Role;
 use App\Http\Controllers\ESarpras\RegionController as Region;
 use App\Http\Controllers\ESarpras\HolidayController as Holiday;
+use App\Http\Controllers\ESarpras\MenuConfigurationController as MenuConfiguration;
+use App\Http\Controllers\ESarpras\ClientController as Client;
+use App\Http\Controllers\ESarpras\TicketController as Ticket;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -112,12 +115,30 @@ Route::middleware(['auth','verified'])->group(function () {
         Route::get('fetch/data', [Holiday::class, 'synchronizeData'])->name('holiday.sync');
     });
 
-    // Route::get('/holiday', function () { dd("holiday"); })->name('holiday.index');
+    Route::resource('menu', MenuConfiguration::class);
 
-    Route::get('/ticket', function () { dd("ticketing"); })->name('ticket.index');
-    Route::get('/ticket/entry', function () { dd("ticketing"); })->name('ticket.entry');
-    Route::get('/ticket/process', function () { dd("process"); })->name('ticket.process');
-    Route::get('/ticket/finish', function () { dd("finish"); })->name('ticket.finish');
+    // Route::get('/holiday', function () { dd("holiday"); })->name('holiday.index');
+    Route::resource('ticket', Ticket::class);
+    Route::group(['prefix' => 'ticket'], function () {
+        // Route::get('by/{status}', [Ticket::class, 'byStatus'])->name('status');
+        Route::get('get/entry', [Ticket::class, 'entry'])->name('entry.ticket');
+        Route::put('get/entry/{ticket}', [Ticket::class, 'entry_update'])->name('entry.update');
+
+        Route::get('get/process', [Ticket::class, 'process'])->name('process.ticket');
+        Route::get('get/process/{ticket}', [Ticket::class, 'process_edit'])->name('process.edit');
+        Route::put('get/process/{ticket}', [Ticket::class, 'process_update'])->name('process.update');
+        Route::put('delete/process/{ticket}', [Ticket::class, 'process_delete'])->name('process.delete');
+        Route::put('finish/process/{ticket}', [Ticket::class, 'process_finish'])->name('process.finish');
+        Route::put('process/sign/{signer}', [Ticket::class, 'signed_ticket'])->name('process.signer');
+        Route::post('process/add-user', [Ticket::class, 'add_user_ticket'])->name('process.addUser');
+        Route::delete('process/delete-user/{UserTicket}', [Ticket::class, 'delete_user_ticket'])->name('process.deleteUser');
+
+        // Route::get('get/finish', [Ticket::class, 'finish'])->name('finish.ticket');
+        // Route::get('get/process/{ticket}', [Ticket::class, 'process_edit'])->name('process.edit');
+    });
+    // Route::get('/ticket/entry', function () { dd("ticketing"); })->name('ticket.entry');
+    // Route::get('/ticket/process', function () { dd("process"); })->name('ticket.process');
+    // Route::get('/ticket/finish', function () { dd("finish"); })->name('ticket.finish');
 
     Route::get('/report/daily', function () { dd("daily"); })->name('report.daily');
     Route::get('/report/picture', function () { dd("picture"); })->name('report.pictures');
@@ -125,5 +146,19 @@ Route::middleware(['auth','verified'])->group(function () {
 });
 
 
+Route::group(['prefix' => 'ticket', 'as' => 'ticket.'], function () {
+    Route::get('user/create', [Ticket::class, 'createUser'])->name('createUser');
+    Route::post('user/store', [Ticket::class, 'storeUser'])->name('storeUser');
+    Route::get('user/history', [Ticket::class, 'historyUser'])->name('historyUser');
+    Route::post('user/history-get', [Ticket::class, 'historyGetUser'])->name('historyGetUser');
+});
 
+
+// Route::get('/create-ticket', function () {
+//     return view('e-sarpras.create-ticket',[
+//         'paramsType' => \DB::table('params')->whereSlug('type-ticket')->first()
+//     ]);
+// })->name('create-ticket');
+
+Route::get('fetch/wilayah/{city}', [Client::class, 'getWilayah'])->name('fetch.wilayah');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

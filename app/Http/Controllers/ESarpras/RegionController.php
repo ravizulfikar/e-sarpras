@@ -96,8 +96,8 @@ class RegionController extends Controller
     public function edit(Region $region)
     {
         return view($this->pages['folder'].'.edit', [
-            'pages'     => $this->pages,
-            'data'      => $region,
+            'pages'       => $this->pages,
+            'data'        => $region,
             'cities'      => $this->region->paramsCity(),
             'levels'      => $this->region->paramsLevelRegion()
         ]);

@@ -14,6 +14,7 @@
         "laravel/telescope": "^4.8",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
+        "laravolt/avatar": "^4.1",
         "mews/captcha": "^3.2",
         "yajra/laravel-datatables-oracle": "~9.0"
     },

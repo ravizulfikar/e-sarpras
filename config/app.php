@@ -167,6 +167,7 @@ return [
          */
         Mews\Captcha\CaptchaServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Laravolt\Avatar\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -239,6 +240,7 @@ return [
         'Menu' => App\Mixins\Menu::class,
         // 'CountData' => App\Mixins\CountData::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'Avatar'    => Laravolt\Avatar\Facade::class,
     ],
 
 ];

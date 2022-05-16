@@ -13,7 +13,7 @@ class MenuProvider extends ServiceProvider
      */
     public function register()
     {
-        require_once app_path().'/Mixins/Menu.php';
+        // require_once app_path().'/Mixins/Menu.php';
     }
 
     /**
@@ -23,6 +23,6 @@ class MenuProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        require_once app_path().'/Mixins/Menu.php';
     }
 }

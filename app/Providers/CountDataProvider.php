@@ -11,9 +11,10 @@ class CountDataProvider extends ServiceProvider
      *
      * @return void
      */
+    
     public function register()
     {
-        require_once app_path().'/Mixins/CountData.php';
+        // require_once app_path().'/Mixins/CountData.php';
     }
 
     /**
@@ -23,6 +24,7 @@ class CountDataProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        require_once app_path().'/Mixins/CountData.php';
     }
+
 }

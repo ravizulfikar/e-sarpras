@@ -34,7 +34,12 @@ class Menu
                         if(isset($value['badge'])){
                             $class .= '<label class="badge badge-'.$value['badge']['type'].'">'.$value['badge']['data'].'</label>';
                         }
-                        $class .= '<a class="sidebar-link sidebar-title link-nav '.self::ActiveMenuGroup($value['group']).'" href="'.route($value['route']).'">';
+
+                        if(isset($value['route']['data'])){
+                            $class .= '<a class="sidebar-link sidebar-title link-nav '.self::ActiveMenuGroup($value['group']).'" href="'.route($value['route']['name'], $value['route']['data']).'">';
+                        }else{
+                            $class .= '<a class="sidebar-link sidebar-title link-nav '.self::ActiveMenuGroup($value['group']).'" href="'.route($value['route']['name']).'">';
+                        }
                         $class .= '<i data-feather="'.$value['icon'].'"> </i><span>'.$value['title'].'</span>';
                         $class .= '</a>';
                         $class .= '</li>';
@@ -54,7 +59,7 @@ class Menu
                             foreach($value['submenu'] as $keySubMenu=>$valueSubMenu){
                                 // dd(self::ActiveMenu($valueSubMenu['route']));
                                 if(self::RoleMenu($valueSubMenu['role'])){
-                                    $class .= '<li><a class="'.self::ActiveMenu($valueSubMenu['route']).'" href="'.route($valueSubMenu['route']).'">'.$valueSubMenu['title'].'</a></li>';
+                                    $class .= '<li><a class="'.self::ActiveMenu($valueSubMenu['route']).'" href="'.route($valueSubMenu['route']['url']).'">'.$valueSubMenu['title'].'</a></li>';
                                 }
                             }
                         }

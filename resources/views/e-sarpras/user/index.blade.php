@@ -51,7 +51,7 @@
 						@foreach($data as $user)
 							<tr>
 								<td>
-									<div class="d-inline-block align-middle"><img class="img-40 m-r-15 rounded-circle align-top" src="{{ asset('uploads/avatar/'.RenderJson($user->profile, "photo", 'safari.png')) }}" alt="">
+									<div class="d-inline-block align-middle"><img class="img-40 m-r-15 rounded-circle align-top" src="{{ ShowFile(RenderJson($user->profile, "photo"), 'uploads/avatar/', 'image', $user->name) }}" alt="">
                                         <div class="d-inline-block"><span><strong>{{ $user->name }}</strong></span>
                                           <p class="font-roboto" style="font-size:7pt;">
 										  {{ $user->username }}</p>

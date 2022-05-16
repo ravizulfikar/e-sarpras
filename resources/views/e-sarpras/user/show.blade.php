@@ -29,7 +29,7 @@
 					{{-- <div class="cardheader"></div> --}}
 					<div class="user-image">
 						<div class="avatar">
-							<img alt="" src="{{ asset('uploads/avatar/'.RenderJson($data->profile, "photo", 'safari.png')) }}">
+							<img alt="" src="{{ ShowFile(RenderJson($data->profile, "photo"), 'uploads/avatar/', 'image', $data->name) }}">
 						</div>
 						<div class="icon-wrapper">
 							<a href="{{ route($pages['edit']['url'], $data) }}">

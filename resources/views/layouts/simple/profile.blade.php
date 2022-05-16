@@ -1,7 +1,8 @@
 <li class="profile-nav onhover-dropdown p-0 me-0">
     <div class="media profile-media">
-        <img class="b-r-10" width="37px" src="{{ asset('uploads/avatar/'.RenderJson(Auth::user()->profile, "photo", 'safari.png')) }}" alt="">
-        <div class="media-body"><span>{{ Auth::user()->name }}</span>
+        <img class="b-r-10" width="37px" src="{{ ShowFile(RenderJson(Auth::user()->profile, "photo"), 'uploads/avatar/', 
+        'image', Auth::user()->name) }}" alt="">
+        <div class="media-body"><span>{{ Auth::user()->name }}
             <p class="mb-0 font-roboto">{{ Auth::user()->email }} <i class="middle fa fa-angle-down"></i></p>
         </div>
     </div>
