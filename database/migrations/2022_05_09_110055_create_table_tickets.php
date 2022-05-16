@@ -20,7 +20,7 @@ class CreateTableTickets extends Migration
             $table->string('source', 20);
             $table->string('type', 20);
             $table->json('location');
-            $table->string('category', 15);
+            $table->string('category');
             $table->json('detail');
             $table->string('status', 15);
             $table->string('verification', 15);

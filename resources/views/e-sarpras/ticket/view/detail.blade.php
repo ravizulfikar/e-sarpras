@@ -1,3 +1,4 @@
+{{-- {{ dd(json_encode($data->detail)) }} --}}
 <div class="row">
 	<div class="col-sm-3">
 		Token
@@ -62,29 +63,15 @@
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-sm-12">
-		Detail
-	</div>
-</div>
+@if($data->type == 'troubleshooting' || $data->type == 'server')
+	@include('e-sarpras.ticket.view.detail_trouble_server')
+@endif
 
-<div class="row mb-3">
-	<div class="col-sm-12">
-		<h5>{{ RenderJson($data->detail, 'trouble') }}</h5>
-	</div>
-</div>
+@if($data->type == 'monitoring')
+	@include('e-sarpras.ticket.view.detail_monitoring')
+@endif
 
-<div class="row">
-	<div class="col-sm-12">
-		Solution
-	</div>
-</div>
 
-<div class="row mb-3">
-	<div class="col-sm-12">
-		<h5>{{ RenderJson($data->detail, 'solution') }}</h5>
-	</div>
-</div>
 
 @if($data->type == 'troubleshooting' || $data->type == 'monitoring')
 	<div class="row">

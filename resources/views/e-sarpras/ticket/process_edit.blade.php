@@ -94,37 +94,22 @@
 
 							<div class="row mb-3">
 								<div class="col-sm-12">
-									<h5>{{ $data->category }}</h5>
+									<h5>{{ ucwords($data->category) }}</h5>
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="col-sm-12">
-									Detail
-								</div>
-							</div>
 
-							<div class="row mb-3">
-								<div class="col-sm-12">
-									<h5>{{ RenderJson($data->detail, 'trouble') }}</h5>
-								</div>
-							</div>
+							@if($data->type == 'troubleshooting' || $data->type == 'server')
+								@include('e-sarpras.ticket.process_troubleshooting_server')
+							@endif
 
-							<div class="row">
-								<div class="col-sm-12">
-									Solution
-								</div>
-							</div>
+							@if($data->type == 'monitoring')
+								@include('e-sarpras.ticket.process_monitoring')
+							@endif
 
-							<div class="row mb-3">
-								<div class="col-sm-12">
-									<input name="detail[trouble]" type="hidden" value="{{ RenderJson($data->detail, 'trouble') }}">
-									<textarea class="form-control" name="detail[solution]" id="detail.solution" rows="3">{{ RenderJson($data->detail, "solution") }}</textarea>
-								</div>
-							</div>
 							
 							@if($data->type == 'troubleshooting' || $data->type == 'monitoring')
-								<div class="row">
+								<div class="row mt-3">
 									<div class="col-sm-9">
 										Signer
 									</div>
@@ -155,17 +140,28 @@
 									<table class="table">
 										<thead>
 											<tr>
-												<td>Name</td>
-												<td>
-													<button class="btn btn-info" type="button" data-bs-toggle="modal"  data-bs-target="#btnAddUser">Add User</button>
-												</td>
+												<td colspan="2">Name</td>
 											</tr>
 										</thead>
+										@php($index = 0)
 										@foreach($userProcess as $user)
 										<tr>
-											<td>{{ $user->user->name }}</td>
-											<td>&nbsp;</td>
+											<td style="width:7%;">
+												@if($index > 0)
+													@if(auth()->user()->id == $firstUser->user_id)
+														<a href="#" class="btn btn-danger btn-xs remove" data-action="{{ route($pages['show']['deleteUser'], $user) }}" data-id="{{$user}}">
+															<i class="fa fa-trash"></i>
+														</a> 
+													@endif
+												@else
+													@if(auth()->user()->id == $firstUser->user_id)
+														<button class="btn btn-info btn-xs" type="button" data-bs-toggle="modal" data-bs-target="#btnAddUser"><i class="fa fa-plus"></i></button>
+													@endif
+												@endif
+											</td>
+											<td style="width:93%;">{{ $user->user->name }}</td>
 										</tr>
+										@php($index++)
 										@endforeach
 										<tbody id="tableUserProcess">
 											
@@ -267,9 +263,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="SignatureLabel">Digital signature</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
+					<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<center>
@@ -352,7 +346,7 @@
 
 				@include('layouts.simple.spinner')
 
-				<div class="col-sm-4">
+				<div class="col-sm-12">
 					<div class="mb-3">
 						<label>User</label>
 						<select class="form-select" name="user_id" id="user_id">
@@ -409,15 +403,23 @@ $(document).ready(function() {
 			},
 			success: function(data) {
 				if(data.success == true){
+					var Route = data.route;
+					var dataID = data.data;
+
 					iziToast.success({
 						message: data.message,
 						position: 'topRight'
 					});
 
 					//insert to row table
-					var row = '<tr>\
+					var row = '<tr><td>\
+							@if(auth()->user()->id == $firstUser->user_id)\
+							<a href="#" class="btn btn-danger btn-xs remove" data-action="'+Route+'" data-id="'+dataID+'">\
+								<i class="fa fa-trash"></i>\
+							</a>\
+							@endif\
+							</td>\
 							<td>'+UserName+'</td>\
-							<td>&nbsp;</td>\
 						</tr>';
 
 					$('#tableUserProcess').append(row);
@@ -466,36 +468,6 @@ $(document).ready(function() {
 		$('#whatsapp').val('');
 	});
 
-
-	// $("#btnShareTelegram").click(function(e) {
-	// 	e.preventDefault();
-
-	// 	var nomor = $('#telegram').val();
-	// 	var url = $(this).data('url');
-
-	// 	if (nomor === '') {
-	// 		iziToast.error({
-	// 			message: "Telegram id must be Filled !",
-	// 			position: 'topRight'
-	// 		});
-	// 		return false;
-	// 	}
-
-	// 	// https://telegram.me/share/url?url=<URL>&text=<TEXT>
-
-	// 	// var WA = nomor.indexOf('0') == 0 ? nomor.substring(1) : nomor;
-	// 	// var LinkShare = "https://wa.me/+62" + WA + "?text=" + url;
-	// 	var LinkShare = "https://telegram.me/share/url?url=" + nomor + "&text=" + url;
-	// 	window.open(
-	// 		LinkShare,
-	// 		'_blank'
-	// 	);
-
-	// 	$('#SignTelegram').modal('hide');
-	// 	$('#telegram').val('');
-	// });
-
-	//send message to telegram with user id
 
 });
 </script>
@@ -573,4 +545,93 @@ $(document).ready(function() {
 	});
 </script>
 
+<script>
+if ($('#CheckOther').is(':checked')) {
+	$('#DivOther').show();
+} else {
+	$('#DivOther').hide();
+}
+
+if ($('#CheckRouter').is(':checked')) {
+	$('#DivRouter').show();
+} else {
+	$('#DivRouter').hide();
+}
+
+if ($('#CheckTV').is(':checked')) {
+	$('.DivTV').show();
+} else {
+	$('.DivTV').hide();
+}
+
+if ($('#CheckAD').is(':checked')) {
+	$('.DivAD').show();
+} else {
+	$('.DivAD').hide();
+}
+
+if ($('#CheckNE').is(':checked')) {
+	$('.DivNE').show();
+} else {
+	$('.DivNE').hide();
+}
+
+if ($('#CheckAV').is(':checked')) {
+	$('.DivAV').show();
+} else {
+	$('.DivAV').hide();
+}
+
+//----------------------------------------------------
+
+
+
+$('#CheckRouter').change(function(){
+	if ($(this).is(':checked')) {
+		$('#DivRouter').show();
+	} else {
+		$('#DivRouter').hide();
+	}
+});
+
+$('#CheckOther').change(function(){
+	if ($(this).is(':checked')) {
+		$('#DivOther').show();
+	} else {
+		$('#DivOther').hide();
+	}
+});
+
+$('#CheckTV').change(function(){
+	if ($(this).is(':checked')) {
+		$('.DivTV').show();
+	} else {
+		$('.DivTV').hide();
+	}
+});
+
+$('#CheckAD').change(function(){
+	if ($(this).is(':checked')) {
+		$('.DivAD').show();
+	} else {
+		$('.DivAD').hide();
+	}
+});
+
+$('#CheckNE').change(function(){
+	if ($(this).is(':checked')) {
+		$('.DivNE').show();
+	} else {
+		$('.DivNE').hide();
+	}
+});
+
+$('#CheckAV').change(function(){
+	if ($(this).is(':checked')) {
+		$('.DivAV').show();
+	} else {
+		$('.DivAV').hide();
+	}
+});
+</script>
 @endpush

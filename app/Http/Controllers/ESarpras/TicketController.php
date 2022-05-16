@@ -127,6 +127,7 @@ class TicketController extends Controller
             'pages'         => $this->pages,
             'data'          => $ticket,
             'userProcess'   => $this->ticket->getUserProcess($ticket->id),
+            'firstUser'     => $this->ticket->getFirstUserProcess($ticket->id),
             'signer'        => $this->ticket->getSigner($ticket->id),
             'paramsUser'    => $this->ticket->paramsUser($ticket),
         ]);

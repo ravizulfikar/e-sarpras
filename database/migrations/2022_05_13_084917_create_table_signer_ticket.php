@@ -19,8 +19,8 @@ class CreateTableSignerTicket extends Migration
             $table->foreign('ticket_id')->references('id')->on('tickets');
             $table->timestamp('date');
             $table->string('signer');
-            $table->string('type_identity', 15);
-            $table->string('number_identity', 15);
+            $table->string('type_identity', 5);
+            $table->string('number_identity', 20);
             $table->text('sign')->nullable();
             $table->timestamps();
         });

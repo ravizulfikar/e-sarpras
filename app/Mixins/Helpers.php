@@ -210,4 +210,27 @@
 			return \App\Models\User::whereId($data)->first()->name;
 		}
 	}
+
+	if (!function_exists('ObjectToArray')) {
+		function ObjectToArray($data) 
+		{	
+			if ((! is_array($data)) and (! is_object($data))) return 'xxx';
+			$result = array();
+			$data = (array) $data;
+			foreach ($data as $key => $value) {
+				if (is_object($value)) $value = (array) $value;
+				if (is_array($value)) 
+				$result[$key] = ObjectToArray($value);
+				else
+					$result[$key] = $value;
+			}
+			return $result;
+		}
+	}
+
+	if (!function_exists('JsonObjectToArray')) {
+		function JsonObjectToArray($data){
+			return ObjectToArray(json_decode($data));
+		}
+	}
 ?>

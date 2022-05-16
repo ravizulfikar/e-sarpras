@@ -286,8 +286,6 @@ $(document).ready(function() {
 					var Route = data.route;
 					var dataID = data.data;
 
-					console.log([Route, dataID]);
-
 					iziToast.success({
 						message: data.message,
 						position: 'topRight'
@@ -626,8 +624,96 @@ $(document).ready(function() {
 			$('#container-name').hide();
 		}
 
-		console.log([TypeSelect, LocateSelect, LocateUnit]);
 	});
 </script>
 
+<script>
+if ($('#CheckOther').is(':checked')) {
+	$('#DivOther').show();
+} else {
+	$('#DivOther').hide();
+}
+
+if ($('#CheckRouter').is(':checked')) {
+	$('#DivRouter').show();
+} else {
+	$('#DivRouter').hide();
+}
+
+if ($('#CheckTV').is(':checked')) {
+	$('.DivTV').show();
+} else {
+	$('.DivTV').hide();
+}
+
+if ($('#CheckAD').is(':checked')) {
+	$('.DivAD').show();
+} else {
+	$('.DivAD').hide();
+}
+
+if ($('#CheckNE').is(':checked')) {
+	$('.DivNE').show();
+} else {
+	$('.DivNE').hide();
+}
+
+if ($('#CheckAV').is(':checked')) {
+	$('.DivAV').show();
+} else {
+	$('.DivAV').hide();
+}
+
+//----------------------------------------------------
+
+
+
+$('#CheckRouter').change(function(){
+	if ($(this).is(':checked')) {
+		$('#DivRouter').show();
+	} else {
+		$('#DivRouter').hide();
+	}
+});
+
+$('#CheckOther').change(function(){
+	if ($(this).is(':checked')) {
+		$('#DivOther').show();
+	} else {
+		$('#DivOther').hide();
+	}
+});
+
+$('#CheckTV').change(function(){
+	if ($(this).is(':checked')) {
+		$('.DivTV').show();
+	} else {
+		$('.DivTV').hide();
+	}
+});
+
+$('#CheckAD').change(function(){
+	if ($(this).is(':checked')) {
+		$('.DivAD').show();
+	} else {
+		$('.DivAD').hide();
+	}
+});
+
+$('#CheckNE').change(function(){
+	if ($(this).is(':checked')) {
+		$('.DivNE').show();
+	} else {
+		$('.DivNE').hide();
+	}
+});
+
+$('#CheckAV').change(function(){
+	if ($(this).is(':checked')) {
+		$('.DivAV').show();
+	} else {
+		$('.DivAV').hide();
+	}
+});
+</script>
 @endpush
