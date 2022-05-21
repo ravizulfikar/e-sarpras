@@ -24,7 +24,7 @@ return [
             'title'       => 'Dashboard',
             'route'       => ['name' => 'index'],
             'group'       => 'index',
-            'role'        => ['superadmin', 'ta-teknisi', 'ta-admin', 'ta-asisten']
+            'role'        => ['superadmin', 'kabid', 'kasubbag', 'kasatpel', 'staff', 'ta-teknisi', 'ta-admin', 'ta-asisten']
         ],
 
         // [
@@ -49,7 +49,7 @@ return [
             'type'          => 'header',
             'title'         => 'Ticketing',
             'description'   => 'Troubleshooting, Server, Monitoring',
-            'role'          => ['superadmin', 'ta-teknisi', 'ta-admin', 'ta-asisten'],
+            'role'          => ['superadmin', 'ta-teknisi', 'ta-admin', 'ta-asisten', 'kabid', 'kasubbag', 'kasatpel', 'staff'],
         ],
 
             [
@@ -59,7 +59,7 @@ return [
                 'title'       => 'Entry',
                 'route'       => ['name' => 'entry.ticket'],
                 'group'       => 'entry',
-                'role'        => ['superadmin', 'ta-teknisi', 'ta-admin', 'ta-asisten']
+                'role'        => ['ta-teknisi', 'ta-admin', 'ta-asisten']
             ],
 
             [
@@ -69,7 +69,7 @@ return [
                 'title'       => 'Process',
                 'route'       => ['name' => 'process.ticket'],
                 'group'       => 'process',
-                'role'        => ['superadmin', 'ta-teknisi', 'ta-admin', 'ta-asisten']
+                'role'        => ['ta-teknisi', 'ta-admin', 'ta-asisten']
             ],
 
             [
@@ -79,7 +79,28 @@ return [
                 'title'       => 'Finish',
                 'route'       => ['name' => 'ticket.index'],
                 'group'       => 'ticket',
-                'role'        => ['superadmin', 'ta-teknisi', 'ta-admin', 'ta-asisten']
+                'role'        => ['ta-teknisi', 'ta-admin', 'ta-asisten']
+            ],
+
+            //Admin
+            [
+                'type'        => 'main',
+                // 'badge'       => ['type' => 'warning', 'data' => $CountEntry ],
+                'icon'        => 'inbox',
+                'title'       => 'On Process',
+                'route'       => ['name' => 'entry.admin.ticket'],
+                'group'       => 'entry',
+                'role'        => ['superadmin', 'kabid', 'kasubbag', 'kasatpel', 'staff']
+            ],
+
+            [
+                'type'        => 'main',
+                // 'badge'       => ['type' => 'success', 'data' => $CountFinish],
+                'icon'        => 'check-circle',
+                'title'       => 'Data',
+                'route'       => ['name' => 'ticket.index'],
+                'group'       => 'ticket',
+                'role'        => ['superadmin', 'kabid', 'kasubbag', 'kasatpel', 'staff']
             ],
         
         //Reporting
@@ -87,7 +108,7 @@ return [
             'type'          => 'header',
             'title'         => 'Reporting',
             'description'   => 'Report of Ticketing',
-            'role'          => ['superadmin'],
+            'role'          => ['ta-teknisi', 'ta-admin', 'ta-asisten'],
         ],
             [
                 'type'        => 'main',
@@ -97,7 +118,7 @@ return [
                 // 'route'       => 'report.daily',
                 'route'       => ['name' => 'report.daily'],
                 'group'       => 'report.daily',
-                'role'        => ['superadmin']
+                'role'        => ['ta-teknisi', 'ta-admin', 'ta-asisten']
             ],
 
             [
@@ -108,7 +129,7 @@ return [
                 // 'route'       => 'report.pictures',
                 'route'       => ['name' => 'report.pictures'],
                 'group'       => 'report.pictures',
-                'role'        => ['superadmin']
+                'role'        => ['ta-teknisi', 'ta-admin', 'ta-asisten']
             ],
 
             [
@@ -119,7 +140,7 @@ return [
                 // 'route'       => 'report.download',
                 'route'       => ['name' => 'report.download'],
                 'group'       => 'report.download',
-                'role'        => ['superadmin']
+                'role'        => ['ta-teknisi', 'ta-admin', 'ta-asisten']
             ],
 
         //Configuration

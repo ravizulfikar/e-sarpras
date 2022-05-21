@@ -19,7 +19,7 @@ class TicketServices
 {
     public function main()
     {
-        return Ticket::all();
+        return Ticket::with('SignerTickets')->get();
     }
 
     public function findBy($field, $id)
@@ -45,6 +45,11 @@ class TicketServices
 
         return $data;
         // return Ticket::with('SignerTickets')->whereIn('type', $this->checkAuth())->whereStatus($status)->get();
+    }
+
+    public function byType($type, $status)
+    {
+        return Ticket::with('SignerTickets')->whereIn('type', $type)->whereIn('status', $status)->get();
     }
 
     public function checkAuth(){
@@ -208,5 +213,11 @@ class TicketServices
         $ticket->update(['status' => 'process']);
         $assign = UserTicket::create(['ticket_id' => $ticket->id, 'user_id' => auth()->user()->id]);
         return $assign;
+    }
+
+    public function resetTicket($id)
+    {
+        $data = SignerTicket::whereTicketId($id)->first();
+        return $data->update(['sign' => '']);
     }
 }

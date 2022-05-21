@@ -164,6 +164,6 @@
 
 <div class="row mb-3">
 	<div class="col-sm-12">
-		<h5>{{ JsonObjectToArray($data->detail)["catatan"] }}</h5>
+		<h5>@if(isset(JsonObjectToArray($data->detail)["catatan"])) {{ JsonObjectToArray($data->detail)["catatan"] }} @else - @endif</h5>
 	</div>
 </div>

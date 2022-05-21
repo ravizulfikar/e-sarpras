@@ -205,6 +205,34 @@
 		}
 	}
 
+	if (!function_exists('StatusBadge')) {
+		function StatusBadge($data){
+			if($data == 'entry'){
+				return '<span class="badge badge-primary">Open</span>';
+			} else if($data == 'finish'){
+				return '<span class="badge badge-success">Finish</span>';
+			} else if($data == 'process'){
+				return '<span class="badge badge-warning">Process</span>';
+			} else {
+				return '<span class="badge badge-danger">ERROR</span>';
+			}
+		}
+	}
+
+	if (!function_exists('StatusHeader')) {
+		function StatusHeader($data){
+			if($data == 'entry'){
+				return 'primary';
+			} else if($data == 'finish'){
+				return 'success';
+			} else if($data == 'process'){
+				return 'warning';
+			} else {
+				return 'danger';
+			}
+		}
+	}
+
 	if (!function_exists('UserName')) {
 		function UserName($data){
 			return \App\Models\User::whereId($data)->first()->name;
@@ -212,7 +240,7 @@
 	}
 
 	if (!function_exists('ObjectToArray')) {
-		function ObjectToArray($data) 
+		function ObjectToArray($data, $object = null) 
 		{	
 			if ((! is_array($data)) and (! is_object($data))) return 'xxx';
 			$result = array();
@@ -224,7 +252,27 @@
 				else
 					$result[$key] = $value;
 			}
+
 			return $result;
+			// dd($result['trouble']);
+			// if($object != null){
+			// 	if(!empty($result[$object])){
+			// 		$class = $result;
+			// 	} else {
+			// 		$class = '-';
+			// 	}
+			// 	return $class;
+
+			// } else {
+			// 	return $result;
+			// }
+
+			// if(!empty(json_decode($dataJson, true)[$object])){
+			// 	$class = json_decode($dataJson, true)[$object];
+			// } else {
+			// 	$class = $value;
+			// }
+			// return $class;
 		}
 	}
 
@@ -233,4 +281,6 @@
 			return ObjectToArray(json_decode($data));
 		}
 	}
+
+	
 ?>

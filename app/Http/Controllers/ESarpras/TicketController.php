@@ -63,6 +63,7 @@ class TicketController extends Controller
             'url'       => 'ticket.show',
             'title'     => 'Detail ticket',
             'view'      => 'e-sarpras.ticket.view',
+            'viewAdmin' => 'e-sarpras.ticket.admin.finish_view',
             'update'    => 'ticket.update',
             'deleteUser'=> 'process.deleteUser',
         ],
@@ -72,12 +73,32 @@ class TicketController extends Controller
         //     'update'    => 'ticket.update',
         // ],
         'destroy'       => 'ticket.destroy',
+        'reset'         => 'ticket.reset',
 
         //Client
         'createUser'        => [
             'title'         => 'Create Your Ticket',
             'description'   => 'Enter your Trouble details to create ticket',
             'store'         => 'ticket.storeUser',
+        ],
+
+        //Admin
+        'admin' => [
+            'url'           => 'entry.admin.ticket',
+            'title'         => 'Ticket On Process',
+            'index'         => 'e-sarpras.ticket.admin.onprocess_main',
+            'indexFinish'   => 'e-sarpras.ticket.admin.finish_main',
+            'view'          => [
+                'url'       => 'entry.admin.view',
+                'index'     => 'e-sarpras.ticket.admin.onprocess_view',
+                'title'     => 'Detail ticket',
+            ],
+            'finish'        => [
+                'url'       => 'entry.admin.view',
+                'index'     => 'e-sarpras.ticket.admin.finish_view',
+                'title'     => 'Detail ticket',
+            ],
+            
         ],
     ];
 
@@ -99,6 +120,16 @@ class TicketController extends Controller
     {
         $this->ticket->assignTicket($ticket);
         return redirect()->route('process.ticket')->with('success', 'Ticket in Process !');
+    }
+
+    public function entry_view(Ticket $ticket)
+    {
+        return view($this->pages['entry']['viewAdmin']['index'], [
+            'pages'         => $this->pages,
+            'data'          => $ticket,
+            'userProcess'   => $this->ticket->getUserProcess($ticket->id),
+            'signer'        => $this->ticket->getSigner($ticket->id),
+        ]);
     }
 
     public function process()
@@ -175,15 +206,32 @@ class TicketController extends Controller
     
     public function index()
     {
-        return view($this->pages['main']['index'], [
+        if(in_array(auth()->user()->role->slug, ['superadmin', 'admin'])){
+            $view = $this->pages['admin']['indexFinish'];
+            $data = [
+                'trouble_monit'       =>  $this->ticket->byType(['troubleshooting', 'monitoring'], ['finish']),
+                'server'              =>  $this->ticket->byType(['server'], ['finish']),
+            ];
+        } else {
+            $view = $this->pages['main']['index'];
+            $data = $this->ticket->byStatus('finish');
+        }
+        
+        return view($view, [
             'pages' => $this->pages, 
-            'data'  => $this->ticket->byStatus('finish'),
+            'data'  => $data,
         ]);
     }
 
     public function show(Ticket $ticket)
     {
-        return view($this->pages['show']['view'], [
+        if(in_array(auth()->user()->role->slug, ['superadmin', 'admin'])){
+            $view = $this->pages['show']['viewAdmin'];
+        } else {
+            $view = $this->pages['show']['view'];
+        }
+
+        return view($view, [
             'pages'         => $this->pages,
             'data'          => $ticket,
             'userProcess'   => $this->ticket->getUserProcess($ticket->id),
@@ -284,6 +332,12 @@ class TicketController extends Controller
         return response()->json(['success'=>true]);
     }
 
+    public function reset($ticket)
+    {
+        $this->ticket->resetTicket($ticket);
+        return response()->json(['success'=>true]);
+    }
+
 
     //Client
     public function createUser()
@@ -334,6 +388,30 @@ class TicketController extends Controller
         return response()->json([
             "success"   => true,
             "data"      => $data 
+        ]);
+    }
+
+    //Admin
+    public function admin_main()
+    {
+        return view($this->pages['admin']['index'], [
+            'pages' => $this->pages,
+            'data'  => [
+                'trouble_monit'       =>  $this->ticket->byType(['troubleshooting', 'monitoring'], ['entry', 'process']),
+                'server'              =>  $this->ticket->byType(['server'], ['entry', 'process']),
+            ],
+        ]);
+    }
+
+    public function admin_view(Ticket $ticket)
+    {
+        return view($this->pages['admin']['view']['index'], [
+            'pages'         => $this->pages,
+            'data'          => $ticket,
+            'userProcess'   => $this->ticket->getUserProcess($ticket->id),
+            'firstUser'     => $this->ticket->getFirstUserProcess($ticket->id),
+            'signer'        => $this->ticket->getSigner($ticket->id),
+            'paramsUser'    => $this->ticket->paramsUser($ticket),
         ]);
     }
 }

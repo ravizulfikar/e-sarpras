@@ -120,6 +120,12 @@ Route::middleware(['auth','verified'])->group(function () {
     // Route::get('/holiday', function () { dd("holiday"); })->name('holiday.index');
     Route::resource('ticket', Ticket::class);
     Route::group(['prefix' => 'ticket'], function () {
+
+        Route::put('reset/{ticket}', [Ticket::class, 'reset'])->name('ticket.reset');
+
+        Route::get('get/onprocess', [Ticket::class, 'admin_main'])->name('entry.admin.ticket');
+        Route::get('get/onprocess/{ticket}', [Ticket::class, 'admin_view'])->name('entry.admin.view');
+
         // Route::get('by/{status}', [Ticket::class, 'byStatus'])->name('status');
         Route::get('get/entry', [Ticket::class, 'entry'])->name('entry.ticket');
         Route::put('get/entry/{ticket}', [Ticket::class, 'entry_update'])->name('entry.update');

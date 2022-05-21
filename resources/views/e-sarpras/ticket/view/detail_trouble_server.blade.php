@@ -19,6 +19,6 @@
 
 <div class="row mb-3">
 	<div class="col-sm-12">
-		<h5>{{ RenderJson($data->detail, 'solution') }}</h5>
+		<h5>{{ RenderJson($data->detail, 'solution', '-') }}</h5>
 	</div>
 </div>

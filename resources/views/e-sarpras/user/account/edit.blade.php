@@ -119,7 +119,7 @@
 
 												<br>
 
-												<a class="btn btn-success btn-block" href="{{ route($pages['show']['url'], $data) }}">View User Profile</a>
+												{{-- <a class="btn btn-success btn-block" href="{{ route($pages['show']['url'], $data) }}">View User Profile</a> --}}
 											</div>
 										</div>
 									</div>
@@ -189,7 +189,7 @@
 											</div>
 										</div>
 
-										<div class="col-sm-2">
+										{{-- <div class="col-sm-2">
 											<div class="mb-3 text-start">
 												<label class="">Confirmed</label>
 												<div class="media-body icon-state switch-outline">
@@ -209,7 +209,7 @@
 													</label>
 												</div>
 											</div>
-										</div>
+										</div> --}}
 
 
 									</div>
