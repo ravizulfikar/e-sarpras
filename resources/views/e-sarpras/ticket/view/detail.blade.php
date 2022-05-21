@@ -88,7 +88,12 @@
 
 	<div class="row mb-3">
 		<div class="col-sm-4">
-			<img src="data:image/png;base64,{{$signer->sign}}" width="200px">
+			@if(!empty($signer->sign))
+			<img src="data:image/png;base64,{{$signer->sign}}" id='signAfter' width="200px">
+			@else
+			-
+			@endif
+			{{-- <img src="data:image/png;base64,{{$signer->sign}}" width="200px"> --}}
 		</div>
 		<div class="col-sm-4">
 			<h5>{{ $signer->signer }}</h5>

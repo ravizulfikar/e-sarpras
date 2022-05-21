@@ -24,6 +24,7 @@ class CreateTableTickets extends Migration
             $table->json('detail');
             $table->string('status', 15);
             $table->string('verification', 15);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

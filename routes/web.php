@@ -157,6 +157,8 @@ Route::group(['prefix' => 'ticket', 'as' => 'ticket.'], function () {
     Route::post('user/store', [Ticket::class, 'storeUser'])->name('storeUser');
     Route::get('user/history', [Ticket::class, 'historyUser'])->name('historyUser');
     Route::post('user/history-get', [Ticket::class, 'historyGetUser'])->name('historyGetUser');
+    Route::get('user/sign/{ticket}', [Ticket::class, 'signUser'])->name('signUser');
+    Route::put('user/sign/{signer}', [Ticket::class, 'updateSignUser'])->name('updateSignUser');
 });
 
 

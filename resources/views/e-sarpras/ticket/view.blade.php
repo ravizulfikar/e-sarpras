@@ -25,60 +25,64 @@
 
 @section('content')
 <div class="container-fluid">
-	<div class="email-wrap bookmark-wrap">
-		<div class="row">
-			<div class="col-xl-3 box-col-6">
-				<div class="email-left-aside">
-					<div class="card">
-						<div class="card-body">
-							<div class="email-app-sidebar left-bookmark task-sidebar">
-								<ul class="nav main-menu" role="tablist">
-									<li><a id="pills-detail-tab" data-bs-toggle="pill" href="#pills-detail" role="tab" aria-controls="pills-detail" aria-selected="true"><span class="title"><i class="fa fa-file-text"></i>Detail</span></a></li>
-									<li><a class="show" id="pills-edit-tab" data-bs-toggle="pill" href="#pills-edit" role="tab" aria-controls="pills-edit" aria-selected="false"><span class="title"><i class="fa fa-pencil"></i>Edit</span></a></li>
-									<li><a class="show" id="pills-report-tab" data-bs-toggle="pill" href="#pills-report" role="tab" aria-controls="pills-report" aria-selected="false"><span class="title"><i class="fa fa-flag-o"></i>Report</span></a></li>
-									{{-- <li><a class="show" id="pills-upcoming-tab" data-bs-toggle="pill" href="#pills-upcoming" role="tab" aria-controls="pills-upcoming" aria-selected="false"><span class="title">Upcoming Tasks</span></a></li> --}}
-								</ul>
-							</div>
-						</div>
+
+	<div class="row project-cards">
+		<div class="col-md-12 project-list">
+			<div class="card">
+				<div class="row">
+					<div class="col-md-6">
+						<ul class="nav nav-tabs border-tab" id="top-tab" role="tablist">
+							<li class="nav-item"><a class="nav-link active" id="top-detail-tab" data-bs-toggle="tab" href="#top-detail" role="tab" aria-controls="top-detail" aria-selected="true"><i class="fa fa-file-text"></i>Detail</a></li>
+
+							<li class="nav-item"><a class="nav-link" id="edit-top-tab" data-bs-toggle="tab" href="#top-edit" role="tab" aria-controls="top-edit" aria-selected="false"><i class="fa fa-pencil"></i> Edit</a></li>
+
+							<li class="nav-item"><a class="nav-link" id="report-top-tab" data-bs-toggle="tab" href="#top-report" role="tab" aria-controls="top-report" aria-selected="false"><i class="fa fa-flag-o"></i> Report</a></li>
+						</ul>
 					</div>
 				</div>
 			</div>
-			<div class="col-xl-9 col-md-12 box-col-12">
-				<div class="email-right-aside bookmark-tabcontent">
-					<div class="card email-body radius-left">
-						<div class="ps-0">
-							<div class="tab-content">
-								<div class="tab-pane fade active show" id="pills-detail" role="tabpanel" aria-labelledby="pills-detaildetail-tab">
-									<div class="card">
-										<div class="card-body">
-											@include($pages['show']['view'].'.detail')
-										</div>
-									</div>
-								</div>
+		</div>
 
-								<div class="tab-pane fade" id="pills-edit" role="tabpanel" aria-labelledby="pills-edit-tab">
-									<div class="card">
-										<div class="card-body">
-											@include($pages['show']['view'].'.edit')
-										</div>
-									</div>
-								</div>
+		<div class="col-sm-12">
+			<div class="card">
+				<div class="card-body justify-content-center align-items-center">
 
-								<div class="tab-pane fade" id="pills-report" role="tabpanel" aria-labelledby="pills-report-tab">
-									<div class="card">
-										<div class="card-body">
-											Report
-										</div>
-									</div>
+					@include('layouts.simple.spinner')
+
+					<div class="tab-content" id="top-tabContent">
+
+
+						<div class="tab-pane fade show active" id="top-detail" role="tabpanel" aria-labelledby="top-detail-tab">
+							<div class="row">
+								<div class="col-md-12">
+									@include($pages['show']['view'].'.detail')
 								</div>
-								
 							</div>
 						</div>
+ 
+						<div class="tab-pane fade" id="top-edit" role="tabpanel" aria-labelledby="edit-top-tab">
+							<div class="row">
+								<div class="col-md-12">
+									@include($pages['show']['view'].'.edit')
+								</div>
+							</div>
+						</div>
+
+						<div class="tab-pane fade" id="top-report" role="tabpanel" aria-labelledby="report-top-tab">
+							<div class="row">
+								<div class="col-md-12">
+									Report
+								</div>
+							</div>
+						</div>
+
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	@include('layouts.simple.spinner')
 
 	@if($data->type == 'troubleshooting' || $data->type == 'monitoring')
@@ -203,7 +207,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-success" type="button" id="btnShareWhatsapp" data-url="Linknya">Share to Whatsapp</button>
+						<button class="btn btn-success" type="button" id="btnShareWhatsapp" data-url="{{ route($pages['createUser']['sign'], $data) }}">Share to Whatsapp</button>
 					</div>
 				</div>
 			</div>
@@ -348,6 +352,21 @@ $(document).ready(function() {
 		$('#whatsapp').val('');
 	});
 
+	//button to copy data action
+	$('#btnCopyAction').click(function() {
+		var url = $(this).data('action');
+		console.log(url);
+		// url.select();
+		navigator.clipboard.writeText(url);
+		iziToast.success({
+			message: "Link copied to clipboard !",
+			position: 'topRight'
+		});
+
+	});
+
+	//btnCopyAction to copy text from data action
+	
 });
 </script>
 

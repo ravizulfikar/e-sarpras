@@ -111,6 +111,7 @@
 				<div class="col-sm-9">
 					<button class="btn btn-danger signBtnBefore" type="button" data-bs-toggle="modal" data-bs-target="#SignTicket">Click to Sign this Ticket</button>
 					<button class="btn btn-success signBtnBefore" type="button" data-bs-toggle="modal"  data-bs-target="#SignWhatsapp">Share to Whatsapp</button>
+					<button class="btn btn-info signBtnBefore" type="button" data-action="{{ route($pages['createUser']['sign'], $data) }}" id="btnCopyAction"><i class="fa fa-copy"></i></button>
 
 
 					<button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#SignTicket" id="signBtnAfter" style="display:none;">Edit Signer</button>

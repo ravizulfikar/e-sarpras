@@ -80,6 +80,8 @@ class TicketController extends Controller
             'title'         => 'Create Your Ticket',
             'description'   => 'Enter your Trouble details to create ticket',
             'store'         => 'ticket.storeUser',
+            'sign'          => 'ticket.signUser',
+            'updateSign'    => 'ticket.updateSignUser'
         ],
 
         //Admin
@@ -328,7 +330,7 @@ class TicketController extends Controller
      */
     public function destroy(Ticket $ticket)
     {
-        $role->delete();
+        $ticket->delete();
         return response()->json(['success'=>true]);
     }
 
@@ -390,6 +392,36 @@ class TicketController extends Controller
             "data"      => $data 
         ]);
     }
+
+    public function signUser(Ticket $ticket)
+    {
+        $checkSign = SignerTicket::whereTicketId($ticket->id)->first();
+
+        if(!empty($checkSign->sign)){
+            return redirect(url('/'))->with('warning', 'Ticket Already signed!');
+        }
+
+        return view('e-sarpras.sign-ticket', [
+            'pages'         => $this->pages,
+            'data'          => $ticket,
+            'userProcess'   => $this->ticket->getUserProcess($ticket->id),
+            'firstUser'     => $this->ticket->getFirstUserProcess($ticket->id),
+            'signer'        => $this->ticket->getSigner($ticket->id),
+            'paramsUser'    => $this->ticket->paramsUser($ticket),
+            'typeTicket'    => RenderParams('type-ticket'),
+            'location'      => RenderParams('location'),
+            'floorUnit'     => RenderParams('floor-unit'),
+            'categorys'     => ParamsCategory(),
+            'identityType'  => RenderParams('identity-type'),
+        ]);
+    }
+
+    public function updateSignUser(Request $request, SignerTicket $signer){
+        return $this->ticket->signedTicket($request, $signer);
+    }
+
+
+
 
     //Admin
     public function admin_main()
