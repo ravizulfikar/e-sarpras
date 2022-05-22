@@ -16,6 +16,7 @@ class CreateTableReportDescription extends Migration
         Schema::create('report_description', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('report_id')->foreign('report_id')->references('id')->on('reports');
+            $table->timestamp('date');
             $table->text('descriptions');
             $table->timestamps();
         });

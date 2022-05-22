@@ -282,5 +282,55 @@
 		}
 	}
 
+	if (!function_exists('ReportVerify')) {
+		function ReportVerify($data){
+			if($data == 'kasatpel'){
+				$class = '<span class="badge badge-primary">Verify by Kasatpel</span>';
+			} else if($data == 'kasubbag'){
+				$class = '<span class="badge badge-success">Verify by Kasubbag</span>';
+			} else if($data == 'kabid'){
+				$class = '<span class="badge badge-info">Verify by Kabid</span>';
+			} else {
+				$class = '<span class="badge badge-danger">Not Verify</span>';
+			}
+
+			return $class;
+		}
+	}
+
+	if (!function_exists('MonthName')) {
+		function MonthName($data){
+			if($data == '01'){
+				$class = 'Januari';
+			} else if($data == '02'){
+				$class = 'Februari';
+			} else if($data == '03'){
+				$class = 'Maret';
+			} else if($data == '04'){
+				$class = 'April';
+			} else if($data == '05'){
+				$class = 'Mei';
+			} else if($data == '06'){
+				$class = 'Juni';
+			} else if($data == '07'){
+				$class = 'Juli';
+			} else if($data == '08'){
+				$class = 'Agustus';
+			} else if($data == '09'){
+				$class = 'September';
+			} else if($data == '10'){
+				$class = 'Oktober';
+			} else if($data == '11'){
+				$class = 'November';
+			} else if($data == '12'){
+				$class = 'Desember';
+			} else {
+				$class = '-';
+			}
+
+			return $class;
+		}
+	}
+
 	
 ?>

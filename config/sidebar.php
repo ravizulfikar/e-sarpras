@@ -112,34 +112,34 @@ return [
         ],
             [
                 'type'        => 'main',
-                'badge'       => ['type' => 'warning', 'data' => CountData::getCount()],
+                // 'badge'       => ['type' => 'warning', 'data' => CountData::getCount()],
                 'icon'        => 'edit',
-                'title'       => 'Daily',
+                'title'       => 'Activity',
                 // 'route'       => 'report.daily',
-                'route'       => ['name' => 'report.daily'],
-                'group'       => 'report.daily',
+                'route'       => ['name' => 'report.index'],
+                'group'       => 'report',
                 'role'        => ['ta-teknisi', 'ta-admin', 'ta-asisten']
             ],
 
-            [
-                'type'        => 'main',
-                'badge'       => ['type' => 'warning', 'data' => CountData::getCount()],
-                'icon'        => 'image',
-                'title'       => 'Picture',
-                // 'route'       => 'report.pictures',
-                'route'       => ['name' => 'report.pictures'],
-                'group'       => 'report.pictures',
-                'role'        => ['ta-teknisi', 'ta-admin', 'ta-asisten']
-            ],
+            // [
+            //     'type'        => 'main',
+            //     // 'badge'       => ['type' => 'warning', 'data' => CountData::getCount()],
+            //     'icon'        => 'image',
+            //     'title'       => 'Picture',
+            //     // 'route'       => 'report.pictures',
+            //     'route'       => ['name' => 'report.pictures'],
+            //     'group'       => 'report.pictures',
+            //     'role'        => ['ta-teknisi', 'ta-admin', 'ta-asisten']
+            // ],
 
             [
                 'type'        => 'main',
-                'badge'       => ['type' => 'success', 'data' => CountData::getCount()],
+                // 'badge'       => ['type' => 'success', 'data' => CountData::getCount()],
                 'icon'        => 'download',
                 'title'       => 'Download',
                 // 'route'       => 'report.download',
-                'route'       => ['name' => 'report.download'],
-                'group'       => 'report.download',
+                'route'       => ['name' => 'download.report'],
+                'group'       => 'download',
                 'role'        => ['ta-teknisi', 'ta-admin', 'ta-asisten']
             ],
 

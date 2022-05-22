@@ -18,7 +18,7 @@ class CreateTableReports extends Migration
             $table->unsignedBigInteger('user_id')->foreign('user_id')->references('id')->on('users');
             $table->string('month', 2);
             $table->string('year', 4);
-            $table->timestamp('date');
+            
             $table->string('verification', 15);
             $table->timestamps();
         });

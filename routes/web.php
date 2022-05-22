@@ -13,6 +13,7 @@ use App\Http\Controllers\ESarpras\HolidayController as Holiday;
 use App\Http\Controllers\ESarpras\MenuConfigurationController as MenuConfiguration;
 use App\Http\Controllers\ESarpras\ClientController as Client;
 use App\Http\Controllers\ESarpras\TicketController as Ticket;
+use App\Http\Controllers\ESarpras\ReportController as Report;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -89,7 +90,8 @@ Route::middleware(['auth','verified'])->group(function () {
         if($data){
             return response()->json(["success" => true]);
         } else {
-            return response()->json(["success" => false]);
+            \DB::table('theme_user')->update(['user_id' => auth()->user()->id, 'class' => $request->class]);
+            return response()->json(["success" => true]);
         }
 
     })->name('changeTheme');
@@ -146,9 +148,28 @@ Route::middleware(['auth','verified'])->group(function () {
     // Route::get('/ticket/process', function () { dd("process"); })->name('ticket.process');
     // Route::get('/ticket/finish', function () { dd("finish"); })->name('ticket.finish');
 
-    Route::get('/report/daily', function () { dd("daily"); })->name('report.daily');
-    Route::get('/report/picture', function () { dd("picture"); })->name('report.pictures');
-    Route::get('/report/download', function () { dd("download"); })->name('report.download');
+    // Route::get('/report/activity', function () { dd("activity"); })->name('report.activity');
+    // Route::get('/report/picture', function () { dd("picture"); })->name('report.pictures');
+    Route::get('/report/download', function () { dd("download"); })->name('download.report');
+
+    Route::group(['prefix' => 'report', 'as' => 'report.'], function () {
+        Route::get('generate', [Report::class, 'generate'])->name('generate');
+        Route::post('generate/store', [Report::class, 'generateStore'])->name('generateStore');
+        
+        Route::post('description/store/{id}', [Report::class, 'storeDescription'])->name('storeDescription');
+        Route::put('update/{report_description}/description', [Report::class, 'updateDescription'])->name('updateDescription');
+        Route::delete('delete/{report_description}/description', [Report::class, 'deleteDescription'])->name('deleteDescription');
+
+        Route::post('picture/upload', [Report::class, 'uploadPicture'])->name('uploadPicture');
+        Route::post('picture/remove', [Report::class, 'removePicture'])->name('removePicture');
+
+        Route::post('picture/store/{id}', [Report::class, 'storePicture'])->name('storePicture');
+        Route::put('update/{report_picture}/picture', [Report::class, 'updatePicture'])->name('updatePicture');
+        Route::delete('delete/{report_picture}/picture', [Report::class, 'deletePicture'])->name('deletePicture');
+        Route::put('picture/remove-by/{report_picture}/{name}', [Report::class, 'removeByPicture'])->name('removeByPicture');
+    });
+
+    Route::resource('report', Report::class);
 });
 
 

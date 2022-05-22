@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class ReportPicture extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'report_id',
+        'date',
+        'pictures',
+    ];
 }
