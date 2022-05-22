@@ -14,6 +14,7 @@ use App\Http\Controllers\ESarpras\MenuConfigurationController as MenuConfigurati
 use App\Http\Controllers\ESarpras\ClientController as Client;
 use App\Http\Controllers\ESarpras\TicketController as Ticket;
 use App\Http\Controllers\ESarpras\ReportController as Report;
+use App\Http\Controllers\ESarpras\VerifyController as Verify;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -180,6 +181,14 @@ Route::group(['prefix' => 'ticket', 'as' => 'ticket.'], function () {
     Route::post('user/history-get', [Ticket::class, 'historyGetUser'])->name('historyGetUser');
     Route::get('user/sign/{ticket}', [Ticket::class, 'signUser'])->name('signUser');
     Route::put('user/sign/{signer}', [Ticket::class, 'updateSignUser'])->name('updateSignUser');
+});
+
+Route::group(['prefix' => 'verify', 'as' => 'ticketing.'], function () {
+    Route::get('ticketing', [Verify::class, 'ticketing'])->name('verify');
+});
+
+Route::group(['prefix' => 'verify', 'as' => 'reporting.'], function () {
+    Route::get('reporting', [Verify::class, 'reporting'])->name('verify');
 });
 
 

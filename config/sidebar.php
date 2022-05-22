@@ -43,6 +43,33 @@ return [
         //     ]
         // ],
         // Custom
+        //Ticketing
+        [
+            'type'          => 'header',
+            'title'         => 'Verification',
+            'description'   => 'Ticketing and Reporting',
+            'role'          => ['kasubbag', 'kasatpel'],
+        ],
+            [
+                'type'        => 'main',
+                // 'badge'       => ['type' => 'warning', 'data' => $CountEntry ],
+                'icon'        => 'bookmark',
+                'title'       => 'Ticketing',
+                'route'       => ['name' => 'ticketing.verify'],
+                'group'       => 'ticketing',
+                'role'        => ['kasubbag', 'kasatpel'],
+            ],
+
+            [
+                'type'        => 'main',
+                // 'badge'       => ['type' => 'warning', 'data' => $CountEntry ],
+                'icon'        => 'book',
+                'title'       => 'Reporting',
+                'route'       => ['name' => 'reporting.verify'],
+                'group'       => 'reporting',
+                'role'        => ['kasubbag', 'kasatpel'],
+            ],
+
 
         //Ticketing
         [
@@ -100,7 +127,7 @@ return [
                 'title'       => 'Data',
                 'route'       => ['name' => 'ticket.index'],
                 'group'       => 'ticket',
-                'role'        => ['superadmin', 'kabid', 'kasubbag', 'kasatpel', 'staff']
+                'role'        => ['superadmin', 'kabid', 'staff']
             ],
         
         //Reporting
@@ -108,7 +135,7 @@ return [
             'type'          => 'header',
             'title'         => 'Reporting',
             'description'   => 'Report of Ticketing',
-            'role'          => ['ta-teknisi', 'ta-admin', 'ta-asisten'],
+            'role'          => ['superadmin', 'ta-teknisi', 'ta-admin', 'ta-asisten'],
         ],
             [
                 'type'        => 'main',
@@ -140,7 +167,7 @@ return [
                 // 'route'       => 'report.download',
                 'route'       => ['name' => 'download.report'],
                 'group'       => 'download',
-                'role'        => ['ta-teknisi', 'ta-admin', 'ta-asisten']
+                'role'        => ['superadmin','ta-teknisi', 'ta-admin', 'ta-asisten']
             ],
 
         //Configuration

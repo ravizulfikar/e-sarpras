@@ -47,8 +47,21 @@
 								<td>{{ $report->year }}</td>
 								<td>{{ MonthName($report->month) }}</td>
 								<td class="va-middle">
-									<a href="#" class="btn btn-outline-danger btn-xs">Pictures</a>
-									<a href="#" class="btn btn-outline-danger btn-xs">Descriptions</a>
+									{{-- {{ $report->ReportPicture()->exists() }} --}}
+
+									@if($report->ReportPicture()->exists())
+										<a href="#" class="btn btn-outline-success btn-xs">Pictures {{ $report->ReportPicture()->count() }}</a>
+									@else
+										<a href="#" class="btn btn-outline-danger btn-xs">Pictures</a>
+									@endif
+
+									@if($report->ReportDescription()->exists())
+										<a href="#" class="btn btn-outline-success btn-xs">Descriptions {{ $report->ReportDescription()->count() }}</a>
+									@else
+										<a href="#" class="btn btn-outline-danger btn-xs">Descriptions</a>
+									@endif
+
+									{{-- <a href="#" class="btn btn-outline-danger btn-xs">Descriptions</a> --}}
 								</td>
 								<td>{!! ReportVerify($report->verification) !!}</td>
 								<td class="va-middle">

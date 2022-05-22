@@ -208,7 +208,7 @@ class TicketController extends Controller
     
     public function index()
     {
-        if(in_array(auth()->user()->role->slug, ['superadmin', 'admin'])){
+        if(in_array(auth()->user()->role->slug, ['superadmin', 'admin', 'kabid', 'staff'])){
             $view = $this->pages['admin']['indexFinish'];
             $data = [
                 'trouble_monit'       =>  $this->ticket->byType(['troubleshooting', 'monitoring'], ['finish']),

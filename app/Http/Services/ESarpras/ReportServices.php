@@ -20,7 +20,7 @@ class ReportServices
 {
     public function main()
     {
-        return Report::whereUserId(auth()->user()->id)->get();
+        return Report::with('ReportDescription', 'ReportPicture')->whereUserId(auth()->user()->id)->get();
     }
 
     public function findBy($field, $id)
