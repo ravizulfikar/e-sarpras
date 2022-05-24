@@ -220,4 +220,26 @@ class TicketServices
         $data = SignerTicket::whereTicketId($id)->first();
         return $data->update(['sign' => '']);
     }
+
+
+    public function paramsOfficer($dataRole)
+    {
+        return User::whereIn('role_id', $dataRole)->get();
+    }
+
+    public function assignOfficer($request){
+
+        //Update Ticket
+        $data = Ticket::findOrFail($request->ticket_id);
+        $data->update(['status' => 'process']);
+
+        //Update UserTicket
+        foreach($request->user_id as $row){
+            UserTicket::create(['ticket_id' => $request->ticket_id, 'user_id' => $row]);
+        }
+
+        return redirect()->back()->with('success', 'Ticket has been successfully to officer !');
+    }
+
+    
 }

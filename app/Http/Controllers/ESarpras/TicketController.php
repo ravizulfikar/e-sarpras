@@ -100,7 +100,9 @@ class TicketController extends Controller
                 'index'     => 'e-sarpras.ticket.admin.finish_view',
                 'title'     => 'Detail ticket',
             ],
-            
+        ],
+        'officer'           => [
+            'assignPost'    => 'ticketing.verify.assign'
         ],
     ];
 
@@ -426,12 +428,15 @@ class TicketController extends Controller
     //Admin
     public function admin_main()
     {
+        // dd($this->ticket->byType(['troubleshooting', 'monitoring'], ['entry', 'process']));
         return view($this->pages['admin']['index'], [
-            'pages' => $this->pages,
-            'data'  => [
+            'pages'             => $this->pages,
+            'data'              => [
                 'trouble_monit'       =>  $this->ticket->byType(['troubleshooting', 'monitoring'], ['entry', 'process']),
                 'server'              =>  $this->ticket->byType(['server'], ['entry', 'process']),
             ],
+            'paramsOfficer'         => $this->ticket->paramsOfficer([7, 8]),
+            'paramsOfficerServer'   => $this->ticket->paramsOfficer([6, 7]),
         ]);
     }
 
@@ -445,5 +450,11 @@ class TicketController extends Controller
             'signer'        => $this->ticket->getSigner($ticket->id),
             'paramsUser'    => $this->ticket->paramsUser($ticket),
         ]);
+    }
+
+    public function assignToOfficer(Request $request)
+    {
+        return $this->ticket->assignOfficer($request);
+        // return redirect()->route('process.ticket')->with('success', 'Ticket in Process !');
     }
 }

@@ -80,7 +80,11 @@
 													<td>{!! StatusBadge($trouble_monit->status) !!}</td>
 													@if(in_array(auth()->user()->role->slug, ['kasatpel']))
 														<td>
-															<a href="#" class="btn btn"
+															@if($trouble_monit->status == 'process')
+																<a href="#" class="btn btn-outline-success btn-xs" data-bs-toggle="modal" data-bs-target="#Modal-ViewAssign-{{ $trouble_monit->id }}">View Assigned</a>
+															@else
+																<a href="#" class="btn btn-outline-primary btn-xs ModalAssignTo" data-bs-toggle="modal" data-bs-target="#Modal-Assign-To" data-whatever="{{ $trouble_monit->id }}">Assign To</a>
+															@endif
 														</td>
 													@endif
 													<td>{{ RenderJson($trouble_monit->detail, "trouble", '-') }}</td>
@@ -110,6 +114,9 @@
 													<th class="all">Location</th>
 													<th class="all">Category</th>
 													<th class="all">Status</th>
+													@if(in_array(auth()->user()->role->slug, ['kasatpel']))
+														<th class="all">Action</th>
+													@endif
 													<th class="none">Troubleshooting</th>
 												</tr>
 											</thead>
@@ -130,7 +137,16 @@
 													
 													<td>{{ $server->category }}</td>
 													<td>{!! StatusBadge($server->status) !!}</td>
-													<td>{{ RenderJson($trouble_monit->detail, "trouble", '-') }}</td>
+													@if(in_array(auth()->user()->role->slug, ['kasatpel']))
+														<td>
+															@if($server->status == 'process')
+																<a href="#" class="btn btn-outline-success btn-xs" data-bs-toggle="modal" data-bs-target="#Modal-ViewAssignServer-{{ $server->id }}">View Assigned</a>
+															@else
+																<a href="#" class="btn btn-outline-primary btn-xs ModalAssignToServer" data-whatever="{{ $server->id }}" data-bs-toggle="modal" data-bs-target="#Modal-Assign-To-Server">Assign To</a>
+															@endif
+														</td>
+													@endif
+													<td>{{ RenderJson($server->detail, "trouble", '-') }}</td>
 												</tr>
 											@endforeach
 											</tbody>
@@ -146,13 +162,233 @@
 		</div>
 	</div>
 
+	<div class="modal fade" id="Modal-Assign-To" tabindex="-1" role="dialog" aria-labelledby="Label-Modal-Assign-To" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Assign To Officer</h5>
+					<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form id="form-assign-to" method="post" action="{{ route($pages['officer']['assignPost']) }}">
+						@csrf
+						<input type="hidden" name="ticket_id" id="ticket_id">
 
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="mb-3">
+									<label>Name Officer <button class="btn btn-primary btn-xs" type="button" id="addDescOfficer"><i class="fa fa-plus"></i></button></label>
+									<table style="width: 100%;" cellspacing="0" cellpadding="0">
+										<tr>
+											<td style="width:5%;">&nbsp;</td>
+											<td style="width:95%;">
+												<select class="form-select" name="user_id[]" required>
+													<option value="">- Choice Officer -</option>
+													@foreach ($paramsOfficer as $user)
+														<option value="{{ $user->id }}">{{ $user->name }}</option>
+													@endforeach
+												</select>
+											</td>
+										</tr>
+										<tbody id="forParamsDesc">
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" type="submit" form="form-assign-to" type="button">Submit</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="Modal-Assign-To-Server" tabindex="-1" role="dialog" aria-labelledby="Label-Modal-Assign-To-Server" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Assign To Officer</h5>
+					<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form id="form-assign-to-server" method="post" action="{{ route($pages['officer']['assignPost']) }}">
+						@csrf
+
+						<input type="hidden" name="ticket_id" id="ticket_id_server">
+
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="mb-3">
+									<label>Name Officer <button class="btn btn-primary btn-xs" type="button" id="addDescOfficerServer"><i class="fa fa-plus"></i></button></label>
+									<table style="width: 100%;" cellspacing="0" cellpadding="0">
+										<tr>
+											<td style="width:5%;">&nbsp;</td>
+											<td style="width:95%;">
+												<select class="form-select" name="user_id[]" required>
+													<option value="">- Choice Officer -</option>
+													@foreach ($paramsOfficerServer as $userServer)
+														<option value="{{ $userServer->id }}">{{ $userServer->name }}</option>
+													@endforeach
+												</select>
+											</td>
+										</tr>
+										<tbody id="forParamsDescServer">
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" type="submit" form="form-assign-to-server" type="button">Submit</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	@foreach($data["trouble_monit"] as $trouble_monit)
+		<div class="modal fade" id="Modal-ViewAssign-{{ $trouble_monit->id }}" tabindex="-1" role="dialog" aria-labelledby="Label-Modal-Assign-To" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">View Assign Officer</h5>
+						<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-12">
+								<b>User Process</b>
+							</div>
+						</div>
+
+						<div class="row mb-3">
+							<div class="col-sm-12">
+								<table class="table table-bordered table-hover table-striped" style="">
+								@if(getUserProcess($trouble_monit->id))
+									@foreach(getUserProcess($trouble_monit->id) as $officer)
+									<tr>
+										<td>{{ $officer->user->name }}</td>
+										<td>&nbsp;</td>
+									</tr>
+									@endforeach
+								@endif
+								</table>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	@endforeach
+
+	@foreach($data["server"] as $server)
+		<div class="modal fade" id="Modal-ViewAssignServer-{{ $server->id }}" tabindex="-1" role="dialog" aria-labelledby="Label-Modal-Assign-To" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">View Assign Officer</h5>
+						<button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-sm-12">
+								<b>User Process</b>
+							</div>
+						</div>
+
+						<div class="row mb-3">
+							<div class="col-sm-12">
+								<table class="table table-bordered table-hover table-striped" style="">
+								@if(getUserProcess($server->id))
+									@foreach(getUserProcess($server->id) as $officer)
+									<tr>
+										<td>{{ $officer->user->name }}</td>
+										<td>&nbsp;</td>
+									</tr>
+									@endforeach
+								@endif
+								</table>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	@endforeach
 
 </div>
 
 @endsection
 
 @push('script')
+
+<script>
+	//deleteDescOfficer btn to delete table forParamsDesc
+	$(document).on('click', '#addDescOfficer', function() {
+		$('#forParamsDesc').append(
+			'<tr>'+
+				'<td style="width:5%;"><button type="button" class="btn btn-danger btn-xs deleteDescOfficer"><i class="fa fa-trash"></i></button></td>'+
+				'<td style="width:95%;">'+
+					'<select class="form-select" name="user_id[]" required>'+
+						'<option value="">- Choice Officer -</option>'+
+						@foreach ($paramsOfficer as $user)
+							'<option value="{{ $user->id }}">{{ $user->name }}</option>'+
+						@endforeach
+					'</select>'+
+				'</td>'+
+			'</tr>'
+		);
+	});
+
+	//deleteDescOfficer btn to delete table forParamsDesc
+	$(document).on('click', '.deleteDescOfficer', function() {
+		$(this).closest('tr').remove();
+	});
+
+
+	//deleteDescOfficer btn to delete table forParamsDesc
+	$(document).on('click', '#addDescOfficerServer', function() {
+		$('#forParamsDescServer').append(
+			'<tr>'+
+				'<td style="width:5%;"><button type="button" class="btn btn-danger btn-xs deleteDescOfficerServer"><i class="fa fa-trash"></i></button></td>'+
+				'<td style="width:95%;">'+
+					'<select class="form-select" name="user_id[]" required>'+
+						'<option value="">- Choice Officer -</option>'+
+						@foreach ($paramsOfficerServer as $useServerr)
+							'<option value="{{ $userServer->id }}">{{ $userServer->name }}</option>'+
+						@endforeach
+					'</select>'+
+				'</td>'+
+			'</tr>'
+		);
+	});
+
+	//deleteDescOfficer btn to delete table forParamsDesc
+	$(document).on('click', '.deleteDescOfficerServer', function() {
+		$(this).closest('tr').remove();
+	});	
+
+	//click modal send data-whatever
+	$(document).on('click', '.ModalAssignTo', function() {
+		var data = $(this).data('whatever');
+		$('#ticket_id').val(data);
+		// console.log(data);
+		// $('#form-assign-to').attr('action', '{{ route($pages['officer']['assignPost']) }}/'+data);
+		// $('#Modal-Assign-To').find('input[name="ticket_id"]').val(data);
+	});
+
+	$(document).on('click', '.ModalAssignToServer', function() {
+		var data = $(this).data('whatever');
+		$('#ticket_id_server').val(data);
+	});
+</script>
 
 <script>
 	

@@ -239,6 +239,13 @@
 		}
 	}
 
+	if (!function_exists('getUserProcess')) {
+		function getUserProcess($id)
+		{
+			return \App\Models\UserTicket::whereTicketId($id)->get();
+		}
+	}
+
 	if (!function_exists('ObjectToArray')) {
 		function ObjectToArray($data, $object = null) 
 		{	

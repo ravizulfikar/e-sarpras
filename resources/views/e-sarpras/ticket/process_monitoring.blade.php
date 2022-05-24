@@ -362,7 +362,11 @@
 	<div class="col-sm-12">
 		<div class="form-group">
 			<label for="">Catatan</label>
-			<textarea name="detail[catatan]" rows="3" class="form-control">{{ JsonObjectToArray($data->detail)["catatan"] }}</textarea>
+			<textarea name="detail[catatan]" rows="3" class="form-control">
+				@if(isset(JsonObjectToArray($data->detail)["catatan"]))
+				{{ JsonObjectToArray($data->detail)["catatan"]  }}
+				@endif
+			</textarea>
 		</div>
 	</div>
 </div>
