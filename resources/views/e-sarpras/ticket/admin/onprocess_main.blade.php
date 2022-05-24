@@ -50,11 +50,14 @@
 													<th class="all">#</th>
 													<th class="all">Token</th>
 													<th class="all">Date</th>
-													<th class="none">Type</th>
 													<th class="all">City</th>
 													<th class="all">Location</th>
-													<th class="all">User</th>
-													<th class="none">Status</th>
+													<th class="none">User</th>
+													<th class="none">Type</th>
+													<th class="all">Status</th>
+													@if(in_array(auth()->user()->role->slug, ['kasatpel']))
+														<th class="all">Action</th>
+													@endif
 													<th class="none">Troubleshooting</th>
 												</tr>
 											</thead>
@@ -70,11 +73,16 @@
 														</a>
 													</td>
 													<td style="font-size:9pt;">{{ date('Y-m-d', strtotime($trouble_monit->date)); }}</td>
-													<td>{!! TypeBadge($trouble_monit->type) !!}</td>
 													<td>{!! Location($trouble_monit->location, 'city') !!}</td>
 													<td>{!! Location($trouble_monit->location, 'unit') !!}</td>
 													<td>{{ (!empty($trouble_monit->SignerTickets) ? $trouble_monit->SignerTickets->signer : '-') }}</td>
+													<td>{!! TypeBadge($trouble_monit->type) !!}</td>
 													<td>{!! StatusBadge($trouble_monit->status) !!}</td>
+													@if(in_array(auth()->user()->role->slug, ['kasatpel']))
+														<td>
+															<a href="#" class="btn btn"
+														</td>
+													@endif
 													<td>{{ RenderJson($trouble_monit->detail, "trouble", '-') }}</td>
 
 												</tr>

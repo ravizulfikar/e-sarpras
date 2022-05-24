@@ -55,10 +55,10 @@ class ReportServices
     public function doStoreGenerate($request) {
 
         $YearMonth = explode("-", $request->month);
-        $request['user_id']     = auth()->user()->id;
-        $request['month']       = $YearMonth[1];
-        $request['year']        = $YearMonth[0];
-
+        $request['user_id']         = auth()->user()->id;
+        $request['month']           = $YearMonth[1];
+        $request['year']            = $YearMonth[0];
+        $request['verification']    = 'open';
         //Store
         $report = Report::create($request->all());
 

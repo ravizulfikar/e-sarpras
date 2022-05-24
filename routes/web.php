@@ -185,10 +185,15 @@ Route::group(['prefix' => 'ticket', 'as' => 'ticket.'], function () {
 
 Route::group(['prefix' => 'verify', 'as' => 'ticketing.'], function () {
     Route::get('ticketing', [Verify::class, 'ticketing'])->name('verify');
+    Route::get('ticketing/{ticket}', [Verify::class, 'ticketingShow'])->name('verify.show');
+    Route::put('ticketing/{ticket}/re-sign', [Verify::class, 'ticketReSign'])->name('verify.reSign');
+    Route::put('ticketing/{ticket}/verify-now', [Verify::class, 'ticketVerifyNow'])->name('verify.verifyNow');
 });
 
 Route::group(['prefix' => 'verify', 'as' => 'reporting.'], function () {
     Route::get('reporting', [Verify::class, 'reporting'])->name('verify');
+    Route::get('reporting/{report}', [Verify::class, 'reportingShow'])->name('verify.show');
+    Route::put('reporting/{report}/verify-now', [Verify::class, 'reportVerifyNow'])->name('verify.verifyNow');
 });
 
 

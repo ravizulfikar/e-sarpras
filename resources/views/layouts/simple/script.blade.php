@@ -317,3 +317,120 @@
     }
 
 </script>
+
+
+
+<script>
+	$("body").on("click",".verify",function(){
+		var current_object = $(this);
+		var action = current_object.attr('data-action');
+        var dataID = current_object.attr('data-id');
+        var dataMethod = current_object.attr('data-method');
+
+		swal({
+			title: 'Want Verify this ?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			buttons: true,
+			dangerMode: true,
+			})
+		.then((willDelete) => {
+			if (willDelete) {
+                actionVerify(action,dataID,current_object, dataMethod);
+			} 
+		});
+
+		
+	});
+
+    function actionVerify(action,dataID,current_object, dataMethod){
+        LoadingOn();
+
+
+        $.ajax({
+            url: action,
+            type: 'POST',
+            data: {
+                _method: dataMethod,
+                _token: "{{ csrf_token() }}",
+                id: dataID,
+            },
+            success: function(response){
+                swal("successfully Verified!", {
+                    icon: "success",
+                });
+
+                LoadingOff();
+                location.reload();
+            },
+            error: function(response){
+                swal("Server Error Detected !!", {
+                    icon: "error",
+                });
+
+                LoadingOff();
+            }
+        });
+
+        
+    }
+
+</script>
+
+
+<script>
+	$("body").on("click",".resign",function(){
+		var current_object = $(this);
+		var action = current_object.attr('data-action');
+        var dataID = current_object.attr('data-id');
+        var dataMethod = current_object.attr('data-method');
+
+		swal({
+			title: 'Re Sign this Ticket?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			buttons: true,
+			dangerMode: true,
+			})
+		.then((willDelete) => {
+			if (willDelete) {
+                actionReSign(action,dataID,current_object, dataMethod);
+			} 
+		});
+
+		
+	});
+
+    function actionReSign(action,dataID,current_object, dataMethod){
+        LoadingOn();
+
+
+        $.ajax({
+            url: action,
+            type: 'POST',
+            data: {
+                _method: dataMethod,
+                _token: "{{ csrf_token() }}",
+                id: dataID,
+            },
+            success: function(response){
+                swal("Ticket has been Reset to Re-sign!", {
+                    icon: "success",
+                });
+
+                LoadingOff();
+                location.reload();
+            },
+            error: function(response){
+                swal("Server Error Detected !!", {
+                    icon: "error",
+                });
+
+                LoadingOff();
+            }
+        });
+
+        
+    }
+
+</script>
