@@ -94,8 +94,12 @@
 															@endif
 														</td>
 														<td class="va-middle">
-															<a href="{{ route($pages['show']['url'], $trouble_monit) }}" class="btn btn-outline-info btn-xs">View</a>
-															<a href="#" class="btn btn-outline-danger btn-xs remove" data-action="{{ route($pages['destroy'], $trouble_monit) }}" data-id="{{$trouble_monit}}">Delete</a>
+															@if($trouble_monit->verification == 'open')
+																<a href="{{ route($pages['show']['url'], $trouble_monit) }}" class="btn btn-outline-info btn-xs">View</a>
+																<a href="#" class="btn btn-outline-danger btn-xs remove" data-action="{{ route($pages['destroy'], $trouble_monit) }}" data-id="{{$trouble_monit}}">Delete</a>
+															@else
+																<button class="btn btn-success btn-xs" type="button" disabled>Verified</button>
+															@endif
 														</td>
 														<td>{!! TypeBadge($trouble_monit->type) !!}</td>
 														<td>{!! StatusBadge($trouble_monit->status) !!}</td>
@@ -151,8 +155,12 @@
 													<td>{!! StatusBadge($server->status) !!}</td>
 													{{-- <td>{{ RenderJson($server->detail, "trouble", '-') }}</td> --}}
 													<td>
+														@if($server->verification == 'open')
 														<a href="{{ route($pages['show']['url'], $server) }}" class="btn btn-outline-info btn-xs">View</a>
 														<a href="#" class="btn btn-outline-danger btn-xs remove" data-action="{{ route($pages['destroy'], $server) }}" data-id="{{$server}}">Delete</a>
+														@else
+															<button class="btn btn-success btn-xs" type="button" disabled>Verified</button>
+														@endif
 													</td>
 												</tr>
 												@endif
