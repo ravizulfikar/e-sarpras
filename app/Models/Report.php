@@ -16,6 +16,11 @@ class Report extends Model
         'verification',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function ReportDescription()
     {
         return $this->hasMany(ReportDescription::class);

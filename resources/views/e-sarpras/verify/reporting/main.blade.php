@@ -33,18 +33,20 @@
 					<table id="example" class="table table-bordernone table-hover table-striped" style="width:100%">
 						<thead>
 							<tr>
-								<th>No</th>
-								<th>Year</th>
-								<th>Month</th>
-								<th>Value</th>
-								<th>Verification</th>
-								<th>Action</th>
+								<th class="all">#</th>
+								<th class="all">Officer</th>
+								<th class="all">Year</th>
+								<th class="all">Month</th>
+								<th class="all">Value</th>
+								<th class="all">Verification</th>
+								<th class="all">Action</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody style="vertical-align: middle;">
 						@foreach($data as $report)
 							<tr>
 								<td></td>
+								<td>{{ $report->user->name }}</td>
 								<td>{{ $report->year }}</td>
 								<td>{{ MonthName($report->month) }}</td>
 								<td class="va-middle">
@@ -102,7 +104,7 @@
 
 @push('script')
 
-<script>
+{{-- <script>
 	$(function() {
 		// var table = $('#example');
 		var table = $('#example').DataTable({
@@ -128,6 +130,31 @@
 		} ).draw();
 
 	} );
-</script>
+</script> --}}
+<script>
+	
+	$(function() {
+		/* Formatting function for row details - modify as you need */
+		var table = $('#example').DataTable({
+		responsive: {
+			details: {
+			type: 'column'
+			}
+		},
+		columnDefs: [{
+			className: 'control',
+			orderable: false,
+			targets: 0
+		}],
+		order: [1, 'asc']
+		});
 
+		$('#btn-show-all-doc').on('click', expandCollapseAll);
+
+		function expandCollapseAll() {
+			table.rows('.parent').nodes().to$().find('td:first-child').trigger('click').length || 
+			table.rows(':not(.parent)').nodes().to$().find('td:first-child').trigger('click')
+		}
+	} );
+</script>
 @endpush

@@ -65,8 +65,12 @@
 								</td>
 								<td>{!! ReportVerify($report->verification) !!}</td>
 								<td class="va-middle">
+									@if($report->verification == 'open')
 									<a href="{{ route($pages['show']['url'], $report) }}" class="btn btn-outline-info btn-xs">View</a>
 									<a href="#" class="btn btn-outline-danger btn-xs remove" data-action="{{ route($pages['destroy'], $report) }}" data-id="{{$report}}"><i class="fa fa-trash"></i></a>
+									@else
+									<a href="#" disabled class="btn btn-success btn-xs">Verified</a><br>
+									@endif
 								</td>
 							</tr>
 						@endforeach

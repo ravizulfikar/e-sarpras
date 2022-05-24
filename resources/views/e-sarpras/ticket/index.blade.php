@@ -132,7 +132,6 @@
 													<th class="all">Location</th>
 													<th class="all">Category</th>
 													<th class="all">Status</th>
-													{{-- <th class="none">Troubleshooting</th> --}}
 													<th class="none">Action</th>
 												</tr>
 											</thead>
