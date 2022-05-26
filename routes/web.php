@@ -15,6 +15,7 @@ use App\Http\Controllers\ESarpras\ClientController as Client;
 use App\Http\Controllers\ESarpras\TicketController as Ticket;
 use App\Http\Controllers\ESarpras\ReportController as Report;
 use App\Http\Controllers\ESarpras\VerifyController as Verify;
+use App\Http\Controllers\ESarpras\OutputController as Output;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -141,16 +142,8 @@ Route::middleware(['auth','verified'])->group(function () {
         Route::put('process/sign/{signer}', [Ticket::class, 'signed_ticket'])->name('process.signer');
         Route::post('process/add-user', [Ticket::class, 'add_user_ticket'])->name('process.addUser');
         Route::delete('process/delete-user/{UserTicket}', [Ticket::class, 'delete_user_ticket'])->name('process.deleteUser');
-
-        // Route::get('get/finish', [Ticket::class, 'finish'])->name('finish.ticket');
-        // Route::get('get/process/{ticket}', [Ticket::class, 'process_edit'])->name('process.edit');
     });
-    // Route::get('/ticket/entry', function () { dd("ticketing"); })->name('ticket.entry');
-    // Route::get('/ticket/process', function () { dd("process"); })->name('ticket.process');
-    // Route::get('/ticket/finish', function () { dd("finish"); })->name('ticket.finish');
 
-    // Route::get('/report/activity', function () { dd("activity"); })->name('report.activity');
-    // Route::get('/report/picture', function () { dd("picture"); })->name('report.pictures');
     Route::get('/report/download', function () { dd("download"); })->name('download.report');
 
     Route::group(['prefix' => 'report', 'as' => 'report.'], function () {
@@ -171,6 +164,10 @@ Route::middleware(['auth','verified'])->group(function () {
     });
 
     Route::resource('report', Report::class);
+});
+
+Route::group(['prefix' => 'output', 'as' => 'output.'], function () {
+    Route::get('{type}/{id}/{methode?}', [Output::class, 'make'])->name('render');
 });
 
 
@@ -198,11 +195,4 @@ Route::group(['prefix' => 'verify', 'as' => 'reporting.'], function () {
 });
 
 
-// Route::get('/create-ticket', function () {
-//     return view('e-sarpras.create-ticket',[
-//         'paramsType' => \DB::table('params')->whereSlug('type-ticket')->first()
-//     ]);
-// })->name('create-ticket');
-
 Route::get('fetch/wilayah/{city}', [Client::class, 'getWilayah'])->name('fetch.wilayah');
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

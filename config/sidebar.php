@@ -48,7 +48,7 @@ return [
             'type'          => 'header',
             'title'         => 'Verification',
             'description'   => 'Ticketing and Reporting',
-            'role'          => ['kasubbag', 'kasatpel'],
+            'role'          => ['kabid', 'kasubbag', 'kasatpel'],
         ],
             [
                 'type'        => 'main',
@@ -57,7 +57,7 @@ return [
                 'title'       => 'Ticketing',
                 'route'       => ['name' => 'ticketing.verify'],
                 'group'       => 'ticketing',
-                'role'        => ['kasubbag', 'kasatpel'],
+                'role'        => ['kabid', 'kasubbag', 'kasatpel'],
             ],
 
             [
@@ -67,7 +67,7 @@ return [
                 'title'       => 'Reporting',
                 'route'       => ['name' => 'reporting.verify'],
                 'group'       => 'reporting',
-                'role'        => ['kasubbag', 'kasatpel'],
+                'role'        => ['kabid', 'kasubbag', 'kasatpel'],
             ],
 
 

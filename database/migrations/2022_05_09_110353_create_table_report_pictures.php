@@ -17,7 +17,7 @@ class CreateTableReportPictures extends Migration
             $table->id();
             $table->unsignedBigInteger('report_id')->foreign('report_id')->references('id')->on('reports');
             $table->timestamp('date');
-            $table->text('pictures');
+            $table->json('pictures');
             $table->timestamps();
         });
     }

@@ -109,7 +109,7 @@ class VerifyController extends Controller
             $data = "kasatpel";
         } else if(in_array(auth()->user()->role->slug, ['kasubbag'])){
             $data = "kasubbag";
-        }
+        } 
 
         $ticket->update(["verification" => $data]);
         return redirect()->back()->with('success', "Ticket has been verified!");
@@ -118,11 +118,13 @@ class VerifyController extends Controller
 
     public function reporting(){
         if(in_array(auth()->user()->role->slug, ['kasatpel'])){
-            $data = $this->verify->mainReport(['open', 'kasatpel', 'kasubbag']);
+            $data = $this->verify->mainReport(['open', 'kasatpel', 'kasubbag', 'kabid']);
         } else if(in_array(auth()->user()->role->slug, ['kasubbag'])){
-            $data = $this->verify->mainReport(['kasubbag', 'kasatpel']);
+            $data = $this->verify->mainReport(['kasubbag', 'kasatpel', 'kabid']);
+        } else if(in_array(auth()->user()->role->slug, ['kabid'])){
+            $data = $this->verify->mainReport(['kasubbag', 'kabid']);
         } else {
-            $data = $this->verify->mainReport(['kasubbag']);
+            $data = $this->verify->mainReport(['kabid']);
         }
 
         return view($this->pages['reporting']['view'], [
@@ -149,6 +151,8 @@ class VerifyController extends Controller
             $data = "kasatpel";
         } else if(in_array(auth()->user()->role->slug, ['kasubbag'])){
             $data = "kasubbag";
+        } else if(in_array(auth()->user()->role->slug, ['kabid'])){
+            $data = "kabid";
         }
 
         $report->update(["verification" => $data]);

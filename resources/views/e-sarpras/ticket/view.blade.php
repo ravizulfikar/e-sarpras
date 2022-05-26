@@ -36,7 +36,7 @@
 
 							<li class="nav-item"><a class="nav-link" id="edit-top-tab" data-bs-toggle="tab" href="#top-edit" role="tab" aria-controls="top-edit" aria-selected="false"><i class="fa fa-pencil"></i> Edit</a></li>
 
-							<li class="nav-item"><a class="nav-link" id="report-top-tab" data-bs-toggle="tab" href="#top-report" role="tab" aria-controls="top-report" aria-selected="false"><i class="fa fa-flag-o"></i> Report</a></li>
+							<li class="nav-item"><a class="nav-link" id="report-top-tab" data-bs-toggle="tab" href="#top-report" role="tab" aria-controls="top-report" aria-selected="false"><i class="fa fa-flag-o"></i> Output Report</a></li>
 						</ul>
 					</div>
 				</div>
@@ -71,7 +71,9 @@
 						<div class="tab-pane fade" id="top-report" role="tabpanel" aria-labelledby="report-top-tab">
 							<div class="row">
 								<div class="col-md-12">
-									Report
+									<a href="{{ route('output.render', ['ticket', $data->id, "D"]) }}" class="btn btn-primary"><i class="fa fa-download"></i> Download</a>
+									<br><br>
+									<embed src= "{{ route('output.render', ['ticket', $data->id]) }}" width= "100%" height= "700">
 								</div>
 							</div>
 						</div>

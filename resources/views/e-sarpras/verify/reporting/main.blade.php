@@ -30,7 +30,10 @@
 
 					@include('layouts.simple.spinner')
 
-					<table id="example" class="table table-bordernone table-hover table-striped" style="width:100%">
+					<button class="btn btn-primary" id="btn-show-all-doc-2">Expand / Collapse</button>
+					<br><br>
+
+					<table id="example-2" class="table table-bordernone table-hover table-striped" style="width:100%">
 						<thead>
 							<tr>
 								<th class="all">#</th>
@@ -39,7 +42,7 @@
 								<th class="all">Month</th>
 								<th class="all">Value</th>
 								<th class="all">Verification</th>
-								<th class="all">Action</th>
+								<th class="none">Action</th>
 							</tr>
 						</thead>
 						<tbody style="vertical-align: middle;">
@@ -68,9 +71,17 @@
 								</td>
 								{{-- <td>{!! ReportVerify($report->verification) !!}</td> --}}
 								<td>
-									@if($report->verification == 'kasubbag')
-																
+									@if($report->verification == 'kabid')
+
 										<a href="#" disabled class="btn btn-success btn-xs">Verified</a><br>
+
+									@elseif($report->verification == 'kasubbag')
+
+										@if(in_array(auth()->user()->role->slug, ['kasatpel', 'kasubbag']))
+											<a href="#" disabled class="btn btn-success btn-xs">Verified</a><br>
+										@elseif(in_array(auth()->user()->role->slug, ['kabid']))
+											<a href="#" data-action="{{ route($pages['reporting']['verifyNow'], $report) }}" data-id="{{ $report->id }}" data-method="PUT" class="btn btn-info btn-xs verify">Verify Now</a><br>
+										@endif
 
 									@elseif($report->verification == 'kasatpel')
 
@@ -135,7 +146,7 @@
 	
 	$(function() {
 		/* Formatting function for row details - modify as you need */
-		var table = $('#example').DataTable({
+		var table = $('#example-2').DataTable({
 		responsive: {
 			details: {
 			type: 'column'
@@ -149,7 +160,7 @@
 		order: [1, 'asc']
 		});
 
-		$('#btn-show-all-doc').on('click', expandCollapseAll);
+		$('#btn-show-all-doc-2').on('click', expandCollapseAll);
 
 		function expandCollapseAll() {
 			table.rows('.parent').nodes().to$().find('td:first-child').trigger('click').length || 

@@ -7,6 +7,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "biscolab/laravel-recaptcha": "^5.3",
+        "elibyy/tcpdf-laravel": "^9.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.4",
         "laravel/framework": "^8.75",
@@ -16,6 +17,7 @@
         "laravel/ui": "^3.4",
         "laravolt/avatar": "^4.1",
         "mews/captcha": "^3.2",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {

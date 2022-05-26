@@ -10,10 +10,12 @@
 						</button>
 					</h5>
 				</div>
+				@if($data->verification == 'open')
 				<div class="col-md-6">
 					<button class="pull-right btn btn-success btn-xs" type="button" data-bs-toggle="modal" data-bs-target="#Modal-Desc-{{ $description->id }}">Edit Description</button>
 					<a href="#" class="pull-right btn btn-danger btn-xs remove" data-action="{{ route($pages['description']['delete'], $description) }}" data-id="{{$description}}">Delete</a>
 				</div>
+				@endif
 			</div>
 		</div>
 		<div class="collapse" id="C{{ $description->id }}" data-bs-parent="#accordionicon">

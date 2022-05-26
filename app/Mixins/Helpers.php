@@ -339,5 +339,23 @@
 		}
 	}
 
+	if (!function_exists('DateFormat')) {
+		function DateFormat($tgl) {
+			$dt = new  \Carbon\Carbon($tgl);
+			setlocale(LC_ALL, 'id_ID.UTF8', 'id_ID.UTF-8', 'id_ID.8859-1', 'id_ID', 'en_US.UTF8', 'en_US.UTF-8', 'en_US');
+		
+			return $dt->formatLocalized('%e %B %Y'); // Senin, 3 September 2018
+		}
+	}
+
+	if (!function_exists('DayFormat')) {
+		function DayFormat($tgl) {
+			$dt = new  \Carbon\Carbon($tgl);
+			setlocale(LC_ALL, 'id_ID.UTF8', 'id_ID.UTF-8', 'id_ID.8859-1', 'id_ID', 'en_US.UTF8', 'en_US.UTF-8', 'en_US');
+
+			return $dt->formatLocalized('%A'); // Senin, 3 September 2018
+		}
+	}
+
 	
 ?>

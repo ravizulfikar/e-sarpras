@@ -168,6 +168,8 @@ return [
         Mews\Captcha\CaptchaServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Laravolt\Avatar\ServiceProvider::class,
+        Elibyy\TCPDF\ServiceProvider::class,
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -241,6 +243,8 @@ return [
         // 'CountData' => App\Mixins\CountData::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Avatar'    => Laravolt\Avatar\Facade::class,
+        'PDF' => Elibyy\TCPDF\Facades\TCPDF::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class
     ],
 
 ];

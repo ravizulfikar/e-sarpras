@@ -6,6 +6,11 @@
 <style>
 	tbody>tr { height: 75px; }
 </style>
+
+<link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"
+    />
 @endpush
 
 @section('breadcrumb-title')
@@ -68,11 +73,16 @@
 													<tr>
 														<td></td>
 														<td style="font-size:9pt;">
-															<a href="{{ route($pages['ticketing']['show']['url'], $trouble_monit) }}">
+															<a data-fancybox data-type="pdf" data-height="700" href="{{ route('output.render', ['ticket', $trouble_monit->id]) }}">
 																<span class="badge badge-{{ StatusHeader($trouble_monit->status) }}">
 																	{{ $trouble_monit->token }}
 																</span>
 															</a>
+															{{-- <a href="{{ route($pages['ticketing']['show']['url'], $trouble_monit) }}">
+																<span class="badge badge-{{ StatusHeader($trouble_monit->status) }}">
+																	{{ $trouble_monit->token }}
+																</span>
+															</a> --}}
 														</td>
 														<td style="font-size:9pt;">{{ date('Y-m-d', strtotime($trouble_monit->date)); }}</td>
 														<td>{!! Location($trouble_monit->location, 'city') !!}</td>
@@ -156,7 +166,7 @@
 
 													<td></td>
 													<td style="font-size:9pt;">
-														<a href="{{ route($pages['ticketing']['show']['url'], $server) }}">
+														<a data-fancybox data-type="pdf" data-height="700" href="{{ route('output.render', ['ticket', $server->id]) }}">
 															<span class="badge badge-{{ StatusHeader($server->status) }}">
 																{{ $server->token }}
 															</span>
@@ -212,6 +222,8 @@
 
 @push('script')
 
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
 <script>
 	
 	$(function() {
@@ -236,6 +248,8 @@
 			table.rows('.parent').nodes().to$().find('td:first-child').trigger('click').length || 
 			table.rows(':not(.parent)').nodes().to$().find('td:first-child').trigger('click')
 		}
+
+		Fancybox.bind("[data-fancybox]", {});
 	} );
 </script>
 
@@ -264,5 +278,12 @@
 			table2.rows(':not(.parent)').nodes().to$().find('td:first-child').trigger('click')
 		}
 	} );
+</script>
+
+
+<script>
+	$(function() {
+		
+	});
 </script>
 @endpush

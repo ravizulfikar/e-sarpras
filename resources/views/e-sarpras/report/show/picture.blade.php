@@ -10,10 +10,12 @@
 						</button>
 					</h5>
 				</div>
+				@if($data->verification == 'open')
 				<div class="col-md-6">
 					<button class="pull-right btn btn-success btn-xs" type="button" data-bs-toggle="modal" data-bs-target="#Modal-Pics-{{ $picture->id }}">Edit picture</button>
 					<a href="#" class="pull-right btn btn-danger btn-xs remove" data-action="{{ route($pages['picture']['delete'], $picture) }}" data-id="{{$picture}}">Delete</a>
 				</div>
+				@endif
 			</div>
 		</div>
 		<div class="collapse" id="C{{ $picture->id }}" data-bs-parent="#accordionicon">
@@ -35,7 +37,7 @@
 						@if($picture->pictures != null)
 							@foreach(json_decode($picture->pictures, true) as $key => $value)
 								<div class="col-md-3">
-									<a href="{{Storage::url('report/pictures/'.$value)}}" data-fancybox="gallery" data-caption="{{ $value }}">
+									<a href="{{ Storage::url('report/pictures/'.$value) }}" data-fancybox="gallery" data-caption="{{ $value }}">
 										<img src="{{Storage::url('report/pictures/'.$value)}}" class="img-thumbnail" alt="{{ $value }}" width="304" height="236">
 									</a>
 									<span class="btn btn-icon btn-xs btn-danger update btnTrash" data-action="{{ route($pages['picture']['byPicture'], [$picture, $value]) }}" data-id="{{ $picture->id }}" data-method="PUT" data-toggle="tooltip" title="Delete">

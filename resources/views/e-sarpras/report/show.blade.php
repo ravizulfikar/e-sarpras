@@ -44,17 +44,34 @@
 						<ul class="pull-right nav nav-pills nav-primary" id="pills-clrtab" role="tablist">
 							<li class="nav-item"><a class="nav-link active" id="pills-desc-tab" data-bs-toggle="pill" href="#pills-desc" role="tab" aria-controls="pills-desc" aria-selected="true"><i class="icofont icofont-listine-dots"></i>Description</a></li>
 							<li class="nav-item"><a class="nav-link" id="pills-pics-tab" data-bs-toggle="pill" href="#pills-pics" role="tab" aria-controls="pills-pics" aria-selected="false"><i class="icofont icofont-ui-image"></i>Pictures</a></li>
+							<li class="nav-item"><a class="nav-link" id="pills-download-tab" data-bs-toggle="pill" href="#pills-download" role="tab" aria-controls="pills-download" aria-selected="false"><i class="icofont icofont-download"></i>Output Report</a></li>
 						</ul>
 						<div class="tab-content" id="pills-clrtabContent">
 							<div class="tab-pane fade show active" id="pills-desc" role="tabpanel" aria-labelledby="pills-desc-tab">
+								@if($data->verification == 'open')
 								<button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#Modal-Desc-Add">Add Description</button>
 								<br><br>
+								@endif
+
 								@include($pages['folder'].'.show.description')
 							</div>
 							<div class="tab-pane fade" id="pills-pics" role="tabpanel" aria-labelledby="pills-pics-tab">
+								@if($data->verification == 'open')
 								<button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#Modal-Pics-Add">Add Picture</button>
 								<br><br>
+								@endif
+
 								@include($pages['folder'].'.show.picture')
+							</div>
+
+							<div class="tab-pane fade" id="pills-download" role="tabpanel" aria-labelledby="pills-download-tab">
+								<div class="row">
+									<div class="col-md-12">
+										<a href="{{ route('output.render', ['report', $data->id, "D"]) }}" class="btn btn-primary"><i class="fa fa-download"></i> Download</a>
+										<br><br>
+										<embed src= "{{ route('output.render', ['report', $data->id]) }}" width= "100%" height= "700">
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
