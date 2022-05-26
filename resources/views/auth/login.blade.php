@@ -16,10 +16,10 @@
 
             if(data.success == false) {
                 document.getElementById('loginForm').addEventListener('submit', function(event) {
-                    // event.preventDefault();
-                    // document.getElementById('submitForm').classList.remove("btn-primary");
-                    // document.getElementById('submitForm').classList.add("btn-danger");
-                    // document.getElementById('submitForm').innerHTML = 'Invalid Captcha, Please Refresh Browser !';
+                    event.preventDefault();
+                    document.getElementById('submitForm').classList.remove("btn-primary");
+                    document.getElementById('submitForm').classList.add("btn-danger");
+                    document.getElementById('submitForm').innerHTML = 'Invalid Captcha, Please Refresh Browser !';
                 });
                 console.log('Recaptcha V3 invalid !');
             }
@@ -108,7 +108,7 @@
                                 </div>
 
                                 <div class="form-group mb-0">
-                                    <div class="checkbox p-0">
+                                    {{-- <div class="checkbox p-0">
                                         <input name="remember" id="remember" type="checkbox" {{ old('remember') ? 'checked' : '' }}>
                                         <label class="text-muted" for="remember">{{ __('Remember Me') }}</label>
                                     </div>
@@ -117,16 +117,16 @@
                                         <a class="link" href="{{ route('password.request') }}">
                                             {{ __('Forgot Your Password?') }}
                                         </a>
-                                    @endif
+                                    @endif --}}
 
-                                    <div class="text-end mt-3">
+                                    <div class="text-end m-t-30">
                                         <button class="btn btn-primary btn-block w-100" type="submit" id="submitForm">Sign In</button>
                                     </div>
 
                                         
                                 </div>
 
-                                <h6 class="text-muted mt-4 or">Or Sign in with</h6>
+                                {{-- <h6 class="text-muted mt-4 or">Or Sign in with</h6>
                                 <div class="social mt-4">
                                     <div class="btn-showcase">
                                         <a class="btn btn-light" ref="https://www.linkedin.com/login" target="_blank">
@@ -137,10 +137,10 @@
                                             <i class="txt-fb" data-feather="facebook"></i>facebook
                                         </a>
                                     </div>
-                                </div>
-                                <p class="mt-4 mb-0 text-center">Don't have account?
+                                </div> --}}
+                                {{-- <p class="mt-4 mb-0 text-center">Don't have account?
                                     <a class="ms-2" href="{{ route('register') }}">{{ __('Create Account') }}</a>
-                                </p>
+                                </p> --}}
                                 
 
                             </form>

@@ -1,6 +1,6 @@
 @extends('layouts.simple.master')
 
-@section('title', 'Default')
+@section('title', $pages['title'] ?? '-' )
 
 @push('css')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/animate.css')}}">
@@ -9,18 +9,17 @@
 @endpush
 
 @section('breadcrumb-title')
-<h3>Default</h3>
+<h3>{{ $pages['title'] ?? '-' }} </h3>
 @endsection
 
 @section('breadcrumb-items')
 <li class="breadcrumb-item">Dashboard</li>
-<li class="breadcrumb-item active">Default</li>
 @endsection
 
 @section('content')
 <div class="container-fluid">
 	<div class="row second-chart-list third-news-update">
-		<div class="col-xl-4 col-lg-12 xl-50 morning-sec box-col-12">
+		<div class="col-xl-6 col-lg-12 morning-sec box-col-6">
 			<div class="card o-hidden profile-greeting">
 				<div class="card-body">
 					<div class="media">
@@ -30,19 +29,31 @@
 						</div>
 					</div>
 					<div class="greeting-user text-center">
-						<div class="profile-vector"><img class="img-fluid" src="{{asset('assets/images/dashboard/welcome.png')}}" alt=""></div>
+						<div class="profile-vector"><img class="img-fluid" src="{{ ShowFile(RenderJson(Auth::user()->profile, "photo"), 'uploads/avatar/', 
+        'image', Auth::user()->name) }}" width="195px" alt=""></div>
 						<h4 class="f-w-600"><span id="greeting">Good Morning</span> <span class="right-circle"><i class="fa fa-check-circle f-14 middle"></i></span></h4>
-						<p>
-							<span> {{ request()->route()->getPrefix() }} <br>{{ \Route::currentRouteName() }}</span>
-							<br>{{ Menu::ActiveMenu('index') }}
-						</p>
-						<div class="whatsnew-btn"><a class="btn btn-primary">Whats New !</a></div>
+						<div class="whatsnew-btn"><a href="{{ route('user.account', Auth::user()->username) }}" class="btn btn-primary">{{ Auth::user()->name }}</a></div>
 						<div class="left-icon"><i class="fa fa-bell"> </i></div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-xl-8 xl-100 dashboard-sec box-col-12">
+
+		<div class="col-xl-6 col-lg-12 calendar-sec box-col-6">
+			<div class="card gradient-primary o-hidden">
+				<div class="card-body">
+					<div class="setting-dot">
+						<div class="setting-bg-primary date-picker-setting position-set pull-right"><i class="fa fa-spin fa-cog"></i></div>
+					</div>
+					<div class="default-datepicker">
+						<div class="datepicker-here" data-language="en"></div>
+					</div>
+					<span class="default-dots-stay overview-dots full-width-dots"><span class="dots-group"><span class="dots dots1"></span><span class="dots dots2 dot-small"></span><span class="dots dots3 dot-small"></span><span class="dots dots4 dot-medium"></span><span class="dots dots5 dot-small"></span><span class="dots dots6 dot-small"></span><span class="dots dots7 dot-small-semi"></span><span class="dots dots8 dot-small-semi"></span><span class="dots dots9 dot-small">                </span></span></span>
+				</div>
+			</div>
+		</div>
+
+		{{-- <div class="col-xl-8 xl-100 dashboard-sec box-col-12">
 			<div class="card earning-card">
 				<div class="card-body p-0">
 					<div class="row m-0">
@@ -132,12 +143,61 @@
 					</div>
 				</div>
 			</div>
+		</div> --}}
+
+		<div class="col-xl-4 col-md-4 box-col-12">
+			<div class="card">
+				<div class="card-body">
+					<div class="media align-items-center">
+						<div class="media-body right-chart-content">
+							<h4>{{ $open }}</h4>
+							<span>New Tickets</span>
+						</div>
+						<div class="knob-block text-center">
+							<input class="knob1" data-width="10" data-height="70" data-thickness=".3" data-angleoffset="0" data-linecap="round" data-fgcolor="#7366ff" data-bgcolor="#eef5fb" value="{{ round($open/$all*100) }}">
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+
+		<div class="col-xl-4 col-md-4 box-col-12">
+			<div class="card">
+				<div class="card-body">
+					<div class="media align-items-center">
+						<div class="media-body right-chart-content">
+							<h4>{{ $process }}</h4>
+							<span>Process Tickets</span>
+						</div>
+						<div class="knob-block text-center">
+							<input class="knob1" data-width="50" data-height="70" data-thickness=".3" data-fgcolor="#7366ff" data-linecap="round" data-angleoffset="0" value="{{ round($process/$all*100) }}">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-4 col-md-4 box-col-12">
+			<div class="card">
+				<div class="card-body">
+					<div class="media align-items-center">
+						<div class="media-body right-chart-content">
+							<h4>{{ $finish }}</h4>
+							<span>Finish Tickets</span>
+						</div>
+						<div class="knob-block text-center">
+							<input class="knob1" data-width="50" data-height="70" data-thickness=".3" data-fgcolor="#7366ff" data-linecap="round" data-angleoffset="0" value="{{ round($finish/$all*100) }}">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="col-xl-9 xl-100 chart_data_left box-col-12">
 			<div class="card">
 				<div class="card-body p-0">
 					<div class="row m-0 chart-main">
-						<div class="col-xl-3 col-md-6 col-sm-6 p-0 box-col-6">
+						<div class="col-xl-4 col-md-6 col-sm-6 p-0 box-col-6">
 							<div class="media align-items-center">
 								<div class="hospital-small-chart">
 									<div class="small-bar">
@@ -146,13 +206,13 @@
 								</div>
 								<div class="media-body">
 									<div class="right-chart-content">
-										<h4>1001</h4>
-										<span>purchase </span>
+										<h4>{{ $troubleshooting }}</h4>
+										<span>Ticket Troubleshooting</span>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-xl-3 col-md-6 col-sm-6 p-0 box-col-6">
+						<div class="col-xl-4 col-md-6 col-sm-6 p-0 box-col-6">
 							<div class="media align-items-center">
 								<div class="hospital-small-chart">
 									<div class="small-bar">
@@ -161,13 +221,13 @@
 								</div>
 								<div class="media-body">
 									<div class="right-chart-content">
-										<h4>1005</h4>
-										<span>Sales</span>
+										<h4>{{ $monitoring }}</h4>
+										<span>Ticket Monitoring</span>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-xl-3 col-md-6 col-sm-6 p-0 box-col-6">
+						<div class="col-xl-4 col-md-6 col-sm-6 p-0 box-col-6">
 							<div class="media align-items-center">
 								<div class="hospital-small-chart">
 									<div class="small-bar">
@@ -176,13 +236,13 @@
 								</div>
 								<div class="media-body">
 									<div class="right-chart-content">
-										<h4>100</h4>
-										<span>Sales return</span>
+										<h4>{{ $server }}</h4>
+										<span>Ticket Server</span>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-xl-3 col-md-6 col-sm-6 p-0 box-col-6">
+						{{-- <div class="col-xl-3 col-md-6 col-sm-6 p-0 box-col-6">
 							<div class="media border-none align-items-center">
 								<div class="hospital-small-chart">
 									<div class="small-bar">
@@ -196,53 +256,19 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> --}}
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-xl-3 xl-50 chart_data_right box-col-12">
-			<div class="card">
-				<div class="card-body">
-					<div class="media align-items-center">
-						<div class="media-body right-chart-content">
-							<h4>$95,900<span class="new-box">Hot</span></h4>
-							<span>Purchase Order Value</span>
-						</div>
-						<div class="knob-block text-center">
-							<input class="knob1" data-width="10" data-height="70" data-thickness=".3" data-angleoffset="0" data-linecap="round" data-fgcolor="#7366ff" data-bgcolor="#eef5fb" value="60">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-3 xl-50 chart_data_right second d-none">
-			<div class="card">
-				<div class="card-body">
-					<div class="media align-items-center">
-						<div class="media-body right-chart-content">
-							<h4>$95,000<span class="new-box">New</span></h4>
-							<span>Product Order Value</span>
-						</div>
-						<div class="knob-block text-center">
-							<input class="knob1" data-width="50" data-height="70" data-thickness=".3" data-fgcolor="#7366ff" data-linecap="round" data-angleoffset="0" value="60">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xl-4 xl-50 news box-col-6">
+		
+		
+
+		{{-- <div class="col-xl-4 xl-50 news box-col-6">
 			<div class="card">
 				<div class="card-header">
 					<div class="header-top">
-						<h5 class="m-0">News & Update</h5>
-						<div class="card-header-right-icon">
-							<select class="button btn btn-primary">
-								<option>Today</option>
-								<option>Tomorrow</option>
-								<option>Yesterday</option>
-							</select>
-						</div>
+						<h5 class="m-0">Log Users</h5>
 					</div>
 				</div>
 				<div class="card-body p-0">
@@ -448,20 +474,9 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-xl-4 col-lg-12 xl-50 calendar-sec box-col-6">
-			<div class="card gradient-primary o-hidden">
-				<div class="card-body">
-					<div class="setting-dot">
-						<div class="setting-bg-primary date-picker-setting position-set pull-right"><i class="fa fa-spin fa-cog"></i></div>
-					</div>
-					<div class="default-datepicker">
-						<div class="datepicker-here" data-language="en"></div>
-					</div>
-					<span class="default-dots-stay overview-dots full-width-dots"><span class="dots-group"><span class="dots dots1"></span><span class="dots dots2 dot-small"></span><span class="dots dots3 dot-small"></span><span class="dots dots4 dot-medium"></span><span class="dots dots5 dot-small"></span><span class="dots dots6 dot-small"></span><span class="dots dots7 dot-small-semi"></span><span class="dots dots8 dot-small-semi"></span><span class="dots dots9 dot-small">                </span></span></span>
-				</div>
-			</div>
-		</div>
+		</div> --}}
+		
+		
 	</div>
 </div>
 <script type="text/javascript">
@@ -478,7 +493,7 @@
 <script src="{{asset('assets/js/chart/apex-chart/stock-prices.js')}}"></script>
 <script src="{{asset('assets/js/notify/bootstrap-notify.min.js')}}"></script>
 <script src="{{asset('assets/js/dashboard/default.js')}}"></script>
-<script src="{{asset('assets/js/notify/index.js')}}"></script>
+{{-- <script src="{{asset('assets/js/notify/index.js')}}"></script> --}}
 <script src="{{asset('assets/js/datepicker/date-picker/datepicker.js')}}"></script>
 <script src="{{asset('assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
 <script src="{{asset('assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>

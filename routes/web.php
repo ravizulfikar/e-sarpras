@@ -16,6 +16,7 @@ use App\Http\Controllers\ESarpras\TicketController as Ticket;
 use App\Http\Controllers\ESarpras\ReportController as Report;
 use App\Http\Controllers\ESarpras\VerifyController as Verify;
 use App\Http\Controllers\ESarpras\OutputController as Output;
+use App\Http\Controllers\ESarpras\DashboardController as Dashboard;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,26 +29,26 @@ use App\Http\Controllers\ESarpras\OutputController as Output;
 */
 
 //Language Change
-Route::get('lang/{locale}', function ($locale) {
-    if (! in_array($locale, ['en', 'de', 'es','fr','pt', 'cn', 'ae'])) {
-        abort(400);
-    }   
-    Session()->put('locale', $locale);
-    Session::get('locale');
-    return redirect()->back();
-})->name('lang');
+// Route::get('lang/{locale}', function ($locale) {
+//     if (! in_array($locale, ['en', 'de', 'es','fr','pt', 'cn', 'ae'])) {
+//         abort(400);
+//     }   
+//     Session()->put('locale', $locale);
+//     Session::get('locale');
+//     return redirect()->back();
+// })->name('lang');
 
 
-Route::get('layout-{light}', function($light){
-    session()->put('layout', $light);
-    session()->get('layout');
-    if($light == 'vertical-layout')
-    {
-        return redirect()->route('pages-vertical-layout');
-    }
-    return redirect()->route('index');
-    return 1;
-});
+// Route::get('layout-{light}', function($light){
+//     session()->put('layout', $light);
+//     session()->get('layout');
+//     if($light == 'vertical-layout')
+//     {
+//         return redirect()->route('pages-vertical-layout');
+//     }
+//     return redirect()->route('index');
+//     return 1;
+// });
 
 Route::get('/clear-cache', function() {
     Artisan::call('config:cache');
@@ -62,16 +63,16 @@ Route::get('/clear-cache', function() {
 // Batas 
 
 //Playground
-Route::get('/playground', function () {
-    $class = Menu::Render(config('sidebar.items'));
-    // $class = Auth::user()->role->module;
-    // $class = \App\Models\Role::findOrFail(1)->module;
-    dd($class);
-});
+// Route::get('/playground', function () {
+//     $class = Menu::Render(config('sidebar.items'));
+//     // $class = Auth::user()->role->module;
+//     // $class = \App\Models\Role::findOrFail(1)->module;
+//     dd($class);
+// });
 
-Route::get('/checkconfig', function () {
-    dd(config('sidebar.items'));
-});
+// Route::get('/checkconfig', function () {
+//     dd(config('sidebar.items'));
+// });
 
 Route::get('/', function () {
     return view('_landing');
@@ -99,8 +100,11 @@ Route::middleware(['auth','verified'])->group(function () {
     })->name('changeTheme');
 
     Route::prefix('dashboard')->group(function () {
-        Route::view('index', 'e-sarpras.dashboard.index')->name('index');
+        // Route::view('index', 'e-sarpras.dashboard.index')->name('index');
         Route::view('dashboard-02', 'e-sarpras.dashboard.dashboard-02')->name('dashboard-02');
+    });
+    Route::group(['prefix' => 'dashboard'], function () {
+        Route::get('', [Dashboard::class, 'main'])->name('index');
     });
 
     //User
@@ -120,7 +124,7 @@ Route::middleware(['auth','verified'])->group(function () {
     });
 
     Route::resource('menu', MenuConfiguration::class);
-    
+
     Route::resource('ticket', Ticket::class);
     Route::group(['prefix' => 'ticket'], function () {
 

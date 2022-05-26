@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Gate;
 use Laravel\Telescope\IncomingEntry;
 use Laravel\Telescope\Telescope;
 use Laravel\Telescope\TelescopeApplicationServiceProvider;
+use Auth;
 
 class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 {
@@ -16,7 +17,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
      */
     public function register()
     {
-        // Telescope::night();
+        Telescope::night();
 
         $this->hideSensitiveRequestDetails();
 
@@ -53,6 +54,27 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
         ]);
     }
 
+    // protected function authorization()
+    // {
+    //     $this->gate();
+
+    //     Telescope::auth(function ($request) {
+    //         $result = collect(config('auth.guards'))->keys()->reduce(function($auth, $guard) use ($request) {
+    //             if ($auth) {
+    //                 return $auth;
+    //             }
+
+    //             app('auth')->shouldUse($guard);
+
+    //             return Gate::check('viewTelescope', [$request->user()]);
+    //         }, app()->environment('local'));
+
+    //         app('auth')->shouldUse(config('auth.defaults.guard'));
+
+    //         return $result;
+    //     });
+    // }
+
     /**
      * Register the Telescope gate.
      *
@@ -64,7 +86,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     {
         Gate::define('viewTelescope', function ($user) {
             return in_array($user->email, [
-                //
+                'ravizulfikar17@gmail.com'
             ]);
         });
     }
