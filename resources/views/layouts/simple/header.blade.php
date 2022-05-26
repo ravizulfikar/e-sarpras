@@ -133,7 +133,7 @@
 
     <div class="nav-right col-8 pull-right right-header col-sm-12 col-xs-12 p-0">
       <ul class="nav-menus">
-        <li class="language-nav">
+        {{-- <li class="language-nav">
           <div class="translate_wrapper">
             <div class="current_lang">
               <div class="lang"><i class="flag-icon flag-icon-{{ (App::getLocale() == 'en') ? 'us' : App::getLocale() }}"></i><span class="lang-txt">{{ App::getLocale() }} </span></div>
@@ -162,11 +162,11 @@
               </a>
             </div>
           </div>
-        </li>
+        </li> --}}
 
         {{-- <li><span class="header-search"><i data-feather="search"></i></span></li> --}}
 
-        <li class="onhover-dropdown">
+        {{-- <li class="onhover-dropdown">
           <div class="notification-box"><i data-feather="bell"> </i><span class="badge rounded-pill badge-secondary">4                                </span></div>
           <ul class="notification-dropdown onhover-show-div">
             <li>
@@ -187,7 +187,7 @@
             </li>
             <li><a class="btn btn-primary" href="#">Check all notification</a></li>
           </ul>
-        </li>
+        </li> --}}
 
         <li>
           <div class="mode"><i class="fa fa-moon-o" id="modeTheme"></i></div>

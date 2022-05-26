@@ -16,10 +16,11 @@ use App\Mixins\CountData;
 
 return [
 
+    // 'badge'       => ['type' => 'warning', 'data' => $CountEntry ]
+
     'items' => [
         [
             'type'        => 'main',
-            // 'badge'       => ['type' => 'danger', 'data' => CountData::getCount()],
             'icon'        => 'home',
             'title'       => 'Dashboard',
             'route'       => ['name' => 'index'],
@@ -52,7 +53,6 @@ return [
         ],
             [
                 'type'        => 'main',
-                // 'badge'       => ['type' => 'warning', 'data' => $CountEntry ],
                 'icon'        => 'bookmark',
                 'title'       => 'Ticketing',
                 'route'       => ['name' => 'ticketing.verify'],
@@ -62,7 +62,6 @@ return [
 
             [
                 'type'        => 'main',
-                // 'badge'       => ['type' => 'warning', 'data' => $CountEntry ],
                 'icon'        => 'book',
                 'title'       => 'Reporting',
                 'route'       => ['name' => 'reporting.verify'],
@@ -81,7 +80,6 @@ return [
 
             [
                 'type'        => 'main',
-                // 'badge'       => ['type' => 'warning', 'data' => $CountEntry ],
                 'icon'        => 'inbox',
                 'title'       => 'Entry',
                 'route'       => ['name' => 'entry.ticket'],
@@ -91,7 +89,6 @@ return [
 
             [
                 'type'        => 'main',
-                // 'badge'       => ['type' => 'primary', 'data' => $CountProcess ],
                 'icon'        => 'list',
                 'title'       => 'Process',
                 'route'       => ['name' => 'process.ticket'],
@@ -101,7 +98,6 @@ return [
 
             [
                 'type'        => 'main',
-                // 'badge'       => ['type' => 'success', 'data' => $CountFinish],
                 'icon'        => 'check-circle',
                 'title'       => 'Finish',
                 'route'       => ['name' => 'ticket.index'],
@@ -112,7 +108,6 @@ return [
             //Admin
             [
                 'type'        => 'main',
-                // 'badge'       => ['type' => 'warning', 'data' => $CountEntry ],
                 'icon'        => 'inbox',
                 'title'       => 'On Process',
                 'route'       => ['name' => 'entry.admin.ticket'],
@@ -122,7 +117,6 @@ return [
 
             [
                 'type'        => 'main',
-                // 'badge'       => ['type' => 'success', 'data' => $CountFinish],
                 'icon'        => 'check-circle',
                 'title'       => 'Data',
                 'route'       => ['name' => 'ticket.index'],
@@ -139,33 +133,18 @@ return [
         ],
             [
                 'type'        => 'main',
-                // 'badge'       => ['type' => 'warning', 'data' => CountData::getCount()],
                 'icon'        => 'edit',
                 'title'       => 'Activity',
-                // 'route'       => 'report.daily',
                 'route'       => ['name' => 'report.index'],
                 'group'       => 'report',
                 'role'        => ['ta-teknisi', 'ta-admin', 'ta-asisten']
             ],
 
-            // [
-            //     'type'        => 'main',
-            //     // 'badge'       => ['type' => 'warning', 'data' => CountData::getCount()],
-            //     'icon'        => 'image',
-            //     'title'       => 'Picture',
-            //     // 'route'       => 'report.pictures',
-            //     'route'       => ['name' => 'report.pictures'],
-            //     'group'       => 'report.pictures',
-            //     'role'        => ['ta-teknisi', 'ta-admin', 'ta-asisten']
-            // ],
-
             [
                 'type'        => 'main',
-                // 'badge'       => ['type' => 'success', 'data' => CountData::getCount()],
                 'icon'        => 'download',
                 'title'       => 'Download',
-                // 'route'       => 'report.download',
-                'route'       => ['name' => 'download.report'],
+                'route'       => ['name' => 'download.index'],
                 'group'       => 'download',
                 'role'        => ['superadmin','ta-teknisi', 'ta-admin', 'ta-asisten']
             ],
@@ -180,7 +159,6 @@ return [
 
             [
                 'type'        => 'main',
-                // 'badge'       => ['type' => 'danger', 'data' => CountData::getCount()],
                 'icon'        => 'users',
                 'title'       => 'Users',
                 'route'       => ['name' => 'user.index'],
@@ -190,7 +168,6 @@ return [
 
             [
                 'type'        => 'main',
-                // 'badge'       => ['type' => 'info', 'data' => CountData::getCount()],
                 'icon'        => 'command',
                 'title'       => 'Role',
                 'route'       => ['name' => 'role.index'],
@@ -200,7 +177,6 @@ return [
 
             [
                 'type'        => 'main',
-                // 'badge'       => ['type' => 'success', 'data' => CountData::getCount()],
                 'icon'        => 'target',
                 'title'       => 'Regional Unit',
                 'route'       => ['name' => 'region.index'],
@@ -210,7 +186,6 @@ return [
 
             [
                 'type'        => 'main',
-                // 'badge'       => ['type' => 'warning', 'data' => CountData::getCount()],
                 'icon'        => 'calendar',
                 'title'       => 'Holiday',
                 'route'       => ['name' => 'holiday.index'],

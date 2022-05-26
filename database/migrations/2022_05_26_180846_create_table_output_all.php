@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableReports extends Migration
+class CreateTableOutputAll extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateTableReports extends Migration
      */
     public function up()
     {
-        Schema::create('reports', function (Blueprint $table) {
+        Schema::create('outputs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->foreign('user_id')->references('id')->on('users');
             $table->string('month', 2);
             $table->string('year', 4);
-            $table->string('verification', 15);
+            $table->text('tickets')->nullable();
+            $table->text('reports')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateTableReports extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reports');
+        Schema::dropIfExists('outputs');
     }
 }

@@ -8,6 +8,7 @@ use App\Models\UserTicket;
 use App\Models\User;
 use App\Models\Report;
 use App\Models\Holiday;
+use App\Models\Output;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -20,6 +21,151 @@ use PDF;
 
 class OutputServices
 {
+
+	public function main()
+    {
+        return Output::whereUserId(auth()->user()->id)->get();
+    }
+
+	public function mainAdmin()
+    {
+        return Output::all();
+    }
+
+	public function doStore($request) {
+
+		$YearMonth = explode("-", $request->month);
+        $request['user_id']         = auth()->user()->id;
+        $request['month']           = $YearMonth[1];
+        $request['year']            = $YearMonth[0];
+		return Output::create($request->all());
+
+    }
+
+	public function generateTickets($output, $month, $year) {
+
+		//Initialize Data
+		$dataUserTicket = UserTicket::whereUserId($output->user_id)->get()->pluck('ticket_id');
+		$dataTickets	= Ticket::whereIn('id', $dataUserTicket)->whereStatus('finish')->whereVerification('kasubbag')->whereMonth('date', $month)->whereYear('date', $year)->get();
+		$dataUser 		= User::whereId($output->user_id)->first();	
+		// dd([$output, $month, $year, $dataTickets, $dataUserTicket]);
+
+		//Generate Output Loopoing
+		$pdf = new PDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+		$title = 'Tickets_'.$dataUser->name.'_Bulan_'.$month.'_Tahun_'.$year;
+		PDF::SetAuthor('E-SarprasTI Pusdatin PMPTSP');
+		PDF::SetTitle($title);
+		PDF::SetSubject('Output Ticketing Sarpras TI');
+		PDF::SetMargins(13, 10, 15);
+		PDF::SetFontSubsetting(false);
+		PDF::SetFontSize('10px');
+		PDF::SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+			
+		foreach ($dataTickets as $row) {
+			//Data
+			$Ticket = Ticket::find($row->id);
+
+			//Get Signer
+			$Signer = $this->getSignerTicket($Ticket);
+			
+			//Blade for View
+			$viewBlade = view('e-sarpras.output.ticket', [
+				'data'          => $Ticket,
+				'userProcess'   => $this->getUserProcess($Ticket->id),
+				'signer'        => $Signer[0],
+				'sign'			=> $Signer[1]
+			]);
+
+			//Page One
+			PDF::AddPage('P', 'F4');
+			$this->Footer($pdf, 'ticket', $row->id);
+			PDF::writeHTML($viewBlade, true, false, true, false, '');
+		}
+
+		$path = storage_path('app/public/output/'.$dataUser->id.'/');
+
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+
+		PDF::Output($path.$title.'.pdf', 'F');
+		
+		return $title.'.pdf';
+	}
+
+	public function generateReports($output, $month, $year) {
+
+		//Initialize Data
+		$Report 		= Report::with('ReportDescription', 'ReportPicture')->whereUserId($output->user_id)->whereVerification('kabid')->where('month', $month)->where('year', $year)->first();
+		$dataUser 		= User::whereId($output->user_id)->first();	
+
+		$dataPicture = '';
+
+		foreach($Report->ReportPicture as $row){
+			if($row->pictures != null){
+
+				$dataPicture .= '<p style="page-break-after: always;"></p><table width="100%" border="1" cellpadding="3" cellspacing="1"><tr>
+								<td width="30%">Hari</td>
+								<td width="70%">'.DayFormat($row->date).'</td>
+							</tr>
+							<tr>
+								<td width="30%">Tanggal</td>
+								<td width="70%">'.DateFormat($row->date).'</td>
+							</tr>
+							<tr>
+								<td colspan="2" height="750px" style="text-align:center;">';
+			
+				$dataPicture .= '<div class="container-box">';
+				foreach(json_decode($row->pictures, true) as $key => $value){
+					$dataPicture .= '<div>
+										<img class="imageReport" src="'.\Storage::url('report/pictures/'.$value).'" class="img-thumbnail" alt="'.$value.'">
+									</div>';
+				}
+				$dataPicture .= '</div>';
+				$dataPicture .= '</td></tr></table>';
+			}
+		}
+		
+		// dd([$output, $month, $year, $Report, $dataPicture, $dataUser]);
+
+		
+		//Blade for View
+		$viewBlade = view('e-sarpras.output.report', [
+			'data'          => $Report,
+			'holidays' 		=> Holiday::whereMonth('date', $Report->month)->whereYear('date', $Report->year)->whereIsHoliday(true)->get(),
+			'dataPics'		=> $dataPicture
+		]);
+		
+		//Generate Output Loopoing
+		$pdf = new PDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+		$title = 'Reports_'.$dataUser->name.'_Bulan_'.$month.'_Tahun_'.$year;
+		PDF::SetAuthor('E-SarprasTI Pusdatin PMPTSP');
+		PDF::SetTitle($title);
+		PDF::SetSubject('Output Ticketing Sarpras TI');
+		PDF::SetMargins(13, 10, 15);
+		PDF::SetFontSubsetting(false);
+		PDF::SetFontSize('10px');
+		PDF::SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+			
+		// Custom Footer
+		$this->FooterReport($pdf, 'report', $Report->id);
+
+		//Page One
+		PDF::AddPage('P', 'F4');
+		PDF::writeHTML($viewBlade, true, false, true, false, '');
+
+		$path = storage_path('app/public/output/'.$dataUser->id.'/');
+
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+
+		PDF::Output($path.$title.'.pdf', 'F');
+		
+		return $title.'.pdf';
+	}
+
+	///Generate
 
 	public function data($type, $id, $documentTitle = false){
 		$pdf = new PDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -92,7 +238,7 @@ class OutputServices
 			//Blade for View
 			$viewBlade = view('e-sarpras.output.report', [
 				'data'          => $Report,
-				'holidays' 		=> Holiday::whereMonth('date', $Report->month)->whereYear('date', $Report->year)->get(),
+				'holidays' 		=> Holiday::whereMonth('date', $Report->month)->whereYear('date', $Report->year)->whereIsHoliday(true)->get(),
 				'dataPics'		=> $dataPicture
 			]);
 

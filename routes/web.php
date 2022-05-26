@@ -120,8 +120,7 @@ Route::middleware(['auth','verified'])->group(function () {
     });
 
     Route::resource('menu', MenuConfiguration::class);
-
-    // Route::get('/holiday', function () { dd("holiday"); })->name('holiday.index');
+    
     Route::resource('ticket', Ticket::class);
     Route::group(['prefix' => 'ticket'], function () {
 
@@ -130,7 +129,6 @@ Route::middleware(['auth','verified'])->group(function () {
         Route::get('get/onprocess', [Ticket::class, 'admin_main'])->name('entry.admin.ticket');
         Route::get('get/onprocess/{ticket}', [Ticket::class, 'admin_view'])->name('entry.admin.view');
 
-        // Route::get('by/{status}', [Ticket::class, 'byStatus'])->name('status');
         Route::get('get/entry', [Ticket::class, 'entry'])->name('entry.ticket');
         Route::put('get/entry/{ticket}', [Ticket::class, 'entry_update'])->name('entry.update');
 
@@ -143,8 +141,6 @@ Route::middleware(['auth','verified'])->group(function () {
         Route::post('process/add-user', [Ticket::class, 'add_user_ticket'])->name('process.addUser');
         Route::delete('process/delete-user/{UserTicket}', [Ticket::class, 'delete_user_ticket'])->name('process.deleteUser');
     });
-
-    Route::get('/report/download', function () { dd("download"); })->name('download.report');
 
     Route::group(['prefix' => 'report', 'as' => 'report.'], function () {
         Route::get('generate', [Report::class, 'generate'])->name('generate');
@@ -161,6 +157,14 @@ Route::middleware(['auth','verified'])->group(function () {
         Route::put('update/{report_picture}/picture', [Report::class, 'updatePicture'])->name('updatePicture');
         Route::delete('delete/{report_picture}/picture', [Report::class, 'deletePicture'])->name('deletePicture');
         Route::put('picture/remove-by/{report_picture}/{name}', [Report::class, 'removeByPicture'])->name('removeByPicture');
+    });
+
+    Route::group(['prefix' => 'report', 'as' => 'download.'], function () {
+        Route::get('download', [Output::class, 'download'])->name('index');
+        Route::get('download/generate', [Output::class, 'generate'])->name('downloadGenerate');
+        Route::post('download/store', [Output::class, 'storeGenerate'])->name('downloadStore');
+        Route::put('tickets/{output}/generate/{month}/{year}', [Output::class, 'tickets'])->name('generate.tickets');
+        Route::put('reports/{output}/generate/{month}/{year}', [Output::class, 'reports'])->name('generate.reports');
     });
 
     Route::resource('report', Report::class);
